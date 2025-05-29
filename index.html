@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arsenal de Efeitos da Raky</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        header {
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            color: #4b0082;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .description {
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .sound-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 15px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .sound-button {
+            background-color: #9370db;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s, background-color 0.2s;
+            word-break: break-word;
+            padding: 5px;
+        }
+        
+        .sound-button:hover {
+            background-color: #8a2be2;
+            transform: scale(1.05);
+        }
+        
+        .sound-button:active {
+            transform: scale(0.95);
+        }
+        
+        .search-container {
+            margin-bottom: 30px;
+        }
+        
+        #search {
+            padding: 10px 15px;
+            width: 300px;
+            border-radius: 20px;
+            border: 2px solid #9370db;
+            font-size: 16px;
+        }
+        
+        footer {
+            margin-top: 50px;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Arsenal de Efeitos da Raky</h1>
+        <p class="description">Suas ações tem efeitos sonoros! Clique nas bolinhas para reproduzir os sons.</p>
+    </header>
+    
+    <div class="search-container">
+        <input type="text" id="search" placeholder="Pesquisar efeitos sonoros..." onkeyup="filterSounds()">
+    </div>
+    
+    <div class="sound-grid" id="soundContainer">
+        <!-- Os botões de som serão gerados dinamicamente pelo JavaScript -->
+    </div>
+    
+    <footer>
+        <p>Arsenal de Efeitos da Raky &copy; 2023 | Todos os direitos reservados</p>
+    </footer>
+    
+    <script>
+        // Lista de efeitos sonoros com seus nomes e arquivos
+        const soundEffects = [
+            { name: "Bravo", file: "Bravo.mp3" },
+            { name: "GG", file: "GG.mp3" },
+            { name: "Goku presente", file: "Goku presente.mp3" },
+            { name: "PANetoneee", file: "PANetoneee.mp3" },
+            { name: "Text to Speech 1", file: "Text_to_Speech-1.wav" },
+            { name: "Text to Speech 2", file: "Text_to_Speech-2.wav" },
+            { name: "William Bonner's Voice", file: "William_Bonner's_Voice.mp3" },
+            { name: "Alerquina presente", file: "alerquina presente.mp3" },
+            { name: "Amado", file: "amado.mp3" },
+            { name: "Amo te", file: "amo te.mp3" },
+            { name: "ASMR", file: "asmr.mp3" },
+            { name: "Bola de futebol", file: "bola de futebol.mp3" },
+            { name: "Bolacha", file: "bolacha.mp3" },
+            { name: "Boné", file: "boné.mp3" },
+            { name: "Buquê de flores", file: "buquê de flores.mp3" },
+            { name: "Café", file: "café.mp3" },
+            { name: "Capivara", file: "capivara.mp3" },
+            { name: "Chapéu de bigode", file: "chapeu de bigode.mp3" },
+            { name: "Chaves presente", file: "chaves presente.mp3" },
+            { name: "Chimarrão", file: "chimarrão.mp3" },
+            { name: "Chocolate", file: "chocolate.mp3" },
+            { name: "Colar da amizade", file: "colar da amizade.mp3" },
+            { name: "Coração ui", file: "coração ui.mp3" },
+            { name: "Coração", file: "coração.mp3" },
+            { name: "Coroa", file: "coroa.mp3" },
+            { name: "Creeps russos", file: "creeps russos.mp3" },
+            { name: "Dino", file: "dino.mp3" },
+            { name: "Dúvidas aprimorado", file: "dúvidas-aprimorado-v2 (mp3cut.net).wav" },
+            { name: "E quem disse", file: "e-quem-disse-que-isso-e-problema-meu.mp3" },
+            { name: "Entrar pelo join", file: "entrar pelo join como.mp3" },
+            { name: "Estucadores", file: "estucadores.mp3" },
+            { name: "Exatamente esse valor", file: "exatamente esse valor.mp3" },
+            { name: "Fabuloso", file: "fabuloso.mp3" },
+            { name: "Fantástico", file: "fantástico.mp3" },
+            { name: "Fathers day", file: "fathers day.mp3" },
+            { name: "Fogo", file: "fogo.mp3" },
+            { name: "Galáxia", file: "galaxia.mp3" },
+            { name: "Geladinho em cone", file: "geladinho em cone.mp3" },
+            { name: "Guacamole", file: "guacamole.mp3" },
+            { name: "Heart me", file: "heart me.wav" },
+            { name: "Informações flutuando", file: "informações flutuando na tela.mp3" },
+            { name: "Its corn", file: "its corn.mp3" },
+            { name: "Mostrar inventário", file: "ja irei mostrar o inventário.mp3" },
+            { name: "Música", file: "música.mp3" },
+            { name: "Nachos", file: "nachos.mp3" },
+            { name: "Não tenho esse pet", file: "não tenho esse pet.mp3" },
+            { name: "Obgd pela rosa", file: "obgd pela rosa mmmm.mp3" },
+            { name: "Obgd pelo abraço", file: "obgd pelo forte abraço.mp3" },
+            { name: "Obgd pelo presente", file: "obgd pelo presentaaooo.mp3" },
+            { name: "Obgd por seguir", file: "obgd por seguir.mp3" },
+            { name: "Origami", file: "origami.mp3" },
+            { name: "Perfume", file: "perfume.mp3" },
+            { name: "Pião", file: "pião.mp3" },
+            { name: "Poção medicinal", file: "poção medicinal.mp3" },
+            { name: "Px e pix flutuando", file: "px e pix flutuando.mp3" },
+            { name: "Que tanto de presente", file: "que tanto de presente.mp3" },
+            { name: "Raky morrendo", file: "raky morrendo.mp3" },
+            { name: "Rosa branca", file: "rosa branca.mp3" },
+            { name: "Rosquinha", file: "rosquinha.mp3" },
+            { name: "T gif", file: "t gif.wav" },
+            { name: "T giiff", file: "t giiff.wav" },
+            { name: "Tacos", file: "tacos.mp3" },
+            { name: "TikTok", file: "tiktok.mp3" },
+            { name: "Urso Mihka", file: "urso mihka.mp3" },
+            { name: "Valores e combos", file: "valores e combos.mp3" },
+            { name: "Vota", file: "vota.mp3" },
+            { name: "Welcome to the mato", file: "welcome-to-the-mato-estourado.mp3" }
+        ];
+
+        // Cria os botões de som
+        function createSoundButtons() {
+            const container = document.getElementById('soundContainer');
+            container.innerHTML = '';
+            
+            soundEffects.forEach(sound => {
+                const button = document.createElement('button');
+                button.className = 'sound-button';
+                button.textContent = sound.name;
+                button.onclick = () => playSound(sound.file);
+                container.appendChild(button);
+            });
+        }
+
+        // Função para reproduzir o som
+        function playSound(soundFile) {
+            // Ajuste o caminho conforme necessário para onde os arquivos estão hospedados
+            const audio = new Audio(`sounds/${soundFile}`);
+            audio.play().catch(e => console.log("Erro ao reproduzir som:", e));
+        }
+
+        // Função para filtrar os sons pela pesquisa
+        function filterSounds() {
+            const searchTerm = document.getElementById('search').value.toLowerCase();
+            const buttons = document.querySelectorAll('.sound-button');
+            
+            buttons.forEach(button => {
+                const soundName = button.textContent.toLowerCase();
+                if (soundName.includes(searchTerm)) {
+                    button.style.display = 'flex';
+                } else {
+                    button.style.display = 'none';
+                }
+            });
+        }
+
+        // Inicializa os botões quando a página carrega
+        window.onload = createSoundButtons;
+    </script>
+</body>
+</html>
