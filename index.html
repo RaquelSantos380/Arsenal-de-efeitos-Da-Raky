@@ -188,13 +188,11 @@
             });
         }
 
-        // Função para reproduzir o som
-        function playSound(soundFile) {
-            // Ajuste o caminho conforme necessário para onde os arquivos estão hospedados
-            const audio = new Audio(`sounds/${soundFile}`);
-            audio.play().catch(e => console.log("Erro ao reproduzir som:", e));
-        }
-
+function playSound(soundFile) {
+    // Usa o link RAW do GitHub para pegar o áudio diretamente
+    const audio = new Audio(`https://raw.githubusercontent.com/RaquelSantos380/Arsenal-de-efeitos-Da-Raky/main/${soundFile}`);
+    audio.play().catch(e => console.log("Erro ao reproduzir som:", e));
+}
         // Função para filtrar os sons pela pesquisa
         function filterSounds() {
             const searchTerm = document.getElementById('search').value.toLowerCase();
