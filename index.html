@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AÇÃO = EFEITO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -22,6 +23,11 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
         
+        h2 {
+            color: #ff3f81;
+            margin: 10px 0;
+        }
+        
         .description {
             color: #666;
             max-width: 800px;
@@ -30,8 +36,8 @@
         
         .sound-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px;
             max-width: 900px;
             margin: 0 auto;
         }
@@ -41,14 +47,14 @@
             color: white;
             border: none;
             border-radius: 50%;
-            width: 100px;
-            height: 100px;
-            margin: 10px;
+            width: 80px;
+            height: 80px;
+            margin: 5px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: 12px;
             text-align: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             transition: transform 0.2s, background-color 0.2s;
@@ -82,6 +88,128 @@
             color: #666;
             font-size: 14px;
         }
+
+        /* Slideshow styles */
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            height: 250px;
+            margin: 10px auto 20px;
+            overflow: hidden;
+            background-color: #fff7f9;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            border: 3px solid #ff99cc;
+        }
+
+        .slides {
+            display: none;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            margin: auto;
+            padding: 5px;
+        }
+
+        .seta {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 30px;
+            color: #ff3f81;
+            cursor: pointer;
+            user-select: none;
+            padding: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .seta:hover {
+            transform: translateY(-50%) scale(1.1);
+            background-color: white;
+        }
+
+        .seta-esquerda {
+            left: 10px;
+        }
+
+        .seta-direita {
+            right: 10px;
+        }
+
+        .pause-btn {
+            display: block;
+            margin: 10px auto;
+            padding: 8px 15px;
+            background: linear-gradient(145deg, #ff3f81, #ff0066);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border: 2px solid white;
+            font-size: 0.9rem;
+        }
+
+        .pause-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Info boxes styles */
+        .info-box {
+            background: linear-gradient(145deg, #ffccff, #ff99cc);
+            padding: 10px 12px;
+            border-radius: 15px;
+            margin: 10px auto;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            border: 2px dashed #ff3f81;
+            max-width: 90%;
+            font-size: 14px;
+        }
+
+        .pix-info {
+            background: linear-gradient(145deg, #e6f7ff, #b3e0ff);
+            color: #0066cc;
+            padding: 8px 10px;
+            border-radius: 12px;
+            margin: 8px auto;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            border: 2px dashed #0066cc;
+            max-width: 90%;
+            font-size: 13px;
+        }
+
+        /* Profile image styles */
+        .profile-img {
+            display: block;
+            margin: 0 auto;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+            border: 5px solid #FFD700;
+            transition: all 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: rotate(10deg) scale(1.1);
+        }
     </style>
 </head>
 <body>
@@ -89,6 +217,67 @@
         <h1>Envie algum Presente ou siga o perfil que suas ações tem efeitos sonoros!</h1>
         <p class="description">Suas ações tem efeitos sonoros! Presentes também</p>
     </header>
+    
+    <!-- Profile image and inventory section -->
+    <img src="Raky.jpg" alt="Foto de Perfil" class="profile-img">
+    <h2>Inventário da Raky</h2>
+    
+    <div class="slideshow-container" id="slideshow-container">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/1.jpg" alt="Slide 1">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/2.jpg" alt="Slide 2">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/3.jpg" alt="Slide 3">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/4.jpg" alt="Slide 4">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/5.jpg" alt="Slide 5">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/6.jpg" alt="Slide 6">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/7.jpg" alt="Slide 7">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/8.jpg" alt="Slide 8">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/9.jpg" alt="Slide 9">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/10.jpg" alt="Slide 10">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/11.jpg" alt="Slide 11">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/12.jpg" alt="Slide 12">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/13.jpg" alt="Slide 13">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/14.jpg" alt="Slide 14">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/15.jpg" alt="Slide 15">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/16.jpg" alt="Slide 16">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/17.jpg" alt="Slide 17">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/18.jpg" alt="Slide 18">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/19.jpg" alt="Slide 19">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/20.jpg" alt="Slide 20">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/21.jpg" alt="Slide 21">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/22.jpg" alt="Slide 22">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/23.jpg" alt="Slide 23">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/24.jpg" alt="Slide 24">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/25.jpg" alt="Slide 25">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/26.jpg" alt="Slide 26">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/27.jpg" alt="Slide 27">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/28.jpg" alt="Slide 28">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/29.jpg" alt="Slide 29">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/30.jpg" alt="Slide 30">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/31.jpg" alt="Slide 31">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/32.jpg" alt="Slide 32">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/33.jpg" alt="Slide 33">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/34.jpg" alt="Slide 34">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/35.jpg" alt="Slide 35">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/36.jpg" alt="Slide 36">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/37.jpg" alt="Slide 37">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/38.jpg" alt="Slide 38">
+    </div>
+
+    <span class="seta seta-esquerda" onclick="voltarSlide()">&#8249;</span>
+    <span class="seta seta-direita" onclick="proximoSlide()">&#8250;</span>
+
+    <button class="pause-btn" id="pauseBtn" onclick="togglePause()">
+        <i class="fas fa-pause"></i> Pausar Slideshow
+    </button>
+
+    <!-- Informações de PIX e Nick -->
+    <div class="pix-info">
+        Chave PIX: raquelgata780@gmail.com
+    </div>
+    
+    <div class="info-box">
+        Entre pelo join usando o nick: <span>RaqueSantos380_2</span>
+    </div>
     
     <div class="search-container">
         <input type="text" id="search" placeholder="Pesquisar efeitos sonoros..." onkeyup="filterSounds()">
@@ -352,8 +541,71 @@
             });
         }
 
+        // Slideshow automático
+        let slideIndex = 0;
+        const slides = document.getElementsByClassName("slides");
+        let slideInterval;
+        let isPaused = false;
+        
+        function mostrarSlide(index) {
+            // Esconde todos os slides
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            
+            // Mostra o slide atual
+            if(slides.length > 0) {
+                slides[index].style.display = "block";
+            }
+        }
+        
+        function proximoSlide() {
+            slideIndex = (slideIndex + 1) % slides.length;
+            mostrarSlide(slideIndex);
+        }
+        
+        function voltarSlide() {
+            slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+            mostrarSlide(slideIndex);
+        }
+        
+        function startSlideShow() {
+            if (!slideInterval) {
+                slideInterval = setInterval(proximoSlide, 3000);
+            }
+        }
+        
+        function stopSlideShow() {
+            clearInterval(slideInterval);
+            slideInterval = null;
+        }
+        
+        function togglePause() {
+            const pauseBtn = document.getElementById("pauseBtn");
+            
+            if (isPaused) {
+                // Se estava pausado, despausa
+                startSlideShow();
+                pauseBtn.innerHTML = '<i class="fas fa-pause"></i> Pausar Slideshow';
+                isPaused = false;
+            } else {
+                // Se estava rodando, pausa
+                stopSlideShow();
+                pauseBtn.innerHTML = '<i class="fas fa-play"></i> Continuar Slideshow';
+                isPaused = true;
+            }
+        }
+
         // Inicializa os botões quando a página carrega
-        window.onload = createSoundButtons;
+        window.onload = function() {
+            createSoundButtons();
+            
+            // Inicia o slideshow
+            if(slides.length > 0) {
+                mostrarSlide(slideIndex);
+                startSlideShow();
+            }
+        };
     </script>
 </body>
 </html>
