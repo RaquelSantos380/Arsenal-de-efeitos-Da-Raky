@@ -16,6 +16,7 @@
         
         header {
             margin-bottom: 30px;
+            position: relative;
         }
         
         h1 {
@@ -96,10 +97,10 @@
             height: 250px;
             margin: 10px auto 20px;
             overflow: hidden;
-            background-color: #fff7f9;
+            background-color: #f5f5f5;
             border-radius: 12px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-            border: 3px solid #ff99cc;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            border: 3px solid #d3d3d3;
         }
 
         .slides {
@@ -113,16 +114,16 @@
 
         .seta {
             position: absolute;
-            top: 60%;
+            top: 65%;
             transform: translateY(-50%);
             font-size: 30px;
-            color: #ff3f81;
+            color: #666;
             cursor: pointer;
             user-select: none;
             padding: 10px;
             border-radius: 50%;
             background-color: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             transition: all 0.2s ease;
             width: 40px;
             height: 40px;
@@ -148,51 +149,53 @@
             display: block;
             margin: 10px auto;
             padding: 8px 15px;
-            background: linear-gradient(145deg, #ff3f81, #ff0066);
-            color: white;
+            background: linear-gradient(145deg, #e0e0e0, #c0c0c0);
+            color: #333;
             border: none;
             border-radius: 25px;
             font-family: 'Arial', sans-serif;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            border: 2px solid white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid #999;
             font-size: 0.9rem;
         }
 
         .pause-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
         }
 
         /* Info boxes styles */
-        .info-box {
-            background: linear-gradient(145deg, #ffccff, #ff99cc);
-            padding: 10px 12px;
-            border-radius: 15px;
-            margin: 10px auto;
-            text-align: center;
-            font-weight: bold;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-            border: 2px dashed #ff3f81;
-            max-width: 90%;
-            font-size: 14px;
+    .info-box {
+        background: linear-gradient(145deg, #f0e5ff, #e0cfff); /* Roxo mais claro gradiente */
+        color: #4b0082; /* Roxo escuro para o texto */
+        padding: 10px 12px;
+        border-radius: 15px;
+        margin: 10px auto;
+        text-align: center;
+        font-weight: bold;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        border: 2px dashed #9370db; /* Roxo médio para a borda */
+        max-width: 90%;
+        font-size: 14px;
+            color: #333;
         }
 
-        .pix-info {
-            background: linear-gradient(145deg, #e6f7ff, #b3e0ff);
-            color: #0066cc;
-            padding: 8px 10px;
-            border-radius: 12px;
-            margin: 8px auto;
-            text-align: center;
-            font-weight: bold;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-            border: 2px dashed #0066cc;
-            max-width: 90%;
-            font-size: 13px;
-        }
+    .pix-info {
+        background: linear-gradient(145deg, #e6d5ff, #d0b5ff); /* Roxo claro gradiente */
+        color: #4b0082; /* Roxo escuro para o texto */
+        padding: 8px 10px;
+        border-radius: 12px;
+        margin: 8px auto;
+        text-align: center;
+        font-weight: bold;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        border: 2px dashed #9370db; /* Roxo médio para a borda */
+        max-width: 90%;
+        font-size: 13px;
+    }
 
         /* Profile image styles */
         .profile-img {
@@ -202,21 +205,119 @@
             width: 100px;
             height: 100px;
             object-fit: cover;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
-            border: 5px solid #FFD700;
+            box-shadow: 0 0 15px rgba(150, 150, 150, 0.8);
+            border: 5px solid #999;
             transition: all 0.3s ease;
         }
 
         .profile-img:hover {
             transform: rotate(10deg) scale(1.1);
         }
+        
+        /* Floating calculator styles */
+        .floating-calculator {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 150px;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            z-index: 100;
+            border: 1px solid #ccc;
+        }
+        
+        .calc-display {
+            width: 100%;
+            height: 30px;
+            margin-bottom: 5px;
+            text-align: right;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        
+        .calc-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3px;
+        }
+        
+        .calc-btn {
+            padding: 5px;
+            border: none;
+            border-radius: 3px;
+            background-color: #e0e0e0;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .calc-btn:hover {
+            background-color: #d0d0d0;
+        }
+        
+        .calc-btn.operator {
+            background-color: #9370db;
+            color: white;
+        }
+        
+        .calc-btn.equals {
+            background-color: #8a2be2;
+            color: white;
+        }
+        
+        .calc-btn.clear {
+            background-color: #ff6b6b;
+            color: white;
+        }
+        
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>Envie algum Presente ou siga o perfil que suas ações tem efeitos sonoros!</h1>
+        <div class="logo-container">
+            <h1>Envie algum Presente ou siga o perfil que suas ações tem efeitos sonoros!</h1>
+            <img src="Raky.jpg" alt="Logo Raky" class="logo-img">
+        </div>
         <p class="description">Suas ações tem efeitos sonoros! Presentes também</p>
     </header>
+    
+    <!-- Floating calculator -->
+    <div class="floating-calculator">
+        <input type="text" class="calc-display" readonly>
+        <div class="calc-buttons">
+            <button class="calc-btn" onclick="calcInput('7')">7</button>
+            <button class="calc-btn" onclick="calcInput('8')">8</button>
+            <button class="calc-btn" onclick="calcInput('9')">9</button>
+            <button class="calc-btn operator" onclick="calcInput('/')">/</button>
+            <button class="calc-btn" onclick="calcInput('4')">4</button>
+            <button class="calc-btn" onclick="calcInput('5')">5</button>
+            <button class="calc-btn" onclick="calcInput('6')">6</button>
+            <button class="calc-btn operator" onclick="calcInput('*')">×</button>
+            <button class="calc-btn" onclick="calcInput('1')">1</button>
+            <button class="calc-btn" onclick="calcInput('2')">2</button>
+            <button class="calc-btn" onclick="calcInput('3')">3</button>
+            <button class="calc-btn operator" onclick="calcInput('-')">-</button>
+            <button class="calc-btn" onclick="calcInput('0')">0</button>
+            <button class="calc-btn" onclick="calcInput('.')">.</button>
+            <button class="calc-btn equals" onclick="calculate()">=</button>
+            <button class="calc-btn operator" onclick="calcInput('+')">+</button>
+            <button class="calc-btn clear" onclick="clearCalc()">C</button>
+        </div>
+    </div>
     
     <!-- Profile image and inventory section -->
     <img src="Raky.jpg" alt="Foto de Perfil" class="profile-img">
@@ -598,6 +699,30 @@
                 stopSlideShow();
                 pauseBtn.innerHTML = '<i class="fas fa-play"></i> Continuar Slideshow';
                 isPaused = true;
+            }
+        }
+        
+        // Calculator functions
+        let calcDisplay = '';
+        
+        function calcInput(value) {
+            calcDisplay += value;
+            document.querySelector('.calc-display').value = calcDisplay;
+        }
+        
+        function clearCalc() {
+            calcDisplay = '';
+            document.querySelector('.calc-display').value = '';
+        }
+        
+        function calculate() {
+            try {
+                const result = eval(calcDisplay);
+                document.querySelector('.calc-display').value = result;
+                calcDisplay = result.toString();
+            } catch (e) {
+                document.querySelector('.calc-display').value = 'Erro';
+                calcDisplay = '';
             }
         }
 
