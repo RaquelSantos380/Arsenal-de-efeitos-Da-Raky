@@ -19,10 +19,16 @@
             position: relative;
         }
         
-        h1 {
-            color: #4b0082;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-        }
+    h1 {
+        color: #001a33; /* Azul escuro */
+        text-shadow: 
+            0 0 5px #0066ff, 
+            0 0 10px #0066ff, 
+            0 0 20px #0066ff, 
+            0 0 40px #00a2ff; /* Neon azul */
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
         
         h2 {
             color: #ff3f81;
@@ -44,8 +50,8 @@
         }
         
         .sound-button {
-            background-color: #9370db;
-            color: white;
+            background-color: #FFD700; /* Dourado */
+            color: #333;
             border: none;
             border-radius: 50%;
             width: 80px;
@@ -61,11 +67,13 @@
             transition: transform 0.2s, background-color 0.2s;
             word-break: break-word;
             padding: 5px;
+            font-weight: bold;
         }
         
         .sound-button:hover {
-            background-color: #8a2be2;
+            background-color: #FFC000; /* Dourado mais escuro */
             transform: scale(1.05);
+            box-shadow: 0 0 15px #FFD700; /* Efeito neon dourado */
         }
         
         .sound-button:active {
@@ -80,8 +88,9 @@
             padding: 10px 15px;
             width: 300px;
             border-radius: 20px;
-            border: 2px solid #9370db;
+            border: 2px solid #FFD700; /* Dourado */
             font-size: 16px;
+            box-shadow: 0 0 10px #FFD700; /* Efeito neon dourado */
         }
         
         footer {
@@ -149,8 +158,8 @@
             display: block;
             margin: 10px auto;
             padding: 8px 15px;
-            background: linear-gradient(145deg, #e0e0e0, #c0c0c0);
-            color: #333;
+            background: linear-gradient(145deg, #FFB6C1, #FF69B4); /* Rosa */
+            color: white;
             border: none;
             border-radius: 25px;
             font-family: 'Arial', sans-serif;
@@ -158,19 +167,20 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            border: 2px solid #999;
+            border: 2px solid #FF1493;
             font-size: 0.9rem;
         }
 
         .pause-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(145deg, #FF69B4, #FF1493); /* Rosa mais forte */
         }
 
         /* Botões PIX e Join */
         .pix-button {
             display: inline-block;
-            background: linear-gradient(145deg, #9c27b0, #7b1fa2);
+            background: linear-gradient(145deg, #BA55D3, #9370DB); /* Roxo claro */
             color: white;
             padding: 12px 20px;
             margin: 10px 5px;
@@ -178,7 +188,7 @@
             font-weight: bold;
             text-decoration: none;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border: 2px solid #e1bee7;
+            border: 2px solid #E6E6FA;
             transition: all 0.3s ease;
             cursor: pointer;
         }
@@ -186,7 +196,7 @@
         .pix-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(145deg, #ab47bc, #8e24aa);
+            background: linear-gradient(145deg, #9370DB, #8A2BE2);
         }
 
         .pix-button:active {
@@ -195,15 +205,15 @@
 
         .join-button {
             display: inline-block;
-            background: linear-gradient(145deg, #ff5722, #e64a19);
-            color: white;
+            background: linear-gradient(145deg, #FFD1DC, #FFB6C1); /* Rosa claro e fofo */
+            color: #333;
             padding: 12px 20px;
             margin: 10px 5px;
             border-radius: 30px;
             font-weight: bold;
             text-decoration: none;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border: 2px solid #ffccbc;
+            border: 2px solid #FFE4E1;
             transition: all 0.3s ease;
             cursor: pointer;
         }
@@ -211,7 +221,8 @@
         .join-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(145deg, #ff7043, #f4511e);
+            background: linear-gradient(145deg, #FFB6C1, #FF69B4);
+            color: white;
         }
 
         .join-button:active {
@@ -226,8 +237,8 @@
             width: 100px;
             height: 100px;
             object-fit: cover;
-            box-shadow: 0 0 15px rgba(150, 150, 150, 0.8);
-            border: 5px solid #999;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.8); /* Dourado */
+            border: 5px solid #FFD700; /* Dourado */
             transition: all 0.3s ease;
         }
 
@@ -281,12 +292,12 @@
         }
         
         .calc-btn.operator {
-            background-color: #9370db;
-            color: white;
+            background-color: #FFD700; /* Dourado */
+            color: #333;
         }
         
         .calc-btn.equals {
-            background-color: #8a2be2;
+            background-color: #FFA500; /* Laranja */
             color: white;
         }
         
@@ -323,8 +334,8 @@
             right: 20px;
             width: 40px;
             height: 40px;
-            background-color: #8a2be2;
-            color: white;
+            background-color: #FFD700; /* Dourado */
+            color: #333;
             border: none;
             border-radius: 50%;
             font-size: 18px;
@@ -337,8 +348,9 @@
         }
 
         .calc-toggle-btn:hover {
-            background-color: #7b1fa2;
+            background-color: #FFC000; /* Dourado mais escuro */
             transform: scale(1.1);
+            box-shadow: 0 0 15px #FFD700; /* Efeito neon dourado */
         }
         
         .logo-container {
@@ -362,7 +374,6 @@
     <header>
         <div class="logo-container">
             <h1>Envie algum Presente ou siga o perfil que suas ações tem efeitos sonoros!</h1>
-            <img src="Raky.jpg" alt="Logo Raky" class="logo-img">
         </div>
         <p class="description">Suas ações tem efeitos sonoros! Presentes também</p>
     </header>
@@ -394,6 +405,7 @@
             <button class="calc-btn equals" onclick="calculate()">=</button>
             <button class="calc-btn operator" onclick="calcInput('+')">+</button>
             <button class="calc-btn clear" onclick="clearCalc()">C</button>
+            <button class="calc-btn" onclick="backspace()" style="grid-column: span 4;">⌫</button>
         </div>
     </div>
     
@@ -802,6 +814,12 @@
                 document.getElementById('calcDisplay').value = 'Erro';
                 calcDisplay = '';
             }
+        }
+        
+        // Função para apagar o último caractere
+        function backspace() {
+            calcDisplay = calcDisplay.slice(0, -1);
+            document.getElementById('calcDisplay').value = calcDisplay;
         }
 
         function toggleCalculator() {
