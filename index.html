@@ -368,6 +368,47 @@
         .buttons-container {
             margin: 20px 0;
         }
+
+        /* Estilos para os novos botões pequenos */
+        .small-button {
+            display: inline-block;
+            padding: 8px 12px;
+            margin: 5px;
+            border-radius: 20px;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .calculator-button {
+            background: linear-gradient(145deg, #4CAF50, #2E7D32); /* Verde */
+            color: white;
+            border: 2px solid #81C784;
+        }
+
+        .scammer-button {
+            background: linear-gradient(145deg, #FF9800, #F57C00); /* Laranja */
+            color: white;
+            border: 2px solid #FFB74D;
+        }
+
+        .inventory-button {
+            background: linear-gradient(145deg, #2196F3, #1976D2); /* Azul */
+            color: white;
+            border: 2px solid #64B5F6;
+        }
+
+        .small-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .small-button:active {
+            transform: translateY(1px);
+        }
     </style>
 </head>
 <body>
@@ -461,7 +502,7 @@
         <i class="fas fa-pause"></i> Pausar
     </button>
 
-    <!-- Botões PIX e Join -->
+    <!-- Botões PIX, Join e outros -->
     <div class="buttons-container">
         <button class="pix-button" onclick="copyPixKey()">
             <i class="fas fa-money-bill-wave"></i> Chave PIX: raquelgata780@gmail.com
@@ -470,6 +511,19 @@
         <button class="join-button" onclick="copyJoinInfo()">
             <i class="fas fa-sign-in-alt"></i> Entre pelo join: RaqueSantos380_2
         </button>
+
+        <!-- Novos botões pequenos -->
+        <a href="https://elvebredd.com/ValueCalculator.html" target="_blank" class="small-button calculator-button">
+            <i class="fas fa-calculator"></i> Value Calculator
+        </a>
+        
+        <a href="https://raquelsantos380.github.io/Confiavel-ou-Scammer-/" target="_blank" class="small-button scammer-button">
+            <i class="fas fa-user-shield"></i> Confiável?
+        </a>
+        
+        <a href="https://raquelsantos380.github.io/Tire-foto-do-seu-inventario/" target="_blank" class="small-button inventory-button">
+            <i class="fas fa-camera"></i> Foto Inventário
+        </a>
     </div>
     
     <div class="search-container">
