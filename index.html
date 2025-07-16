@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AÇÃO = EFEITO | Arsenal da Raky</title>
+    <title>Arsenal | Arsenal da Raky</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
@@ -28,11 +28,15 @@
         }
         
         h1 {
-            color: #001a33;
-            text-shadow: 0 0 5px #0066ff, 0 0 10px #0066ff, 0 0 20px #0066ff, 0 0 40px #00a2ff;
+            color: #ff69b4;
             font-weight: bold;
             letter-spacing: 1px;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
+            text-shadow: 1px 1px 2px white;
+            border: 2px solid white;
+            border-radius: 10px;
+            display: inline-block;
+            padding: 5px 15px;
         }
         
         h2 {
@@ -64,7 +68,7 @@
 
         .seta {
             position: absolute;
-            top: 50%;
+            top: 60%;
             transform: translateY(-50%);
             font-size: 30px;
             color: #666;
@@ -343,17 +347,79 @@
             margin: 3px;
             font-size: 0.6rem;
         }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+            text-align: center;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 10px;
+            top: 5px;
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: black;
+        }
+
+        /* Lembrete vermelho */
+        .lembrete {
+            color: red;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        /* Efeitos sonoros lado a lado */
+        .sound-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .sound-button {
+            margin: 2px;
+            width: 70px;
+            height: 70px;
+            font-size: 0.6rem;
+        }
     </style>
 </head>
 <body>
     <header>
         <h1>Arsenal de Efeitos Sonoros da Raky</h1>
-        <p class="description">Encontre o efeito perfeito rapidamente!</p>
     </header>
 
     <!-- Profile image -->
     <img src="Raky.jpg" alt="Foto de Perfil" class="profile-img">
     <h2>Inventário da Raky</h2>
+
+    <!-- Lembrete vermelho -->
+    <div class="lembrete">NÃO ACEITO BANCO INTER</div>
 
     <!-- Slideshow -->
     <div class="slideshow-container" id="slideshow-container">
@@ -406,11 +472,11 @@
 
     <!-- Botões Principais -->
     <div class="buttons-container">
-        <button class="pix-button" onclick="copyPixKey()">
+        <button class="pix-button" onclick="showPixModal()">
             <i class="fas fa-money-bill-wave"></i> Chave PIX
         </button>
         
-        <button class="join-button" onclick="copyJoinInfo()">
+        <button class="join-button" onclick="showJoinModal()">
             <i class="fas fa-sign-in-alt"></i> Entrar pelo Join
         </button>
 
@@ -420,10 +486,6 @@
         
         <a href="https://raquelsantos380.github.io/Confiavel-ou-Scammer-/" target="_blank" class="small-button scammer-button">
             <i class="fas fa-user-shield"></i> Confiável?
-        </a>
-        
-        <a href="https://raquelsantos380.github.io/Tire-foto-do-seu-inventario/" target="_blank" class="small-button inventory-button">
-            <i class="fas fa-camera"></i> Foto Inventário
         </a>
         
         <button class="small-button" onclick="mostrarAtalhos()">
@@ -459,6 +521,26 @@
 
     <!-- Grid de Sons -->
     <div class="sound-grid" id="soundContainer"></div>
+    
+    <!-- Modal PIX -->
+    <div id="pixModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closePixModal()">&times;</span>
+            <h3>Chave PIX</h3>
+            <p>raquelgata780@gmail.com</p>
+            <button onclick="copyPixKey()">Copiar Chave</button>
+        </div>
+    </div>
+
+    <!-- Modal Join -->
+    <div id="joinModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeJoinModal()">&times;</span>
+            <h3>Entrar pelo Join</h3>
+            <p>Nick: RaqueSantos380_2</p>
+            <button onclick="copyJoinInfo()">Copiar Nick</button>
+        </div>
+    </div>
     
     <footer>
         <p>Arsenal de Efeitos da Raky &copy; 2023 | Pressione Alt+H para ajuda</p>
@@ -919,6 +1001,23 @@ Alt+H = Mostrar esta ajuda`);
                 .catch(err => {
                     console.error('Erro ao copiar: ', err);
                 });
+        }
+
+        // Modal functions
+        function showPixModal() {
+            document.getElementById('pixModal').style.display = 'block';
+        }
+
+        function closePixModal() {
+            document.getElementById('pixModal').style.display = 'none';
+        }
+
+        function showJoinModal() {
+            document.getElementById('joinModal').style.display = 'block';
+        }
+
+        function closeJoinModal() {
+            document.getElementById('joinModal').style.display = 'none';
         }
     </script>
 </body>
