@@ -3,9 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AÇÃO = EFEITO</title>
+    <title>AÇÃO = EFEITO | Arsenal da Raky</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        :root {
+            --cor-presentes: #FFB6C1;
+            --cor-engracados: #90EE90;
+            --cor-musicas: #87CEFA;
+            --cor-reacoes: #FFD700;
+            --cor-jogos: #D8BFD8;
+            --cor-favoritos: #FF1493;
+        }
+        
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f0f8ff;
@@ -15,96 +24,28 @@
         }
         
         header {
-            margin-bottom: 30px;
-            position: relative;
+            margin-bottom: 20px;
         }
         
-    h1 {
-        color: #001a33; /* Azul escuro */
-        text-shadow: 
-            0 0 5px #0066ff, 
-            0 0 10px #0066ff, 
-            0 0 20px #0066ff, 
-            0 0 40px #00a2ff; /* Neon azul */
-        font-weight: bold;
-        letter-spacing: 1px;
-    }
+        h1 {
+            color: #001a33;
+            text-shadow: 0 0 5px #0066ff, 0 0 10px #0066ff, 0 0 20px #0066ff, 0 0 40px #00a2ff;
+            font-weight: bold;
+            letter-spacing: 1px;
+            font-size: 1.8rem;
+        }
         
         h2 {
             color: #ff3f81;
-            margin: 10px 0;
-        }
-        
-        .description {
-            color: #666;
-            max-width: 800px;
-            margin: 0 auto 30px;
-        }
-        
-        .sound-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 10px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .sound-button {
-            background-color: #FFD700; /* Dourado */
-            color: #333;
-            border: none;
-            border-radius: 50%;
-            width: 80px;
-            height: 80px;
-            margin: 5px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.2s, background-color 0.2s;
-            word-break: break-word;
-            padding: 5px;
-            font-weight: bold;
-        }
-        
-        .sound-button:hover {
-            background-color: #FFC000; /* Dourado mais escuro */
-            transform: scale(1.05);
-            box-shadow: 0 0 15px #FFD700; /* Efeito neon dourado */
-        }
-        
-        .sound-button:active {
-            transform: scale(0.95);
-        }
-        
-        .search-container {
-            margin-bottom: 30px;
-        }
-        
-        #search {
-            padding: 10px 15px;
-            width: 300px;
-            border-radius: 20px;
-            border: 2px solid #FFD700; /* Dourado */
-            font-size: 16px;
-            box-shadow: 0 0 10px #FFD700; /* Efeito neon dourado */
-        }
-        
-        footer {
-            margin-top: 50px;
-            color: #666;
-            font-size: 14px;
+            margin: 15px 0;
         }
 
-        /* Slideshow styles */
+        /* Slideshow Styles */
         .slideshow-container {
             position: relative;
             max-width: 100%;
             height: 250px;
-            margin: 10px auto 20px;
+            margin: 15px auto;
             overflow: hidden;
             background-color: #f5f5f5;
             border-radius: 12px;
@@ -123,7 +64,7 @@
 
         .seta {
             position: absolute;
-            top: 65%;
+            top: 50%;
             transform: translateY(-50%);
             font-size: 30px;
             color: #666;
@@ -139,6 +80,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            z-index: 10;
         }
 
         .seta:hover {
@@ -158,11 +100,10 @@
             display: block;
             margin: 10px auto;
             padding: 8px 15px;
-            background: linear-gradient(145deg, #FFB6C1, #FF69B4); /* Rosa */
+            background: linear-gradient(145deg, #FFB6C1, #FF69B4);
             color: white;
             border: none;
             border-radius: 25px;
-            font-family: 'Arial', sans-serif;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -174,62 +115,211 @@
         .pause-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-            background: linear-gradient(145deg, #FF69B4, #FF1493); /* Rosa mais forte */
+            background: linear-gradient(145deg, #FF69B4, #FF1493);
         }
 
-        /* Botões PIX e Join */
-        .pix-button {
-            display: inline-block;
-            background: linear-gradient(145deg, #BA55D3, #9370DB); /* Roxo claro */
+        /* Sistema de Categorias */
+        .categoria-presentes { background-color: var(--cor-presentes) !important; }
+        .categoria-engracados { background-color: var(--cor-engracados) !important; }
+        .categoria-musicas { background-color: var(--cor-musicas) !important; }
+        .categoria-reacoes { background-color: var(--cor-reacoes) !important; }
+        .categoria-jogos { background-color: var(--cor-jogos) !important; }
+        .categoria-favoritos { 
+            background-color: var(--cor-favoritos) !important;
+            color: white !important;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Filtros Rápidos */
+        .filtro-rapido {
+            margin: 15px auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            max-width: 800px;
+        }
+        
+        .filtro-rapido button {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 15px;
+            background: #333;
             color: white;
-            padding: 12px 20px;
-            margin: 10px 5px;
-            border-radius: 30px;
-            font-weight: bold;
-            text-decoration: none;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border: 2px solid #E6E6FA;
-            transition: all 0.3s ease;
             cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s;
         }
-
-        .pix-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(145deg, #9370DB, #8A2BE2);
+        
+        .filtro-rapido button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
-
-        .pix-button:active {
-            transform: translateY(1px);
-        }
-
-        .join-button {
-            display: inline-block;
-            background: linear-gradient(145deg, #FFD1DC, #FFB6C1); /* Rosa claro e fofo */
+        
+        /* Botões de Som Melhorados */
+        .sound-button {
+            position: relative;
+            background-color: #FFD700;
             color: #333;
-            padding: 12px 20px;
-            margin: 10px 5px;
-            border-radius: 30px;
+            border: none;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            margin: 5px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s;
+            padding: 5px;
+            overflow: visible;
+        }
+        
+        .sound-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #FFD700;
+        }
+        
+        .sound-tag {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #FF1493;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .favorito-btn {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            font-size: 0.7rem;
+            cursor: pointer;
+        }
+        
+        /* Barra de Pesquisa */
+        #search {
+            padding: 10px 15px;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 20px;
+            border: 2px solid #FFD700;
+            font-size: 16px;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            margin-bottom: 15px;
+        }
+        
+        /* Botões Principais */
+        .buttons-container {
+            margin: 20px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .pix-button, .join-button, .small-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 10px 15px;
+            border-radius: 25px;
             font-weight: bold;
             text-decoration: none;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border: 2px solid #FFE4E1;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .pix-button {
+            background: linear-gradient(145deg, #BA55D3, #9370DB);
+            color: white;
+            border-color: #E6E6FA;
+        }
+        
+        .join-button {
+            background: linear-gradient(145deg, #FFD1DC, #FFB6C1);
+            color: #333;
+            border-color: #FFE4E1;
+        }
+        
+        .small-button {
+            font-size: 0.8rem;
+            padding: 8px 12px;
+        }
+        
+        .calculator-button {
+            background: linear-gradient(145deg, #4CAF50, #2E7D32);
+            color: white;
+            border-color: #81C784;
+        }
+        
+        .scammer-button {
+            background: linear-gradient(145deg, #FF9800, #F57C00);
+            color: white;
+            border-color: #FFB74D;
+        }
+        
+        .inventory-button {
+            background: linear-gradient(145deg, #2196F3, #1976D2);
+            color: white;
+            border-color: #64B5F6;
+        }
+        
+        /* Seção de Histórico */
+        .historico-container {
+            background: rgba(255,255,255,0.8);
+            border-radius: 10px;
+            padding: 10px;
+            margin: 15px auto;
+            max-width: 800px;
+            display: none;
+        }
+        
+        .historico-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #FF1493;
+        }
+        
+        .historico-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: center;
+        }
+        
+        .historico-btn {
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            padding: 5px 10px;
+            font-size: 0.7rem;
             cursor: pointer;
         }
-
-        .join-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(145deg, #FFB6C1, #FF69B4);
-            color: white;
-        }
-
-        .join-button:active {
-            transform: translateY(1px);
-        }
-
-        /* Profile image styles */
+        
+        /* Profile image */
         .profile-img {
             display: block;
             margin: 0 auto;
@@ -237,8 +327,8 @@
             width: 100px;
             height: 100px;
             object-fit: cover;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.8); /* Dourado */
-            border: 5px solid #FFD700; /* Dourado */
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+            border: 5px solid #FFD700;
             transition: all 0.3s ease;
         }
 
@@ -246,214 +336,26 @@
             transform: rotate(10deg) scale(1.1);
         }
         
-        /* Floating calculator styles */
-        .floating-calculator {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 150px;
-            background-color: #f5f5f5;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            padding: 10px;
-            z-index: 100;
-            border: 1px solid #ccc;
-            display: none;
-        }
-
-        .calc-display {
-            width: 100%;
-            height: 30px;
-            margin-bottom: 5px;
-            text-align: right;
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #fff;
-        }
-        
-        .calc-buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 3px;
-        }
-        
-        .calc-btn {
-            padding: 5px;
-            border: none;
-            border-radius: 3px;
-            background-color: #e0e0e0;
-            cursor: pointer;
-            font-size: 12px;
-        }
-        
-        .calc-btn:hover {
-            background-color: #d0d0d0;
-        }
-        
-        .calc-btn.operator {
-            background-color: #FFD700; /* Dourado */
-            color: #333;
-        }
-        
-        .calc-btn.equals {
-            background-color: #FFA500; /* Laranja */
-            color: white;
-        }
-        
-        .calc-btn.clear {
-            background-color: #ff6b6b;
-            color: white;
-        }
-
-        .calc-close-btn {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            width: 20px;
-            height: 20px;
-            background-color: #ff4444;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            font-size: 12px;
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .calc-close-btn:hover {
-            background-color: #cc0000;
-        }
-
-        .calc-toggle-btn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
-            background-color: #FFD700; /* Dourado */
-            color: #333;
-            border: none;
-            border-radius: 50%;
-            font-size: 18px;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            z-index: 99;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .calc-toggle-btn:hover {
-            background-color: #FFC000; /* Dourado mais escuro */
-            transform: scale(1.1);
-            box-shadow: 0 0 15px #FFD700; /* Efeito neon dourado */
-        }
-        
-        .logo-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .logo-img {
-            height: 50px;
-            width: auto;
-        }
-
-        .buttons-container {
-            margin: 20px 0;
-        }
-
-        /* Estilos para os novos botões pequenos */
-        .small-button {
-            display: inline-block;
-            padding: 8px 12px;
-            margin: 5px;
-            border-radius: 20px;
-            font-weight: bold;
-            text-decoration: none;
-            font-size: 14px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .calculator-button {
-            background: linear-gradient(145deg, #4CAF50, #2E7D32); /* Verde */
-            color: white;
-            border: 2px solid #81C784;
-        }
-
-        .scammer-button {
-            background: linear-gradient(145deg, #FF9800, #F57C00); /* Laranja */
-            color: white;
-            border: 2px solid #FFB74D;
-        }
-
-        .inventory-button {
-            background: linear-gradient(145deg, #2196F3, #1976D2); /* Azul */
-            color: white;
-            border: 2px solid #64B5F6;
-        }
-
-        .small-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        .small-button:active {
-            transform: translateY(1px);
+        /* Modo Emergência */
+        .modo-emergencia .sound-button {
+            width: 100px;
+            height: 100px;
+            margin: 3px;
+            font-size: 0.6rem;
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="logo-container">
-            <h1>Envie algum Presente ou siga o perfil que suas ações tem efeitos sonoros!</h1>
-        </div>
-        <p class="description">Suas ações tem efeitos sonoros! Presentes também</p>
+        <h1>Arsenal de Efeitos Sonoros da Raky</h1>
+        <p class="description">Encontre o efeito perfeito rapidamente!</p>
     </header>
-    
-    <!-- Botão para abrir/fechar calculadora -->
-    <button class="calc-toggle-btn" id="calcToggleBtn" onclick="toggleCalculator()">
-        <i class="fas fa-calculator"></i>
-    </button>
-    
-    <!-- Floating calculator -->
-    <div class="floating-calculator" id="floatingCalculator">
-        <button class="calc-close-btn" onclick="toggleCalculator()">×</button>
-        <input type="text" class="calc-display" id="calcDisplay" readonly>
-        <div class="calc-buttons">
-            <button class="calc-btn" onclick="calcInput('7')">7</button>
-            <button class="calc-btn" onclick="calcInput('8')">8</button>
-            <button class="calc-btn" onclick="calcInput('9')">9</button>
-            <button class="calc-btn operator" onclick="calcInput('/')">/</button>
-            <button class="calc-btn" onclick="calcInput('4')">4</button>
-            <button class="calc-btn" onclick="calcInput('5')">5</button>
-            <button class="calc-btn" onclick="calcInput('6')">6</button>
-            <button class="calc-btn operator" onclick="calcInput('*')">×</button>
-            <button class="calc-btn" onclick="calcInput('1')">1</button>
-            <button class="calc-btn" onclick="calcInput('2')">2</button>
-            <button class="calc-btn" onclick="calcInput('3')">3</button>
-            <button class="calc-btn operator" onclick="calcInput('-')">-</button>
-            <button class="calc-btn" onclick="calcInput('0')">0</button>
-            <button class="calc-btn" onclick="calcInput('.')">.</button>
-            <button class="calc-btn equals" onclick="calculate()">=</button>
-            <button class="calc-btn operator" onclick="calcInput('+')">+</button>
-            <button class="calc-btn clear" onclick="clearCalc()">C</button>
-            <button class="calc-btn" onclick="backspace()" style="grid-column: span 4;">⌫</button>
-        </div>
-    </div>
-    
-    <!-- Profile image and inventory section -->
+
+    <!-- Profile image -->
     <img src="Raky.jpg" alt="Foto de Perfil" class="profile-img">
     <h2>Inventário da Raky</h2>
-    
+
+    <!-- Slideshow -->
     <div class="slideshow-container" id="slideshow-container">
         <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/1.jpg" alt="Slide 1">
         <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/2.jpg" alt="Slide 2">
@@ -499,20 +401,19 @@
     <span class="seta seta-direita" onclick="proximoSlide()">&#8250;</span>
 
     <button class="pause-btn" id="pauseBtn" onclick="togglePause()">
-        <i class="fas fa-pause"></i> Pausar
+        <i class="fas fa-pause"></i> Pausar Slideshow
     </button>
 
-    <!-- Botões PIX, Join e outros -->
+    <!-- Botões Principais -->
     <div class="buttons-container">
         <button class="pix-button" onclick="copyPixKey()">
-            <i class="fas fa-money-bill-wave"></i> Chave PIX: raquelgata780@gmail.com
+            <i class="fas fa-money-bill-wave"></i> Chave PIX
         </button>
         
         <button class="join-button" onclick="copyJoinInfo()">
-            <i class="fas fa-sign-in-alt"></i> Entre pelo join: RaqueSantos380_2
+            <i class="fas fa-sign-in-alt"></i> Entrar pelo Join
         </button>
 
-        <!-- Novos botões pequenos -->
         <a href="https://elvebredd.com/ValueCalculator.html" target="_blank" class="small-button calculator-button">
             <i class="fas fa-calculator"></i> Value Calculator
         </a>
@@ -524,265 +425,421 @@
         <a href="https://raquelsantos380.github.io/Tire-foto-do-seu-inventario/" target="_blank" class="small-button inventory-button">
             <i class="fas fa-camera"></i> Foto Inventário
         </a>
+        
+        <button class="small-button" onclick="mostrarAtalhos()">
+            <i class="fas fa-keyboard"></i> Atalhos
+        </button>
+        
+        <button class="small-button" onclick="toggleModoEmergencia()">
+            <i class="fas fa-expand"></i> Modo Emergência
+        </button>
     </div>
-    
+
+    <!-- Filtros Rápidos -->
+    <div class="filtro-rapido">
+        <button onclick="filtrarPorCategoria('todos')"><i class="fas fa-list"></i> Todos</button>
+        <button onclick="filtrarPorCategoria('favoritos')"><i class="fas fa-star"></i> Favoritos</button>
+        <button onclick="filtrarPorCategoria('reacoes')"><i class="fas fa-smile"></i> Reações</button>
+        <button onclick="filtrarPorCategoria('presentes')"><i class="fas fa-gift"></i> Presentes</button>
+        <button onclick="filtrarPorCategoria('musicas')"><i class="fas fa-music"></i> Músicas</button>
+        <button onclick="filtrarPorCategoria('engracados')"><i class="fas fa-laugh-squint"></i> Engraçados</button>
+        <button onclick="filtrarPorCategoria('jogos')"><i class="fas fa-gamepad"></i> Jogos</button>
+    </div>
+
+    <!-- Barra de Pesquisa -->
     <div class="search-container">
-        <input type="text" id="search" placeholder="Pesquisar efeitos sonoros..." onkeyup="filterSounds()">
+        <input type="text" id="search" placeholder="🔍 Pesquisar efeitos sonoros..." onkeyup="filterSounds()">
     </div>
-    
-    <div class="sound-grid" id="soundContainer">
-        <!-- Os botões de som serão gerados dinamicamente pelo JavaScript -->
+
+    <!-- Histórico Recente -->
+    <div class="historico-container" id="historicoContainer">
+        <div class="historico-title">Usados Recentemente:</div>
+        <div class="historico-buttons" id="historicoButtons"></div>
     </div>
+
+    <!-- Grid de Sons -->
+    <div class="sound-grid" id="soundContainer"></div>
     
     <footer>
-        <p>Arsenal de Efeitos da Raky &copy; 2023 | Todos os direitos reservados</p>
+        <p>Arsenal de Efeitos da Raky &copy; 2023 | Pressione Alt+H para ajuda</p>
     </footer>
     
     <script>
-        // LISTA COMPLETA DE SONS (todos os originais + novos, sem a palavra "MEME" nos nomes)
+        // Dados dos Efeitos Sonoros com Categorias
         const soundEffects = [
-            { name: "Obgd por seguir", file: "obgd por seguir.mp3" },
-            { name: "Obgd pela rosa", file: "obgd pela rosa mmmm.mp3" },
-            { name: "Heart me", file: "heart me.wav" },
-            { name: "Nhe", file: "nhe.mp3" },
-            { name: "Som morte Roblox", file: "sommorteroblox.mp3" },
-            { name: "Obg pelo coração molusco", file: "lula molusco 1.mp3" },
-            { name: "dora aventureira music", file: "dora aventureira music.mp3" },
-            { name: "E o pix (só cai)", file: "eopix.mp3" },
-            { name: "Allstar but it's Frozen music", file: "Allstar but it's Frozen music.mp3" },
-            { name: "What Is Star  Baby Don't Shoot Me music", file: "What Is Star  Baby Don t Shoot Me.mp3" },
-            { name: "Manda Tu pix", file: "Manda Tu pix.opus" },
-            { name: "megalovania funk music", file: "megalovania funk music.mp3" },
-            { name: "to meio gripadinha", file: "to meio gripadinha.mp3" },
-            { name: "rapaz ta certo isso", file: "rapaz ta certo isso.mp3" },
-            { name: "E quem disse", file: "e-quem-disse-que-isso-e-problema-meu.mp3" },
-            { name: "Valores uhulll!", file: "valores uhulll.mp3" },
-            { name: "Apresentação da LojinhaDarakyOficial", file: "Apresentação da LojinhaDarakyOficial.mp3" },
-            { name: "Vegeta Goku 2", file: "vegeta goku 2.mp3" },
-            { name: "Vegeta Goku 1", file: "vegeta goku 1.mp3" },
-            { name: "Vegeta 3", file: "vegeta 3.mp3" },
-            { name: "pretty little bby music", file: "pretty little bby music.mp3" },
-            { name: "i like to move move it music", file: "i like to move move it music.mp3" },
-            { name: "moto moto music", file: "moto moto music.mp3" },
-            { name: "e é memo porque é memo sid", file: "e é memo porque é memo sid.mp3" },
-            { name: "welcome-to-the-mato-estourado", file: "welcome-to-the-mato-estourado.mp3" },
-            { name: "sid era do gelo", file: "sid era do gelo.mp3" },
-            { name: "oi meu chapa", file: "oi meu chapa.mp3" },
-            { name: "vacuo motivacional", file: "vacuo motivacional.mp3" },
-            { name: "fazendinha bom dia", file: "fazendinha bom dia.mp3" },
-            { name: "caganeira-gordurosa", file: "caganeira-gordurosa.mp3" },
-            { name: "uma maquina", file: "uma maquina.mp3" },
-            { name: "love song", file: "love song.mp3" },
-            { name: "a tia ta aqui tem peixe", file: "a tia ta aqui tem peixe.mp3" },
-            { name: "whatup bby corpse", file: "whatup bby corpse.mp3" },
-            { name: "reflexao do dia", file: "reflexao do dia.mp3" },
-            { name: "mario jump", file: "mario jump.mp3" },
-            { name: "CHAD musica", file: "CHAD musica.mp3" },
-            { name: "ta chovendo ai", file: "ta chovendo ai.mp3" },
-            { name: "chipi chipi chapa music", file: "chipi chipi chapa music.mp3" },
-            { name: "chipi chipi chapa phonk", file: "chipi chipi chapa phonk.mp3" },
-            { name: "9 hoije-e-teu-aniverseiriooo", file: "hoije-e-teu-aniverseiriooo.mp3" },
-            { name: "rat-dance-music", file: "rat-dance-music.mp3" },
-            { name: "aipai-para-hihi", file: "aipai-para-hihi.mp3" },
-            { name: "ze da manga", file: "ze da manga.mp3" },
-            { name: "bem-amigos-terminou", file: "bem-amigos-terminou.mp3" },
-            { name: "Caneta Azul 3", file: "caneta azul 3.mp3" },
-            { name: "sente a pressão nenem music", file: "sente a pressão nenem music.mp3" },
-            { name: "indian version music", file: "indian version music.mp3" },
-            { name: "historia da dubladora da Raky", file: "historia da dubladora da Raky.mp3" },
-            { name: "Caneta azul engasgado", file: "caneta azul engasgado.mp3" },
-            { name: "caneta azul sigam a raky bugado", file: "caneta azul sigam a raky bugado.mp3" },
-            { name: "Porfavor aguarde William Bonner", file: "porfavor aguarde william bonner.mp3" },
-            { name: "Essa vai ser a minha melhor vigarice", file: "essavaiseraminhamelhorvigarice.mp3" },
-            { name: "Naruto LojinhaDarakyOficial confiável", file: "naruto LojinhaDarakyOficial confiavel.mp3" },
-            { name: "Naruto dúvida de compra", file: "Naruto dúvida de compra.mp3" },
-            { name: "Como entrar pelo join locutor", file: "como entrar pelo join locutor.mp3" },
-            { name: "Informações flutuando", file: "informações flutuando na tela.mp3" },
-            { name: "Its corn", file: "its corn.mp3" },
-            { name: "Hello darkness my old friend", file: "hellodarknessmyownfriend.mp3" },
-            { name: "Mostrar inventário", file: "ja irei mostrar o inventário.mp3" },
-            { name: "Fez de novo o desgraçado", file: "fezdenovo.mp3" },
-            { name: "Não gostei amei", file: "naogosteiamei.mp3" },
-            { name: "Freeza completo", file: "freezacompleto.mp3" },
-            { name: "Freeza gritando", file: "freezagrito.mp3" },
-            { name: "Eu estou nervoso", file: "euestounervoso.mp3" },
-            { name: "Pq vc faz isso comigo", file: "pqvoce.mp3" },
-            { name: "XP desligando", file: "xpdesligando.mp3" },
-            { name: "Música da Dolly", file: "musicadolly.mp3" },
-            { name: "Sou o Dollynho vamos cantar", file: "souodollynhovamoscantar.mp3" },
-            { name: "Ou será que não?", file: "ouseraquenao.mp3" },
-            { name: "O que? Como?", file: "oquecomo.mp3" },
-            { name: "Oi oi caindo", file: "oioicaindo.mp3" },
-            { name: "Aqui tem coragem", file: "aquitemcoragem.mp3" },
-            { name: "É com fé no pai eterno sempre aqui estou", file: "ecomfenopaieternosempreaquiestou.mp3" },
-            { name: "É haverdade não minto", file: "ehaverdadenaominto.mp3" },
-            { name: "Acho que eu tava brincando", file: "achoqueeutavabrincando.mp3" },
-            { name: "É mesmo é?", file: "emesmoe.mp3" },
-            { name: "William Bonner's Voice", file: "William_Bonner's_Voice.mp3" },
-            { name: "Bravo", file: "Bravo.mp3" },
-            { name: "GG", file: "GG.mp3" },
-            { name: "Goku presente", file: "Goku presente.mp3" },
-            { name: "PANetoneee", file: "PANetoneee.mp3" },
-            { name: "Futebol", file: "Text_to_Speech-1.wav" },
-            { name: "Alerquina presente", file: "alerquina presente.mp3" },
-            { name: "Amado", file: "amado.mp3" },
-            { name: "Amo te", file: "amo te.mp3" },
-            { name: "ASMR", file: "asmr.mp3" },
-            { name: "Bola de futebol", file: "bola de futebol.mp3" },
-            { name: "Bolacha", file: "bolacha.mp3" },
-            { name: "Boné", file: "boné.mp3" },
-            { name: "Buquê de flores", file: "buquê de flores.mp3" },
-            { name: "Café", file: "café.mp3" },
-            { name: "Capivara", file: "capivara.mp3" },
-            { name: "Chapéu de bigode", file: "chapeu de bigode.mp3" },
-            { name: "Chaves presente", file: "chaves presente.mp3" },
-            { name: "Chimarrão", file: "chimarrão.mp3" },
-            { name: "Chocolate", file: "chocolate.mp3" },
-            { name: "Colar da amizade", file: "colar da amizade.mp3" },
-            { name: "Coração ui", file: "coração ui.mp3" },
-            { name: "Coração", file: "coração.mp3" },
-            { name: "Coroa", file: "coroa.mp3" },
-            { name: "Creeps russos", file: "creeps russos.mp3" },
-            { name: "Dino", file: "dino.mp3" },
-            { name: "Entrar pelo join", file: "entrar pelo join como.mp3" },
-            { name: "Estucadores", file: "estucadores.mp3" },
-            { name: "Exatamente esse valor", file: "exatamente esse valor.mp3" },
-            { name: "Fabuloso", file: "fabuloso.mp3" },
-            { name: "Fantástico", file: "fantástico.mp3" },
-            { name: "Fathers day", file: "fathers day.mp3" },
-            { name: "Fogo", file: "fogo.mp3" },
-            { name: "Galáxia", file: "galaxia.mp3" },
-            { name: "Feliz parabéns", file: "feliz ani lalaia.mp3" },
-            { name: "Feliz kids", file: "feliz ani kids.mp3" },
-            { name: "Feliz mensagem", file: "feliz ani mensagem.mp3" },
-            { name: "Geladinho em cone", file: "geladinho em cone.mp3" },
-            { name: "Guacamole", file: "guacamole.mp3" },
-            { name: "Música", file: "música.mp3" },
-            { name: "Nachos", file: "nachos.mp3" },
-            { name: "Não tenho esse pet", file: "não tenho esse pet.mp3" },
-            { name: "Obgd pelo abraço", file: "obgd pelo forte abraço.mp3" },
-            { name: "Obgd pelo presente", file: "obgd pelo presentaaooo.mp3" },
-            { name: "Origami", file: "origami.mp3" },
-            { name: "Perfume", file: "perfume.mp3" },
-            { name: "Pião", file: "pião.mp3" },
-            { name: "Poção medicinal", file: "poção medicinal.mp3" },
-            { name: "Px e pix flutuando", file: "px e pix flutuando.mp3" },
-            { name: "Que tanto de presente", file: "que tanto de presente.mp3" },
-            { name: "Raky morrendo", file: "raky morrendo.mp3" },
-            { name: "Rosa branca", file: "rosa branca.mp3" },
-            { name: "Rosquinha", file: "rosquinha.mp3" },
-            { name: "T gif", file: "t gif.wav" },
-            { name: "T giiff", file: "t giiff.wav" },
-            { name: "Tacos", file: "tacos.mp3" },
-            { name: "TikTok", file: "tiktok.mp3" },
-            { name: "Urso Mihka", file: "urso mihka.mp3" },
-            { name: "Valores e combos", file: "valores e combos.mp3" },
-            { name: "Vota", file: "vota.mp3" },
-            { name: "Welcome to the mato", file: "welcome-to-the-mato-estourado.mp3" },
-            { name: "Que show de bola", file: "queshow.mp3" },
-            { name: "Belligol demais", file: "belligol.mp3" },
-            { name: "Banido desbanido", file: "banidodesbanido.mp3" },
-            { name: "Horrível (grito)", file: "horrivel.mp3" },
-            { name: "Aleluia irmão", file: "aleluia.mp3" },
-            { name: "Bem te vi 2", file: "bemtevi2.mp3" },
-            { name: "Bem te vi 1", file: "bemtevi1.mp3" },
-            { name: "Tripulante ou impostor?", file: "tripulanteouimpostor.mp3" },
-            { name: "When you smile", file: "whenyousmile.mp3" },
-            { name: "Oh no no no", file: "ohno.mp3" },
-            { name: "Weeeeee", file: "wee.mp3" },
-            { name: "É um guinomio", file: "ehumguinomio.mp3" },
-            { name: "Milos (grito)", file: "milos.mp3" },
-            { name: "Machista opressor music", file: "machistaopressor.mp3" },
-            { name: "Entendi a referência", file: "entendiareferencia.mp3" },
-            { name: "Hehe boy", file: "heheboy.mp3" },
-            { name: "Você é um amigo", file: "vcehumamigo.mp3" },
-            { name: "Gringo é mais caro", file: "gringoehmaiscaro.mp3" },
-            { name: "Pokémon temos que pegar musi", file: "poktemospegar.mp3" },
-            { name: "Caixão curto", file: "caixaocurto.mp3" },
-            { name: "Caixão longo", file: "caixaolongo.mp3" },
-            { name: "Buttercup musi", file: "buttercup.mp3" },
-            { name: "Corona vírus", file: "corona.mp3" },
-            { name: "Dorime remix musi", file: "dorimeremix.mp3" },
-            { name: "Piada do tijolinho", file: "piadatijolinho.mp3" },
-            { name: "Música da garrafa", file: "musicagarrafa.mp3" },
-            { name: "Caralho maluco é bravo porra", file: "caralhomalucoehbravoporra.mp3" },
-            { name: "Que demais", file: "quedemais.mp3" },
-            { name: "Ai pai para", file: "aipaipara.mp3" },
-            { name: "Quero café", file: "querocafe.mp3" },
-            { name: "Você que fuma maconha vai morrer antes do natal", file: "vocequefumamaconhavaimorrerantesdonatal.mp3" },
-            { name: "Sou um merda mermo", file: "souummerdamerdao.mp3" },
-            { name: "To be continued", file: "tobecontinued.mp3" },
-            { name: "Bombadiro crocodilo musi", file: "Bombadiro crocodilo.mp3" },
-            { name: "PHONK UHU musi", file: "PHONK UHU.mp3" },
-            { name: "GANGASTA cat musi", file: "gangstar cat.mp3" },
-            { name: "É verdade as vezes não", file: "ehverdadeasvezesnao.mp3" },
-            { name: "Hum boiola", file: "humboiola.mp3" },
-            { name: "Harlem shake", file: "harlemshake.mp3" },
-            { name: "O que passa na cabeça dela", file: "oquepassanacabecadela.mp3" },
-            { name: "Funk winks musi", file: "funkwinks.mp3" },
-            { name: "Final Arnold (funk) musi", file: "finalarnoldfunk.mp3" },
-            { name: "Open the door", file: "openthedoor.mp3" },
-            { name: "Essa gente inventa cada coisa", file: "essagenteinventacadacoisa.mp3" },
-            { name: "Caneta azul", file: "canetaazul.mp3" },
-            { name: "Tá me ouvindo?", file: "tameouvindo.mp3" },
-            { name: "Som directed by Robert", file: "somdirectedbyrobert.mp3" },
-            { name: "Socorro Deus", file: "socorrodeus.mp3" },
-            { name: "Som do grilo", file: "somgrilo.mp3" },
-            { name: "Você não é tão bom assim e hum fracassado", file: "vocenaoehtaobomassimehumfracassado.mp3" },
-            { name: "Você é retardado por acaso?", file: "voceehretardadoporacaso.mp3" },
-            { name: "Foi ótimo", file: "foiotimo.mp3" },
-            { name: "Eu não quero", file: "eunaoquero.mp3" },
-            { name: "Talvez não funcione com burros", file: "talveznaofuncionecomburros.mp3" },
-            { name: "Que cara mais engraçado", file: "quecaramaisengracado.mp3" },
-            { name: "Evil Morty tema", file: "evilmortytema.mp3" },
-            { name: "Mama mia Marcelo", file: "mamamiamarcelo.mp3" },
-            { name: "Bomb has been defused", file: "bombhasbeendefused.mp3" },
-            { name: "Bomb has been planted", file: "bombhasbeenplanted.mp3" },
-            { name: "Olá amor podendo falar ou sua mulher tá perto?", file: "oiamortapodendofalarousuamulhertaperto.mp3" },
-            { name: "Não seu madruga", file: "naoseumadruga.mp3" },
-            { name: "Não vou aguentar mais", file: "naovouaguentarmais.mp3" },
-            { name: "I believe I can fly", file: "ibelieveicanfly.mp3" },
-            { name: "Tô comendo um tico le", file: "tocomendoumticole.mp3" },
-            { name: "Follow the dawn train CJ", file: "followthedawntraincj.mp3" },
-            { name: "I got a gun", file: "igotagun.mp3" },
-            { name: "Jubileu está esquisito hoje", file: "jubileuestaesquisitohoje.mp3" },
-            { name: "Tá me tirando?", file: "tametirando.mp3" },
-            { name: "Smoke weed everyday musica", file: "smokeweedeveryday.mp3" },
-            { name: "Run", file: "run.mp3" },
-            { name: "Já avisei que vai dar merda", file: "jaaviseiquevaidarmerda.mp3" },
-            { name: "Oi meu nome é Betina", file: "oimeunomeehbetina.mp3" },
-            { name: "Música triste Chaves 1", file: "muscatristechaves1.mp3" },
-            { name: "XP ligando", file: "xpligando.mp3" },
-            { name: "Do you know the way?", file: "doyouknowtheway.mp3" },
-            { name: "Hagaaay", file: "hagaaay.mp3" },
-            { name: "Vinicius Jr vamos pular", file: "viniciusjrvamospular.mp3" },
-            { name: "Sweet dreams (funk) musi", file: "sweetdreamsfunk.mp3" },
-            { name: "Final Arnold", file: "finalarnold.mp3" },
-            { name: "É mais de 8 mil", file: "edemaisde8mil.mp3" },
-            { name: "eu fingo que nao percebo motivacional", file: "eu fingo que nao percebo motivacional.mp3" },
-    ];
+    // CATEGORIA: PRESENTES (obgd ou presentes do TikTok)
+    { name: "Obgd por seguir", file: "obgd por seguir.mp3", categoria: "presentes", tag: "🎁" },
+    { name: "Obgd pela rosa", file: "obgd pela rosa mmmm.mp3", categoria: "presentes", tag: "🌹" },
+    { name: "Obg pelo coração molusco", file: "lula molusco 1.mp3", categoria: "presentes", tag: "🐙" },
+    { name: "Goku presente", file: "Goku presente.mp3", categoria: "presentes", tag: "🐉" },
+    { name: "Alerquina presente", file: "alerquina presente.mp3", categoria: "presentes", tag: "🃏" },
+    { name: "Bola de futebol", file: "bola de futebol.mp3", categoria: "presentes", tag: "⚽" },
+    { name: "Buquê de flores", file: "buquê de flores.mp3", categoria: "presentes", tag: "💐" },
+    { name: "Coração ui", file: "coração ui.mp3", categoria: "presentes", tag: "💖" },
+    { name: "Obgd pelo abraço", file: "obgd pelo forte abraço.mp3", categoria: "presentes", tag: "🤗" },
+    { name: "Obgd pelo presente", file: "obgd pelo presentaaooo.mp3", categoria: "presentes", tag: "🎁" },
+    { name: "Chaves presente", file: "chaves presente.mp3", categoria: "presentes", tag: "🧢" },
+    { name: "Rosa branca", file: "rosa branca.mp3", categoria: "presentes", tag: "🌹" },
+    { name: "Urso Mihka", file: "urso mihka.mp3", categoria: "presentes", tag: "🧸" },
 
-        // Cria os botões de som
+    // CATEGORIA: ENGAÇADOS (memes ou sons engraçados)
+    { name: "Nhe", file: "nhe.mp3", categoria: "engracados", tag: "😂" },
+    { name: "E o pix (só cai)", file: "eopix.mp3", categoria: "engracados", tag: "💰" },
+    { name: "rapaz ta certo isso", file: "rapaz ta certo isso.mp3", categoria: "engracados", tag: "🤨" },
+    { name: "E quem disse", file: "e-quem-disse-que-isso-e-problema-meu.mp3", categoria: "engracados", tag: "🤷" },
+    { name: "caganeira-gordurosa", file: "caganeira-gordurosa.mp3", categoria: "engracados", tag: "💩" },
+    { name: "uma maquina", file: "uma maquina.mp3", categoria: "engracados", tag: "🤖" },
+    { name: "Freeza gritando", file: "freezagrito.mp3", categoria: "engracados", tag: "👾" },
+    { name: "Fez de novo o desgraçado", file: "fezdenovo.mp3", categoria: "engracados", tag: "😈" },
+    { name: "Não gostei amei", file: "naogosteiamei.mp3", categoria: "engracados", tag: "😍" },
+    { name: "Oi oi caindo", file: "oioicaindo.mp3", categoria: "engracados", tag: "👋" },
+    { name: "Que show de bola", file: "queshow.mp3", categoria: "engracados", tag: "👏" },
+    { name: "Horrível (grito)", file: "horrivel.mp3", categoria: "engracados", tag: "😱" },
+    { name: "É um guinomio", file: "ehumguinomio.mp3", categoria: "engracados", tag: "🧞" },
+    { name: "Hum boiola", file: "humboiola.mp3", categoria: "engracados", tag: "🏳️‍🌈" },
+    { name: "Tá me tirando?", file: "tametirando.mp3", categoria: "engracados", tag: "🤨" },
+    { name: "Caralho maluco é bravo porra", file: "caralhomalucoehbravoporra.mp3", categoria: "engracados", tag: "😤" },
+
+    // CATEGORIA: JOGOS (sons de games)
+    { name: "Som morte Roblox", file: "sommorteroblox.mp3", categoria: "jogos", tag: "🎮" },
+    { name: "mario jump", file: "mario jump.mp3", categoria: "jogos", tag: "🍄" },
+    { name: "XP desligando", file: "xpdesligando.mp3", categoria: "jogos", tag: "💻" },
+    { name: "Bomb has been defused", file: "bombhasbeendefused.mp3", categoria: "jogos", tag: "💣" },
+    { name: "Bomb has been planted", file: "bombhasbeenplanted.mp3", categoria: "jogos", tag: "💣" },
+    { name: "Follow the dawn train CJ", file: "followthedawntraincj.mp3", categoria: "jogos", tag: "🚂" },
+    { name: "XP ligando", file: "xpligando.mp3", categoria: "jogos", tag: "💻" },
+    { name: "Tripulante ou impostor?", file: "tripulanteouimpostor.mp3", categoria: "jogos", tag: "👨‍🚀" },
+
+    // CATEGORIA: REAÇÕES (cumprimentos/falas cotidianas)
+    { name: "Heart me", file: "heart me.wav", categoria: "reacoes", tag: "💓" },
+    { name: "oi meu chapa", file: "oi meu chapa.mp3", categoria: "reacoes", tag: "👋" },
+    { name: "a tia ta aqui tem peixe", file: "a tia ta aqui tem peixe.mp3", categoria: "reacoes", tag: "🐟" },
+    { name: "whatup bby corpse", file: "whatup bby corpse.mp3", categoria: "reacoes", tag: "👻" },
+    { name: "fazendinha bom dia", file: "fazendinha bom dia.mp3", categoria: "reacoes", tag: "🌄" },
+    { name: "O que? Como?", file: "oquecomo.mp3", categoria: "reacoes", tag: "🤔" },
+    { name: "Aqui tem coragem", file: "aquitemcoragem.mp3", categoria: "reacoes", tag: "💪" },
+    { name: "É haverdade não minto", file: "ehaverdadenaominto.mp3", categoria: "reacoes", tag: "🤥" },
+    { name: "Bravo", file: "Bravo.mp3", categoria: "reacoes", tag: "👏" },
+    { name: "GG", file: "GG.mp3", categoria: "reacoes", tag: "👍" },
+    { name: "Amado", file: "amado.mp3", categoria: "reacoes", tag: "😍" },
+    { name: "Amo te", file: "amo te.mp3", categoria: "reacoes", tag: "💕" },
+    { name: "Aleluia irmão", file: "aleluia.mp3", categoria: "reacoes", tag: "🙏" },
+    { name: "Bem te vi 2", file: "bemtevi2.mp3", categoria: "reacoes", tag: "🐦" },
+    { name: "Bem te vi 1", file: "bemtevi1.mp3", categoria: "reacoes", tag: "🐦" },
+    { name: "Que demais", file: "quedemais.mp3", categoria: "reacoes", tag: "🤩" },
+    { name: "Foi ótimo", file: "foiotimo.mp3", categoria: "reacoes", tag: "👍" },
+    { name: "Oi meu nome é Betina", file: "oimeunomeehbetina.mp3", categoria: "reacoes", tag: "👧" },
+    { name: "Hagaaay", file: "hagaaay.mp3", categoria: "reacoes", tag: "😆" },
+    { name: "Não seu madruga", file: "naoseumadruga.mp3", categoria: "reacoes", tag: "🧓" },
+
+    // CATEGORIA: MÚSICAS (qualquer música ou trilha)
+    { name: "dora aventureira music", file: "dora aventureira music.mp3", categoria: "musicas", tag: "🎶" },
+    { name: "Allstar but it's Frozen music", file: "Allstar but it's Frozen music.mp3", categoria: "musicas", tag: "❄️" },
+    { name: "What Is Star Baby Don't Shoot Me music", file: "What Is Star Baby Don t Shoot Me.mp3", categoria: "musicas", tag: "⭐" },
+    { name: "megalovania funk music", file: "megalovania funk music.mp3", categoria: "musicas", tag: "🎸" },
+    { name: "pretty little bby music", file: "pretty little bby music.mp3", categoria: "musicas", tag: "👶" },
+    { name: "i like to move move it music", file: "i like to move move it music.mp3", categoria: "musicas", tag: "💃" },
+    { name: "moto moto music", file: "moto moto music.mp3", categoria: "musicas", tag: "🦛" },
+    { name: "love song", file: "love song.mp3", categoria: "musicas", tag: "💘" },
+    { name: "CHAD musica", file: "CHAD musica.mp3", categoria: "musicas", tag: "💪" },
+    { name: "chipi chipi chapa music", file: "chipi chipi chapa music.mp3", categoria: "musicas", tag: "🦊" },
+    { name: "chipi chipi chapa phonk", file: "chipi chipi chapa phonk.mp3", categoria: "musicas", tag: "🦊" },
+    { name: "rat-dance-music", file: "rat-dance-music.mp3", categoria: "musicas", tag: "🐀" },
+    { name: "Música da Dolly", file: "musicadolly.mp3", categoria: "musicas", tag: "🧴" },
+    { name: "Sou o Dollynho vamos cantar", file: "souodollynhovamoscantar.mp3", categoria: "musicas", tag: "🧴" },
+    { name: "Pokémon temos que pegar musi", file: "poktemospegar.mp3", categoria: "musicas", tag: "⚡" },
+    { name: "Buttercup musi", file: "buttercup.mp3", categoria: "musicas", tag: "🧈" },
+    { name: "Dorime remix musi", file: "dorimeremix.mp3", categoria: "musicas", tag: "🙏" },
+    { name: "Música da garrafa", file: "musicagarrafa.mp3", categoria: "musicas", tag: "🍾" },
+    { name: "Bombadiro crocodilo musi", file: "Bombadiro crocodilo.mp3", categoria: "musicas", tag: "🐊" },
+    { name: "PHONK UHU musi", file: "PHONK UHU.mp3", categoria: "musicas", tag: "👻" },
+    { name: "GANGASTA cat musi", file: "gangstar cat.mp3", categoria: "musicas", tag: "🐱" },
+    { name: "Funk winks musi", file: "funkwinks.mp3", categoria: "musicas", tag: "😉" },
+    { name: "Final Arnold (funk) musi", file: "finalarnoldfunk.mp3", categoria: "musicas", tag: "💪" },
+    { name: "Caneta azul", file: "canetaazul.mp3", categoria: "musicas", tag: "🖊️" },
+    { name: "Smoke weed everyday musica", file: "smokeweedeveryday.mp3", categoria: "musicas", tag: "🍁" },
+    { name: "Música triste Chaves music", file: "musicatristechaves1.mp3", categoria: "musicas", tag: "🎻" },
+    { name: "Sweet dreams (funk) musi", file: "sweetdreamsfunk.mp3", categoria: "musicas", tag: "💤" },
+    { name: "Final Arnold music", file: "finalarnold.mp3", categoria: "musicas", tag: "💪" },
+    { name: "I believe I can fly", file: "ibelieveicanfly.mp3", categoria: "musicas", tag: "✈️" },
+    { name: "Tô comendo um tico le music", file: "tocomendoumticole.mp3", categoria: "musicas", tag: "🍽️" },
+    { name: "Run music", file: "run.mp3", categoria: "musicas", tag: "🏃" },
+
+    // OUTROS (sons que não se encaixam nas categorias acima)
+    { name: "to meio gripadinha", file: "to meio gripadinha.mp3", categoria: "outros", tag: "🤧" },
+    { name: "Valores uhulll!", file: "valores uhulll.mp3", categoria: "outros", tag: "💰" },
+    { name: "Apresentação da LojinhaDarakyOficial", file: "Apresentação da LojinhaDarakyOficial.mp3", categoria: "outros", tag: "📢" },
+    { name: "Vegeta Goku 2", file: "vegeta goku 2.mp3", categoria: "outros", tag: "🐉" },
+    { name: "Vegeta Goku 1", file: "vegeta goku 1.mp3", categoria: "outros", tag: "🐉" },
+    { name: "Vegeta 3", file: "vegeta 3.mp3", categoria: "outros", tag: "🐉" },
+    { name: "e é memo porque é memo sid", file: "e é memo porque é memo sid.mp3", categoria: "outros", tag: "🦥" },
+    { name: "welcome-to-the-mato-estourado", file: "welcome-to-the-mato-estourado.mp3", categoria: "outros", tag: "🌳" },
+    { name: "sid era do gelo", file: "sid era do gelo.mp3", categoria: "outros", tag: "🦥" },
+    { name: "vacuo motivacional", file: "vacuo motivacional.mp3", categoria: "outros", tag: "💨" },
+    { name: "reflexao do dia", file: "reflexao do dia.mp3", categoria: "outros", tag: "🧠" },
+    { name: "ta chovendo ai", file: "ta chovendo ai.mp3", categoria: "outros", tag: "🌧️" },
+    { name: "hoije-e-teu-aniverseiriooo", file: "hoije-e-teu-aniverseiriooo.mp3", categoria: "outros", tag: "🎂" },
+    { name: "aipai-para-hihi", file: "aipai-para-hihi.mp3", categoria: "outros", tag: "👨" },
+    { name: "ze da manga", file: "ze da manga.mp3", categoria: "outros", tag: "🥭" },
+    { name: "bem-amigos-terminou", file: "bem-amigos-terminou.mp3", categoria: "outros", tag: "👋" },
+    { name: "Caneta Azul 3", file: "caneta azul 3.mp3", categoria: "outros", tag: "🖊️" },
+    { name: "sente a pressão nenem music", file: "sente a pressão nenem music.mp3", categoria: "outros", tag: "👶" },
+    { name: "indian version music", file: "indian version music.mp3", categoria: "outros", tag: "🇮🇳" },
+    { name: "historia da dubladora da Raky", file: "historia da dubladora da Raky.mp3", categoria: "outros", tag: "🎙️" },
+    { name: "Caneta azul engasgado", file: "caneta azul engasgado.mp3", categoria: "outros", tag: "🖊️" },
+    { name: "caneta azul sigam a raky bugado", file: "caneta azul sigam a raky bugado.mp3", categoria: "outros", tag: "🖊️" },
+    { name: "Porfavor aguarde William Bonner", file: "porfavor aguarde william bonner.mp3", categoria: "outros", tag: "📺" },
+    { name: "Essa vai ser a minha melhor vigarice", file: "essavaiseraminhamelhorvigarice.mp3", categoria: "outros", tag: "🎩" },
+    { name: "Naruto LojinhaDarakyOficial confiável", file: "naruto LojinhaDarakyOficial confiavel.mp3", categoria: "outros", tag: "🍥" },
+    { name: "Naruto dúvida de compra", file: "Naruto dúvida de compra.mp3", categoria: "outros", tag: "🍥" },
+    { name: "Como entrar pelo join locutor", file: "como entrar pelo join locutor.mp3", categoria: "outros", tag: "🎙️" },
+    { name: "Informações flutuando", file: "informações flutuando na tela.mp3", categoria: "outros", tag: "ℹ️" },
+    { name: "Its corn", file: "its corn.mp3", categoria: "outros", tag: "🌽" },
+    { name: "Hello darkness my old friend", file: "hellodarknessmyownfriend.mp3", categoria: "outros", tag: "🌑" },
+    { name: "Mostrar inventário", file: "ja irei mostrar o inventário.mp3", categoria: "outros", tag: "📦" },
+    { name: "Freeza completo", file: "freezacompleto.mp3", categoria: "outros", tag: "👾" },
+    { name: "Eu estou nervoso", file: "euestounervoso.mp3", categoria: "outros", tag: "😤" },
+    { name: "Pq vc faz isso comigo", file: "pqvoce.mp3", categoria: "outros", tag: "😢" },
+    { name: "Ou será que não?", file: "ouseraquenao.mp3", categoria: "outros", tag: "🤔" },
+    { name: "Acho que eu tava brincando", file: "achoqueeutavabrincando.mp3", categoria: "outros", tag: "🤪" },
+    { name: "É mesmo é?", file: "emesmoe.mp3", categoria: "outros", tag: "🤨" },
+    { name: "William Bonner's Voice", file: "William_Bonner's_Voice.mp3", categoria: "outros", tag: "📺" },
+    { name: "PANetoneee", file: "PANetoneee.mp3", categoria: "outros", tag: "🎄" },
+    { name: "Futebol", file: "Text_to_Speech-1.wav", categoria: "outros", tag: "⚽" },
+    { name: "ASMR", file: "asmr.mp3", categoria: "outros", tag: "🎧" },
+    { name: "Bolacha", file: "bolacha.mp3", categoria: "outros", tag: "🍪" },
+    { name: "Boné", file: "boné.mp3", categoria: "outros", tag: "🧢" },
+    { name: "Café", file: "café.mp3", categoria: "outros", tag: "☕" },
+    { name: "Capivara", file: "capivara.mp3", categoria: "outros", tag: "🦫" },
+    { name: "Chapéu de bigode", file: "chapeu de bigode.mp3", categoria: "outros", tag: "🧔" },
+    { name: "Chimarrão", file: "chimarrão.mp3", categoria: "outros", tag: "🧉" },
+    { name: "Chocolate", file: "chocolate.mp3", categoria: "outros", tag: "🍫" },
+    { name: "Colar da amizade", file: "colar da amizade.mp3", categoria: "outros", tag: "📿" },
+    { name: "Coração", file: "coração.mp3", categoria: "outros", tag: "💖" },
+    { name: "Coroa", file: "coroa.mp3", categoria: "outros", tag: "👑" },
+    { name: "Creeps russos", file: "creeps russos.mp3", categoria: "outros", tag: "👻" },
+    { name: "Dino", file: "dino.mp3", categoria: "outros", tag: "🦖" },
+    { name: "Entrar pelo join", file: "entrar pelo join como.mp3", categoria: "outros", tag: "🎙️" },
+    { name: "Estucadores", file: "estucadores.mp3", categoria: "outros", tag: "👷" },
+    { name: "Exatamente esse valor", file: "exatamente esse valor.mp3", categoria: "outros", tag: "💰" },
+    { name: "Fabuloso", file: "fabuloso.mp3", categoria: "outros", tag: "✨" },
+    { name: "Fantástico", file: "fantástico.mp3", categoria: "outros", tag: "🌟" },
+    { name: "Fathers day", file: "fathers day.mp3", categoria: "outros", tag: "👨" },
+    { name: "Fogo", file: "fogo.mp3", categoria: "outros", tag: "🔥" },
+    { name: "Galáxia", file: "galaxia.mp3", categoria: "outros", tag: "🌌" },
+    { name: "Feliz parabéns", file: "feliz ani lalaia.mp3", categoria: "outros", tag: "🎂" },
+    { name: "Feliz kids", file: "feliz ani kids.mp3", categoria: "outros", tag: "👶" },
+    { name: "Feliz mensagem", file: "feliz ani mensagem.mp3", categoria: "outros", tag: "✉️" },
+    { name: "Geladinho em cone", file: "geladinho em cone.mp3", categoria: "outros", tag: "🍦" },
+    { name: "Guacamole", file: "guacamole.mp3", categoria: "outros", tag: "🥑" },
+    { name: "Música", file: "música.mp3", categoria: "outros", tag: "🎵" },
+    { name: "Nachos", file: "nachos.mp3", categoria: "outros", tag: "🌮" },
+    { name: "Não tenho esse pet", file: "não tenho esse pet.mp3", categoria: "outros", tag: "🐾" },
+    { name: "Origami", file: "origami.mp3", categoria: "outros", tag: "📜" },
+    { name: "Perfume", file: "perfume.mp3", categoria: "outros", tag: "💨" },
+    { name: "Pião", file: "pião.mp3", categoria: "outros", tag: "🪀" },
+    { name: "Poção medicinal", file: "poção medicinal.mp3", categoria: "outros", tag: "🧪" },
+    { name: "Px e pix flutuando", file: "px e pix flutuando.mp3", categoria: "outros", tag: "💸" },
+    { name: "Que tanto de presente", file: "que tanto de presente.mp3", categoria: "outros", tag: "🎁" },
+    { name: "Raky morrendo", file: "raky morrendo.mp3", categoria: "outros", tag: "💀" },
+    { name: "Rosquinha", file: "rosquinha.mp3", categoria: "outros", tag: "🍩" },
+    { name: "T gif", file: "t gif.wav", categoria: "outros", tag: "🔄" },
+    { name: "T giiff", file: "t giiff.wav", categoria: "outros", tag: "🔄" },
+    { name: "Tacos", file: "tacos.mp3", categoria: "outros", tag: "🌮" },
+    { name: "TikTok", file: "tiktok.mp3", categoria: "outros", tag: "📱" },
+    { name: "Valores e combos", file: "valores e combos.mp3", categoria: "outros", tag: "💰" },
+    { name: "Vota", file: "vota.mp3", categoria: "outros", tag: "🗳️" },
+    { name: "Welcome to the mato", file: "welcome-to-the-mato-estourado.mp3", categoria: "outros", tag: "🌳" },
+    { name: "Belligol demais", file: "belligol.mp3", categoria: "outros", tag: "⚽" },
+    { name: "Banido desbanido", file: "banidodesbanido.mp3", categoria: "outros", tag: "🚫" },
+    { name: "Milos (grito)", file: "milos.mp3", categoria: "outros", tag: "😱" },
+    { name: "Machista opressor music", file: "machistaopressor.mp3", categoria: "outros", tag: "👊" },
+    { name: "Entendi a referência", file: "entendiareferencia.mp3", categoria: "outros", tag: "🔍" },
+    { name: "Hehe boy", file: "heheboy.mp3", categoria: "outros", tag: "😏" },
+    { name: "Você é um amigo", file: "vcehumamigo.mp3", categoria: "outros", tag: "🤝" },
+    { name: "Gringo é mais caro", file: "gringoehmaiscaro.mp3", categoria: "outros", tag: "💵" },
+    { name: "Caixão curto", file: "caixaocurto.mp3", categoria: "outros", tag: "⚰️" },
+    { name: "Caixão longo", file: "caixaolongo.mp3", categoria: "outros", tag: "⚰️" },
+    { name: "Corona vírus", file: "corona.mp3", categoria: "outros", tag: "🦠" },
+    { name: "Piada do tijolinho", file: "piadatijolinho.mp3", categoria: "outros", tag: "🧱" },
+    { name: "Quero café", file: "querocafe.mp3", categoria: "outros", tag: "☕" },
+    { name: "Você que fuma maconha vai morrer antes do natal", file: "vocequefumamaconhavaimorrerantesdonatal.mp3", categoria: "outros", tag: "🚬" },
+    { name: "Sou um merda mermo", file: "souummerdamerdao.mp3", categoria: "outros", tag: "💩" },
+    { name: "To be continued", file: "tobecontinued.mp3", categoria: "outros", tag: "⏭️" },
+    { name: "É verdade as vezes não", file: "ehverdadeasvezesnao.mp3", categoria: "outros", tag: "🤷" },
+    { name: "Harlem shake", file: "harlemshake.mp3", categoria: "outros", tag: "🕺" },
+    { name: "O que passa na cabeça dela", file: "oquepassanacabecadela.mp3", categoria: "outros", tag: "🧠" },
+    { name: "Open the door", file: "openthedoor.mp3", categoria: "outros", tag: "🚪" },
+    { name: "Essa gente inventa cada coisa", file: "essagenteinventacadacoisa.mp3", categoria: "outros", tag: "🤯" },
+    { name: "Tá me ouvindo?", file: "tameouvindo.mp3", categoria: "outros", tag: "👂" },
+    { name: "Som directed by Robert music", file: "somdirectedbyrobert.mp3", categoria: "outros", tag: "🎬" },
+    { name: "Socorro Deus music", file: "socorrodeus.mp3", categoria: "outros", tag: "🙏" },
+    { name: "Som do grilo", file: "somgrilo.mp3", categoria: "outros", tag: "🦗" },
+    { name: "Você não é tão bom assim e hum fracassado", file: "vocenaoehtaobomassimehumfracassado.mp3", categoria: "outros", tag: "👎" },
+    { name: "Você é retardado por acaso?", file: "voceehretardadoporacaso.mp3", categoria: "outros", tag: "🤪" },
+    { name: "Eu não quero", file: "eunaoquero.mp3", categoria: "outros", tag: "🙅" },
+    { name: "Talvez não funcione com burros", file: "talveznaofuncionecomburros.mp3", categoria: "outros", tag: "🤦" },
+    { name: "Que cara mais engraçado", file: "quecaramaisengracado.mp3", categoria: "outros", tag: "🤣" },
+    { name: "Evil Morty tema music", file: "evilmortytema.mp3", categoria: "outros", tag: "👁️" },
+    { name: "Mama mia Marcelo", file: "mamamiamarcelo.mp3", categoria: "outros", tag: "👨" },
+    { name: "Olá amor podendo falar ou sua mulher tá perto?", file: "oiamortapodendofalarousuamulhertaperto.mp3", categoria: "outros", tag: "💑" },
+    { name: "Não vou aguentar mais", file: "naovouaguentarmais.mp3", categoria: "outros", tag: "😫" },
+    { name: "I got a gun", file: "igotagun.mp3", categoria: "outros", tag: "🔫" },
+    { name: "Jubileu está esquisito hoje", file: "jubileuestaesquisitohoje.mp3", categoria: "outros", tag: "👴" },
+    { name: "Já avisei que vai dar merda", file: "jaaviseiquevaidarmerda.mp3", categoria: "outros", tag: "💩" },
+    { name: "Do you know the way?", file: "doyouknowtheway.mp3", categoria: "outros", tag: "🗺️" },
+    { name: "Vinicius Jr vamos pular", file: "viniciusjrvamospular.mp3", categoria: "outros", tag: "⚽" },
+    { name: "É mais de 8 mil", file: "edemaisde8mil.mp3", categoria: "outros", tag: "💰" },
+    { name: "eu fingo que nao percebo motivacional", file: "eu fingo que nao percebo motivacional.mp3", categoria: "outros", tag: "💪" }
+];
+        // Sistema de Favoritos e Histórico
+        let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+        let historico = JSON.parse(localStorage.getItem('historico')) || [];
+        let modoEmergencia = false;
+
+        // Slideshow
+        let slideIndex = 0;
+        const slides = document.getElementsByClassName("slides");
+        let slideInterval;
+        let isPaused = false;
+
+        // Inicialização
+        window.onload = function() {
+            createSoundButtons();
+            mostrarAtalhos();
+            mostrarSlide(slideIndex);
+            startSlideShow();
+        };
+
+        // Slideshow functions
+        function mostrarSlide(n) {
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[n].style.display = "block";
+        }
+
+        function proximoSlide() {
+            slideIndex = (slideIndex + 1) % slides.length;
+            mostrarSlide(slideIndex);
+        }
+
+        function voltarSlide() {
+            slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+            mostrarSlide(slideIndex);
+        }
+
+        function startSlideShow() {
+            if (!slideInterval) {
+                slideInterval = setInterval(proximoSlide, 3000);
+                document.getElementById("pauseBtn").innerHTML = '<i class="fas fa-pause"></i> Pausar Slideshow';
+                isPaused = false;
+            }
+        }
+
+        function stopSlideShow() {
+            clearInterval(slideInterval);
+            slideInterval = null;
+            document.getElementById("pauseBtn").innerHTML = '<i class="fas fa-play"></i> Continuar Slideshow';
+            isPaused = true;
+        }
+
+        function togglePause() {
+            if (isPaused) {
+                startSlideShow();
+            } else {
+                stopSlideShow();
+            }
+        }
+
+        // Criar botões de som
         function createSoundButtons() {
             const container = document.getElementById('soundContainer');
             container.innerHTML = '';
             
             soundEffects.forEach(sound => {
                 const button = document.createElement('button');
-                button.className = 'sound-button';
-                button.textContent = sound.name;
+                button.className = `sound-button categoria-${sound.categoria}`;
+                if (favoritos.includes(sound.name)) {
+                    button.classList.add('categoria-favoritos');
+                }
+                
+                button.innerHTML = `
+                    ${sound.name}
+                    ${sound.tag ? `<span class="sound-tag">${sound.tag}</span>` : ''}
+                    <span class="favorito-btn" onclick="event.stopPropagation(); toggleFavorito('${sound.name}')">
+                        ${favoritos.includes(sound.name) ? '★' : '☆'}
+                    </span>
+                `;
+                
                 button.onclick = () => playSound(sound.file);
                 container.appendChild(button);
             });
+            
+            updateHistoricoUI();
         }
 
-        function playSound(soundFile) {
-            // Usa o link RAW do GitHub para pegar o áudio diretamente
-            const audio = new Audio(`https://raw.githubusercontent.com/RaquelSantos380/Arsenal-de-efeitos-Da-Raky/main/${soundFile}`);
+        // Toggle Favorito
+        function toggleFavorito(nomeSom) {
+            const index = favoritos.indexOf(nomeSom);
+            if (index === -1) {
+                favoritos.push(nomeSom);
+            } else {
+                favoritos.splice(index, 1);
+            }
+            localStorage.setItem('favoritos', JSON.stringify(favoritos));
+            createSoundButtons();
+        }
+
+        // Filtrar por categoria
+        function filtrarPorCategoria(categoria) {
+            const buttons = document.querySelectorAll('.sound-button');
+            buttons.forEach(button => {
+                if (categoria === 'todos') {
+                    button.style.display = 'flex';
+                } else if (categoria === 'favoritos') {
+                    button.style.display = favoritos.includes(button.textContent.trim()) ? 'flex' : 'none';
+                } else {
+                    button.style.display = button.classList.contains(`categoria-${categoria}`) ? 'flex' : 'none';
+                }
+            });
+            
+            document.getElementById('historicoContainer').style.display = categoria === 'todos' ? 'block' : 'none';
+        }
+
+        // Atualizar UI do Histórico
+        function updateHistoricoUI() {
+            const container = document.getElementById('historicoButtons');
+            container.innerHTML = '';
+            
+            historico.forEach(soundName => {
+                const sound = soundEffects.find(s => s.name === soundName);
+                if (sound) {
+                    const btn = document.createElement('button');
+                    btn.className = 'historico-btn';
+                    btn.textContent = soundName;
+                    btn.onclick = () => playSound(sound.file);
+                    container.appendChild(btn);
+                }
+            });
+        }
+
+        // Reproduzir som
+        function playSound(file) {
+            const audio = new Audio(`https://raw.githubusercontent.com/RaquelSantos380/Arsenal-de-efeitos-Da-Raky/main/${file}`);
             audio.play().catch(e => console.log("Erro ao reproduzir som:", e));
+            
+            // Adicionar ao histórico
+            const soundName = soundEffects.find(s => s.file === file).name;
+            historico = historico.filter(name => name !== soundName);
+            historico.unshift(soundName);
+            if (historico.length > 5) historico.pop();
+            localStorage.setItem('historico', JSON.stringify(historico));
+            
+            updateHistoricoUI();
         }
 
-        // Função para filtrar os sons pela pesquisa
+        // Filtro de pesquisa
         function filterSounds() {
             const searchTerm = document.getElementById('search').value.toLowerCase();
             const buttons = document.querySelectorAll('.sound-button');
@@ -791,104 +848,54 @@
                 const soundName = button.textContent.toLowerCase();
                 if (soundName.includes(searchTerm)) {
                     button.style.display = 'flex';
+                    button.style.animation = 'pulse 0.5s';
+                    setTimeout(() => button.style.animation = '', 500);
                 } else {
                     button.style.display = 'none';
                 }
             });
         }
 
-        // Slideshow automático
-        let slideIndex = 0;
-        const slides = document.getElementsByClassName("slides");
-        let slideInterval;
-        let isPaused = false;
-        
-        function mostrarSlide(index) {
-            // Esconde todos os slides
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
+        // Teclas de Atalho
+        document.addEventListener('keydown', (e) => {
+            if (e.altKey) {
+                switch(e.key.toLowerCase()) {
+                    case '1': playSound('obgd por seguir.mp3'); break;
+                    case '2': playSound('nhe.mp3'); break;
+                    case '3': playSound('eopix.mp3'); break;
+                    case 'h': mostrarAtalhos(); break;
+                    case 'f': filtrarPorCategoria('favoritos'); break;
+                    case 'e': toggleModoEmergencia(); break;
+                    case 'arrowright': proximoSlide(); break;
+                    case 'arrowleft': voltarSlide(); break;
+                    case 'p': togglePause(); break;
+                }
             }
-            
-            // Mostra o slide atual
-            if(slides.length > 0) {
-                slides[index].style.display = "block";
-            }
-        }
-        
-        function proximoSlide() {
-            slideIndex = (slideIndex + 1) % slides.length;
-            mostrarSlide(slideIndex);
-        }
-        
-        function voltarSlide() {
-            slideIndex = (slideIndex - 1 + slides.length) % slides.length;
-            mostrarSlide(slideIndex);
-        }
-        
-        function startSlideShow() {
-            if (!slideInterval) {
-                slideInterval = setInterval(proximoSlide, 3000);
-            }
-        }
-        
-        function stopSlideShow() {
-            clearInterval(slideInterval);
-            slideInterval = null;
-        }
-        
-        function togglePause() {
-            const pauseBtn = document.getElementById("pauseBtn");
-            
-            if (isPaused) {
-                // Se estava pausado, despausa
-                startSlideShow();
-                pauseBtn.innerHTML = '<i class="fas fa-pause"></i> Pausar Slideshow';
-                isPaused = false;
-            } else {
-                // Se estava rodando, pausa
-                stopSlideShow();
-                pauseBtn.innerHTML = '<i class="fas fa-play"></i> Continuar Slideshow';
-                isPaused = true;
-            }
-        }
-        
-        // Calculator functions
-        let calcDisplay = '';
-        
-        function calcInput(value) {
-            calcDisplay += value;
-            document.getElementById('calcDisplay').value = calcDisplay;
-        }
-        
-        function clearCalc() {
-            calcDisplay = '';
-            document.getElementById('calcDisplay').value = '';
-        }
-        
-        function calculate() {
-            try {
-                const result = eval(calcDisplay);
-                document.getElementById('calcDisplay').value = result;
-                calcDisplay = result.toString();
-            } catch (e) {
-                document.getElementById('calcDisplay').value = 'Erro';
-                calcDisplay = '';
-            }
-        }
-        
-        // Função para apagar o último caractere
-        function backspace() {
-            calcDisplay = calcDisplay.slice(0, -1);
-            document.getElementById('calcDisplay').value = calcDisplay;
+        });
+
+        // Mostrar atalhos
+        function mostrarAtalhos() {
+            alert(`📌 Atalhos do Teclado:
+Alt+1 = Agradecimento
+Alt+2 = Som "Nhe"
+Alt+3 = "E o pix"
+Alt+F = Mostrar Favoritos
+Alt+E = Modo Emergência
+Alt+→ = Próximo Slide
+Alt+← = Slide Anterior
+Alt+P = Pausar/Continuar Slideshow
+Alt+H = Mostrar esta ajuda`);
         }
 
-        function toggleCalculator() {
-            const calculator = document.getElementById('floatingCalculator');
-            if (calculator.style.display === 'block') {
-                calculator.style.display = 'none';
-            } else {
-                calculator.style.display = 'block';
-            }
+        // Modo Emergência
+        function toggleModoEmergencia() {
+            modoEmergencia = !modoEmergencia;
+            document.body.classList.toggle('modo-emergencia', modoEmergencia);
+            
+            const container = document.getElementById('soundContainer');
+            container.style.gridTemplateColumns = modoEmergencia ? 
+                'repeat(auto-fill, minmax(100px, 1fr))' : 
+                'repeat(auto-fill, minmax(80px, 1fr))';
         }
 
         // Funções para copiar PIX e Join
@@ -913,17 +920,6 @@
                     console.error('Erro ao copiar: ', err);
                 });
         }
-
-        // Inicializa os botões quando a página carrega
-        window.onload = function() {
-            createSoundButtons();
-            
-            // Inicia o slideshow
-            if(slides.length > 0) {
-                mostrarSlide(slideIndex);
-                startSlideShow();
-            }
-        };
     </script>
 </body>
 </html>
