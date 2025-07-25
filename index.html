@@ -77,7 +77,7 @@
 
         .seta {
             position: absolute;
-            top: 50%;
+            top: 65%;
             transform: translateY(-50%);
             font-size: 24px;
             color: #666;
@@ -432,68 +432,89 @@
             justify-content: center;
         }
         
-        /* Calculadora */
-        .calculator-container {
-            display: none;
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            width: 250px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            z-index: 100;
-            padding: 10px;
-        }
-        
-        .calculator-display {
-            width: 100%;
-            height: 40px;
-            margin-bottom: 10px;
-            text-align: right;
-            padding: 5px;
-            font-size: 1.2rem;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        
-        .calculator-buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 5px;
-        }
-        
-        .calc-btn {
-            padding: 10px;
-            font-size: 1rem;
-            border: none;
-            border-radius: 5px;
-            background: #f0f0f0;
-            cursor: pointer;
-        }
-        
-        .calc-btn:active {
-            background: #ddd;
-        }
-        
-        .calc-btn.operator {
-            background: #FFD700;
-        }
-        
-        .calc-btn.equals {
-            background: #4CAF50;
-            color: white;
-        }
-        
-        .calc-btn.clear {
-            background: #FF5722;
-            color: white;
-        }
-        
-        .calc-btn.backspace {
-            background: #2196F3;
-            color: white;
-        }
+/* Calculadora de Valores Mobile */
+.value-calculator-container {
+    display: none;
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 300px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 100;
+    padding: 10px;
+}
+
+.value-calculator-display {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 10px;
+    text-align: right;
+    padding: 5px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.value-calculator-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+}
+
+.value-calc-btn {
+    padding: 8px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 5px;
+    background: #f0f0f0;
+    cursor: pointer;
+}
+
+.value-calc-btn:active {
+    background: #ddd;
+}
+
+.value-calc-btn.operator {
+    background: #FFD700;
+}
+
+.value-calc-btn.equals {
+    background: #4CAF50;
+    color: white;
+}
+
+.value-calc-btn.clear {
+    background: #FF5722;
+    color: white;
+}
+
+.value-calc-btn.backspace {
+    background: #2196F3;
+    color: white;
+}
+
+.floating-value-calculator-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #2196F3, #1976D2);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
     </style>
 </head>
 <body>
@@ -507,6 +528,7 @@
 
     <!-- Lembrete vermelho -->
     <div class="lembrete">NÃO ACEITO BANCO INTER</div>
+
 
     <!-- Slideshow -->
     <div class="slideshow-container" id="slideshow-container">
@@ -534,6 +556,10 @@
         <button class="pix-button" onclick="showPixModal()">
             <i class="fas fa-money-bill-wave"></i> PIX
         </button>
+
+    <a href="https://elvebredd.com/ValueCalculator.html" target="_blank" class="small-button inventory-button">
+        <i class="fas fa-coins"></i> Calculadora de Valores
+        </a>
         
         <button class="join-button" onclick="showJoinModal()">
             <i class="fas fa-sign-in-alt"></i> Join
@@ -606,32 +632,37 @@
         <i class="fas fa-calculator"></i>
     </button>
     
-    <!-- Calculadora flutuante -->
-    <div class="calculator-container" id="calculatorContainer">
-        <input type="text" class="calculator-display" id="calcDisplay" readonly>
-        <div class="calculator-buttons">
-            <button class="calc-btn clear" onclick="clearDisplay()">C</button>
-            <button class="calc-btn backspace" onclick="backspace()">⌫</button>
-            <button class="calc-btn operator" onclick="appendToDisplay('/')">/</button>
-            <button class="calc-btn operator" onclick="appendToDisplay('*')">×</button>
+    <!-- Botão flutuante da calculadora de valores -->
+    <button class="floating-value-calculator-btn" onclick="toggleValueCalculator()">
+        <i class="fas fa-coins"></i>
+    </button>
+
+    <!-- Calculadora de Valores flutuante -->
+    <div class="value-calculator-container" id="valueCalculatorContainer">
+        <input type="text" class="value-calculator-display" id="valueCalcDisplay" readonly>
+        <div class="value-calculator-buttons">
+            <button class="value-calc-btn clear" onclick="clearValueDisplay()">C</button>
+            <button class="value-calc-btn backspace" onclick="valueBackspace()">⌫</button>
+            <button class="value-calc-btn operator" onclick="appendToValueDisplay('/')">/</button>
+            <button class="value-calc-btn operator" onclick="appendToValueDisplay('*')">×</button>
             
-            <button class="calc-btn" onclick="appendToDisplay('7')">7</button>
-            <button class="calc-btn" onclick="appendToDisplay('8')">8</button>
-            <button class="calc-btn" onclick="appendToDisplay('9')">9</button>
-            <button class="calc-btn operator" onclick="appendToDisplay('-')">-</button>
+            <button class="value-calc-btn" onclick="appendToValueDisplay('7')">7</button>
+            <button class="value-calc-btn" onclick="appendToValueDisplay('8')">8</button>
+            <button class="value-calc-btn" onclick="appendToValueDisplay('9')">9</button>
+            <button class="value-calc-btn operator" onclick="appendToValueDisplay('-')">-</button>
             
-            <button class="calc-btn" onclick="appendToDisplay('4')">4</button>
-            <button class="calc-btn" onclick="appendToDisplay('5')">5</button>
-            <button class="calc-btn" onclick="appendToDisplay('6')">6</button>
-            <button class="calc-btn operator" onclick="appendToDisplay('+')">+</button>
+            <button class="value-calc-btn" onclick="appendToValueDisplay('4')">4</button>
+            <button class="value-calc-btn" onclick="appendToValueDisplay('5')">5</button>
+            <button class="value-calc-btn" onclick="appendToValueDisplay('6')">6</button>
+            <button class="value-calc-btn operator" onclick="appendToValueDisplay('+')">+</button>
             
-            <button class="calc-btn" onclick="appendToDisplay('1')">1</button>
-            <button class="calc-btn" onclick="appendToDisplay('2')">2</button>
-            <button class="calc-btn" onclick="appendToDisplay('3')">3</button>
-            <button class="calc-btn equals" onclick="calculate()">=</button>
+            <button class="value-calc-btn" onclick="appendToValueDisplay('1')">1</button>
+            <button class="value-calc-btn" onclick="appendToValueDisplay('2')">2</button>
+            <button class="value-calc-btn" onclick="appendToValueDisplay('3')">3</button>
+            <button class="value-calc-btn equals" onclick="calculateValue()">=</button>
             
-            <button class="calc-btn" onclick="appendToDisplay('0')" style="grid-column: span 2;">0</button>
-            <button class="calc-btn" onclick="appendToDisplay('.')">.</button>
+            <button class="value-calc-btn" onclick="appendToValueDisplay('0')" style="grid-column: span 2;">0</button>
+            <button class="value-calc-btn" onclick="appendToValueDisplay('.')">.</button>
         </div>
     </div>
     
@@ -640,7 +671,6 @@
     </footer>
     
     <script>
-        // Dados dos Efeitos Sonoros com Categorias
         const soundEffects = [
     // CATEGORIA: PRESENTES (obgd ou presentes do TikTok)
     { name: "Obgd por seguir", file: "obgd por seguir.mp3", categoria: "presentes", tag: "🎁" },
@@ -1042,7 +1072,7 @@
                 switch(e.key.toLowerCase()) {
                     case '1': playSound('obgd por seguir.mp3'); break;
                     case '2': playSound('nhe.mp3'); break;
-                    case '3': playSound('eopix.mp3'); break;
+                    case '3': playSound('sommorteroblox.mp3'); break;
                     case 'h': mostrarAtalhos(); break;
                     case 'f': filtrarPorCategoria('favoritos'); break;
                     case 'e': toggleModoEmergencia(); break;
@@ -1058,7 +1088,7 @@
             alert(`📌 Atalhos do Teclado:
 Alt+1 = Agradecimento
 Alt+2 = Som "Nhe"
-Alt+3 = "E o pix"
+Alt+3 = Som morte Roblox
 Alt+F = Mostrar Favoritos
 Alt+E = Modo Emergência
 Alt+→ = Próximo Slide
@@ -1119,28 +1149,28 @@ Alt+H = Mostrar esta ajuda`);
         function closeJoinModal() {
             document.getElementById('joinModal').style.display = 'none';
         }
-        
-        // Funções da calculadora
-        function toggleCalculator() {
-            const calc = document.getElementById('calculatorContainer');
+
+        // Funções da calculadora de valores
+        function toggleValueCalculator() {
+            const calc = document.getElementById('valueCalculatorContainer');
             calc.style.display = calc.style.display === 'block' ? 'none' : 'block';
         }
-        
-        function appendToDisplay(value) {
-            document.getElementById('calcDisplay').value += value;
+
+        function appendToValueDisplay(value) {
+            document.getElementById('valueCalcDisplay').value += value;
         }
-        
-        function clearDisplay() {
-            document.getElementById('calcDisplay').value = '';
+
+        function clearValueDisplay() {
+            document.getElementById('valueCalcDisplay').value = '';
         }
-        
-        function backspace() {
-            const display = document.getElementById('calcDisplay');
+
+        function valueBackspace() {
+            const display = document.getElementById('valueCalcDisplay');
             display.value = display.value.slice(0, -1);
         }
-        
-        function calculate() {
-            const display = document.getElementById('calcDisplay');
+
+        function calculateValue() {
+            const display = document.getElementById('valueCalcDisplay');
             try {
                 display.value = eval(display.value);
             } catch (e) {
