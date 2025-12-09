@@ -344,14 +344,6 @@
             transition: all 0.2s ease;
         }
         
-        /* Modo Emergência */
-        .modo-emergencia .sound-button {
-            width: 90px;
-            height: 90px;
-            margin: 3px;
-            font-size: 0.6rem;
-        }
-
         /* Modal styles */
         .modal {
             display: none;
@@ -412,6 +404,66 @@
             padding: 5px;
         }
         
+        /* Calculadora flutuante menor */
+        .calculator-container {
+            display: none;
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 150px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 100;
+            padding: 8px;
+            border: 2px solid #4CAF50;
+        }
+        
+        .calculator-display {
+            width: 100%;
+            height: 30px;
+            margin-bottom: 8px;
+            text-align: right;
+            padding: 5px;
+            font-size: 0.9rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        .calculator-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4px;
+        }
+        
+        .calc-btn {
+            padding: 6px;
+            font-size: 0.8rem;
+            border: none;
+            border-radius: 4px;
+            background: #f0f0f0;
+            cursor: pointer;
+        }
+        
+        .calc-btn:active {
+            background: #ddd;
+        }
+        
+        .calc-btn.operator {
+            background: #FFD700;
+        }
+        
+        .calc-btn.equals {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .calc-btn.clear {
+            background: #FF5722;
+            color: white;
+            font-size: 0.7rem;
+        }
+        
         /* Botão da calculadora flutuante */
         .floating-calculator-btn {
             position: fixed;
@@ -431,90 +483,6 @@
             align-items: center;
             justify-content: center;
         }
-        
-/* Calculadora de Valores Mobile */
-.value-calculator-container {
-    display: none;
-    position: fixed;
-    bottom: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    max-width: 300px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    z-index: 100;
-    padding: 10px;
-}
-
-.value-calculator-display {
-    width: 100%;
-    height: 40px;
-    margin-bottom: 10px;
-    text-align: right;
-    padding: 5px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.value-calculator-buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 5px;
-}
-
-.value-calc-btn {
-    padding: 8px;
-    font-size: 0.9rem;
-    border: none;
-    border-radius: 5px;
-    background: #f0f0f0;
-    cursor: pointer;
-}
-
-.value-calc-btn:active {
-    background: #ddd;
-}
-
-.value-calc-btn.operator {
-    background: #FFD700;
-}
-
-.value-calc-btn.equals {
-    background: #4CAF50;
-    color: white;
-}
-
-.value-calc-btn.clear {
-    background: #FF5722;
-    color: white;
-}
-
-.value-calc-btn.backspace {
-    background: #2196F3;
-    color: white;
-}
-
-.floating-value-calculator-btn {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: linear-gradient(145deg, #2196F3, #1976D2);
-    color: white;
-    border: none;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    font-size: 20px;
-    cursor: pointer;
-    z-index: 99;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
     </style>
 </head>
 <body>
@@ -529,23 +497,17 @@
     <!-- Lembrete vermelho -->
     <div class="lembrete">NÃO ACEITO BANCO INTER</div>
 
-
     <!-- Slideshow -->
     <div class="slideshow-container" id="slideshow-container">
-    <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/1.jpg" alt="Slide 1">
-    <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/2.jpg" alt="Slide 2">
-    <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/3.jpg" alt="Slide 3">
-    <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/4.jpg" alt="Slide 4">
-    <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/5.jpg" alt="Slide 5">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/1.jpg" alt="Slide 1">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/2.jpg" alt="Slide 2">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/3.jpg" alt="Slide 3">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/4.jpg" alt="Slide 4">
+        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/5.jpg" alt="Slide 5">
 
-    <span class="seta seta-esquerda" onclick="voltarSlide()">&#8249;</span>
-    <span class="seta seta-direita" onclick="proximoSlide()">&#8250;</span>
-<!-- Adicione esta linha -->
-
-</div>
-
-<!-- Botões Principais -->
-<div class="buttons-container">
+        <span class="seta seta-esquerda" onclick="voltarSlide()">&#8249;</span>
+        <span class="seta seta-direita" onclick="proximoSlide()">&#8250;</span>
+    </div>
 
     <button class="pause-btn" id="pauseBtn" onclick="togglePause()">
         <i class="fas fa-pause"></i> Pausar Slideshow
@@ -557,8 +519,8 @@
             <i class="fas fa-money-bill-wave"></i> PIX
         </button>
 
-    <a href="https://elvebredd.com/ValueCalculator.html" target="_blank" class="small-button inventory-button">
-        <i class="fas fa-coins"></i> Calculadora de Valores
+        <a href="https://elvebredd.com/ValueCalculator.html" target="_blank" class="small-button inventory-button">
+            <i class="fas fa-coins"></i> Calculadora de Valores
         </a>
         
         <button class="join-button" onclick="showJoinModal()">
@@ -572,14 +534,6 @@
         <a href="https://raquelsantos380.github.io/Confiavel-ou-Scammer-/" target="_blank" class="small-button scammer-button">
             <i class="fas fa-user-shield"></i> Confiável?
         </a>
-        
-        <button class="small-button" onclick="mostrarAtalhos()">
-            <i class="fas fa-keyboard"></i> Atalhos
-        </button>
-        
-        <button class="small-button" onclick="toggleModoEmergencia()">
-            <i class="fas fa-expand"></i> Emergência
-        </button>
     </div>
 
     <!-- Filtros Rápidos -->
@@ -632,37 +586,27 @@
         <i class="fas fa-calculator"></i>
     </button>
     
-    <!-- Botão flutuante da calculadora de valores -->
-    <button class="floating-value-calculator-btn" onclick="toggleValueCalculator()">
-        <i class="fas fa-coins"></i>
-    </button>
-
-    <!-- Calculadora de Valores flutuante -->
-    <div class="value-calculator-container" id="valueCalculatorContainer">
-        <input type="text" class="value-calculator-display" id="valueCalcDisplay" readonly>
-        <div class="value-calculator-buttons">
-            <button class="value-calc-btn clear" onclick="clearValueDisplay()">C</button>
-            <button class="value-calc-btn backspace" onclick="valueBackspace()">⌫</button>
-            <button class="value-calc-btn operator" onclick="appendToValueDisplay('/')">/</button>
-            <button class="value-calc-btn operator" onclick="appendToValueDisplay('*')">×</button>
-            
-            <button class="value-calc-btn" onclick="appendToValueDisplay('7')">7</button>
-            <button class="value-calc-btn" onclick="appendToValueDisplay('8')">8</button>
-            <button class="value-calc-btn" onclick="appendToValueDisplay('9')">9</button>
-            <button class="value-calc-btn operator" onclick="appendToValueDisplay('-')">-</button>
-            
-            <button class="value-calc-btn" onclick="appendToValueDisplay('4')">4</button>
-            <button class="value-calc-btn" onclick="appendToValueDisplay('5')">5</button>
-            <button class="value-calc-btn" onclick="appendToValueDisplay('6')">6</button>
-            <button class="value-calc-btn operator" onclick="appendToValueDisplay('+')">+</button>
-            
-            <button class="value-calc-btn" onclick="appendToValueDisplay('1')">1</button>
-            <button class="value-calc-btn" onclick="appendToValueDisplay('2')">2</button>
-            <button class="value-calc-btn" onclick="appendToValueDisplay('3')">3</button>
-            <button class="value-calc-btn equals" onclick="calculateValue()">=</button>
-            
-            <button class="value-calc-btn" onclick="appendToValueDisplay('0')" style="grid-column: span 2;">0</button>
-            <button class="value-calc-btn" onclick="appendToValueDisplay('.')">.</button>
+    <!-- Calculadora flutuante menor -->
+    <div class="calculator-container" id="calculatorContainer">
+        <input type="text" class="calculator-display" id="calcDisplay" readonly>
+        <div class="calculator-buttons">
+            <button class="calc-btn clear" onclick="clearDisplay()">C</button>
+            <button class="calc-btn" onclick="appendToDisplay('/')">/</button>
+            <button class="calc-btn" onclick="appendToDisplay('*')">×</button>
+            <button class="calc-btn" onclick="appendToDisplay('7')">7</button>
+            <button class="calc-btn" onclick="appendToDisplay('8')">8</button>
+            <button class="calc-btn" onclick="appendToDisplay('9')">9</button>
+            <button class="calc-btn" onclick="appendToDisplay('-')">-</button>
+            <button class="calc-btn" onclick="appendToDisplay('4')">4</button>
+            <button class="calc-btn" onclick="appendToDisplay('5')">5</button>
+            <button class="calc-btn" onclick="appendToDisplay('6')">6</button>
+            <button class="calc-btn" onclick="appendToDisplay('+')">+</button>
+            <button class="calc-btn" onclick="appendToDisplay('1')">1</button>
+            <button class="calc-btn" onclick="appendToDisplay('2')">2</button>
+            <button class="calc-btn" onclick="appendToDisplay('3')">3</button>
+            <button class="calc-btn equals" onclick="calculate()">=</button>
+            <button class="calc-btn" onclick="appendToDisplay('0')" style="grid-column: span 2;">0</button>
+            <button class="calc-btn" onclick="appendToDisplay('.')">.</button>
         </div>
     </div>
     
@@ -672,242 +616,241 @@
     
     <script>
         const soundEffects = [
-    // CATEGORIA: PRESENTES (obgd ou presentes do TikTok)
-    { name: "Obgd por seguir", file: "obgd por seguir.mp3", categoria: "presentes", tag: "🎁" },
-    { name: "Obgd pela rosa", file: "obgd pela rosa mmmm.mp3", categoria: "presentes", tag: "🌹" },
-    { name: "Obg pelo coração molusco", file: "lula molusco 1.mp3", categoria: "presentes", tag: "🐙" },
-    { name: "Goku presente", file: "Goku presente.mp3", categoria: "presentes", tag: "🐉" },
-    { name: "Alerquina presente", file: "alerquina presente.mp3", categoria: "presentes", tag: "🃏" },
-    { name: "Bola de futebol", file: "bola de futebol.mp3", categoria: "presentes", tag: "⚽" },
-    { name: "Buquê de flores", file: "buquê de flores.mp3", categoria: "presentes", tag: "💐" },
-    { name: "Coração ui", file: "coração ui.mp3", categoria: "presentes", tag: "💖" },
-    { name: "Obgd pelo abraço", file: "obgd pelo forte abraço.mp3", categoria: "presentes", tag: "🤗" },
-    { name: "Obgd pelo presente", file: "obgd pelo presentaaooo.mp3", categoria: "presentes", tag: "🎁" },
-    { name: "Chaves presente", file: "chaves presente.mp3", categoria: "presentes", tag: "🧢" },
-    { name: "Rosa branca", file: "rosa branca.mp3", categoria: "presentes", tag: "🌹" },
-    { name: "Urso Mihka", file: "urso mihka.mp3", categoria: "presentes", tag: "🧸" },
+            // CATEGORIA: PRESENTES (obgd ou presentes do TikTok)
+            { name: "Obgd por seguir", file: "obgd por seguir.mp3", categoria: "presentes", tag: "🎁" },
+            { name: "Obgd pela rosa", file: "obgd pela rosa mmmm.mp3", categoria: "presentes", tag: "🌹" },
+            { name: "Obg pelo coração molusco", file: "lula molusco 1.mp3", categoria: "presentes", tag: "🐙" },
+            { name: "Goku presente", file: "Goku presente.mp3", categoria: "presentes", tag: "🐉" },
+            { name: "Alerquina presente", file: "alerquina presente.mp3", categoria: "presentes", tag: "🃏" },
+            { name: "Bola de futebol", file: "bola de futebol.mp3", categoria: "presentes", tag: "⚽" },
+            { name: "Buquê de flores", file: "buquê de flores.mp3", categoria: "presentes", tag: "💐" },
+            { name: "Coração ui", file: "coração ui.mp3", categoria: "presentes", tag: "💖" },
+            { name: "Obgd pelo abraço", file: "obgd pelo forte abraço.mp3", categoria: "presentes", tag: "🤗" },
+            { name: "Obgd pelo presente", file: "obgd pelo presentaaooo.mp3", categoria: "presentes", tag: "🎁" },
+            { name: "Chaves presente", file: "chaves presente.mp3", categoria: "presentes", tag: "🧢" },
+            { name: "Rosa branca", file: "rosa branca.mp3", categoria: "presentes", tag: "🌹" },
+            { name: "Urso Mihka", file: "urso mihka.mp3", categoria: "presentes", tag: "🧸" },
 
-    // CATEGORIA: ENGAÇADOS (memes ou sons engraçados)
-    { name: "Nhe", file: "nhe.mp3", categoria: "engracados", tag: "😂" },
-    { name: "E o pix (só cai)", file: "eopix.mp3", categoria: "engracados", tag: "💰" },
-    { name: "rapaz ta certo isso", file: "rapaz ta certo isso.mp3", categoria: "engracados", tag: "🤨" },
-    { name: "E quem disse", file: "e-quem-disse-que-isso-e-problema-meu.mp3", categoria: "engracados", tag: "🤷" },
-    { name: "caganeira-gordurosa", file: "caganeira-gordurosa.mp3", categoria: "engracados", tag: "💩" },
-    { name: "uma maquina", file: "uma maquina.mp3", categoria: "engracados", tag: "🤖" },
-    { name: "Freeza gritando", file: "freezagrito.mp3", categoria: "engracados", tag: "👾" },
-    { name: "Fez de novo o desgraçado", file: "fezdenovo.mp3", categoria: "engracados", tag: "😈" },
-    { name: "Não gostei amei", file: "naogosteiamei.mp3", categoria: "engracados", tag: "😍" },
-    { name: "Oi oi caindo", file: "oioicaindo.mp3", categoria: "engracados", tag: "👋" },
-    { name: "Que show de bola", file: "queshow.mp3", categoria: "engracados", tag: "👏" },
-    { name: "Horrível (grito)", file: "horrivel.mp3", categoria: "engracados", tag: "😱" },
-    { name: "É um guinomio", file: "ehumguinomio.mp3", categoria: "engracados", tag: "🧞" },
-    { name: "Hum boiola", file: "humboiola.mp3", categoria: "engracados", tag: "🏳️‍🌈" },
-    { name: "Tá me tirando?", file: "tametirando.mp3", categoria: "engracados", tag: "🤨" },
-    { name: "Caralho maluco é bravo porra", file: "caralhomalucoehbravoporra.mp3", categoria: "engracados", tag: "😤" },
+            // CATEGORIA: ENGAÇADOS (memes ou sons engraçados)
+            { name: "Nhe", file: "nhe.mp3", categoria: "engracados", tag: "😂" },
+            { name: "E o pix (só cai)", file: "eopix.mp3", categoria: "engracados", tag: "💰" },
+            { name: "rapaz ta certo isso", file: "rapaz ta certo isso.mp3", categoria: "engracados", tag: "🤨" },
+            { name: "E quem disse", file: "e-quem-disse-que-isso-e-problema-meu.mp3", categoria: "engracados", tag: "🤷" },
+            { name: "caganeira-gordurosa", file: "caganeira-gordurosa.mp3", categoria: "engracados", tag: "💩" },
+            { name: "uma maquina", file: "uma maquina.mp3", categoria: "engracados", tag: "🤖" },
+            { name: "Freeza gritando", file: "freezagrito.mp3", categoria: "engracados", tag: "👾" },
+            { name: "Fez de novo o desgraçado", file: "fezdenovo.mp3", categoria: "engracados", tag: "😈" },
+            { name: "Não gostei amei", file: "naogosteiamei.mp3", categoria: "engracados", tag: "😍" },
+            { name: "Oi oi caindo", file: "oioicaindo.mp3", categoria: "engracados", tag: "👋" },
+            { name: "Que show de bola", file: "queshow.mp3", categoria: "engracados", tag: "👏" },
+            { name: "Horrível (grito)", file: "horrivel.mp3", categoria: "engracados", tag: "😱" },
+            { name: "É um guinomio", file: "ehumguinomio.mp3", categoria: "engracados", tag: "🧞" },
+            { name: "Hum boiola", file: "humboiola.mp3", categoria: "engracados", tag: "🏳️‍🌈" },
+            { name: "Tá me tirando?", file: "tametirando.mp3", categoria: "engracados", tag: "🤨" },
+            { name: "Caralho maluco é bravo porra", file: "caralhomalucoehbravoporra.mp3", categoria: "engracados", tag: "😤" },
 
-    // CATEGORIA: JOGOS (sons de games)
-    { name: "Som morte Roblox", file: "sommorteroblox.mp3", categoria: "jogos", tag: "🎮" },
-    { name: "mario jump", file: "mario jump.mp3", categoria: "jogos", tag: "🍄" },
-    { name: "XP desligando", file: "xpdesligando.mp3", categoria: "jogos", tag: "💻" },
-    { name: "Bomb has been defused", file: "bombhasbeendefused.mp3", categoria: "jogos", tag: "💣" },
-    { name: "Bomb has been planted", file: "bombhasbeenplanted.mp3", categoria: "jogos", tag: "💣" },
-    { name: "Follow the dawn train CJ", file: "followthedawntraincj.mp3", categoria: "jogos", tag: "🚂" },
-    { name: "XP ligando", file: "xpligando.mp3", categoria: "jogos", tag: "💻" },
-    { name: "Tripulante ou impostor?", file: "tripulanteouimpostor.mp3", categoria: "jogos", tag: "👨‍🚀" },
+            // CATEGORIA: JOGOS (sons de games)
+            { name: "Som morte Roblox", file: "sommorteroblox.mp3", categoria: "jogos", tag: "🎮" },
+            { name: "mario jump", file: "mario jump.mp3", categoria: "jogos", tag: "🍄" },
+            { name: "XP desligando", file: "xpdesligando.mp3", categoria: "jogos", tag: "💻" },
+            { name: "Bomb has been defused", file: "bombhasbeendefused.mp3", categoria: "jogos", tag: "💣" },
+            { name: "Bomb has been planted", file: "bombhasbeenplanted.mp3", categoria: "jogos", tag: "💣" },
+            { name: "Follow the dawn train CJ", file: "followthedawntraincj.mp3", categoria: "jogos", tag: "🚂" },
+            { name: "XP ligando", file: "xpligando.mp3", categoria: "jogos", tag: "💻" },
+            { name: "Tripulante ou impostor?", file: "tripulanteouimpostor.mp3", categoria: "jogos", tag: "👨‍🚀" },
 
-    // CATEGORIA: REAÇÕES (cumprimentos/falas cotidianas)
-    { name: "Heart me", file: "heart me.wav", categoria: "reacoes", tag: "💓" },
-    { name: "oi meu chapa", file: "oi meu chapa.mp3", categoria: "reacoes", tag: "👋" },
-    { name: "a tia ta aqui tem peixe", file: "a tia ta aqui tem peixe.mp3", categoria: "reacoes", tag: "🐟" },
-    { name: "whatup bby corpse", file: "whatup bby corpse.mp3", categoria: "reacoes", tag: "👻" },
-    { name: "fart", file: "fart.mp3", categoria: "engracados", tag: "😂" },
-    { name: "fart music", file: "fart music.mp3", categoria: "musica", tag: "🎵" },
-    { name: "O Pintinho Piu music", file: "O Pintinho Piu music.mp3", categoria: "musica", tag: "🎵" },
-    { name: "Gangster paradise Edit Music", file: "Gangster paradise Edit Music.mp3", categoria: "musica", tag: "🎵" },
-    { name: "fazendinha bom dia", file: "fazendinha bom dia.mp3", categoria: "reacoes", tag: "🌄" },
-    { name: "O que? Como?", file: "oquecomo.mp3", categoria: "reacoes", tag: "🤔" },
-    { name: "Aqui tem coragem", file: "aquitemcoragem.mp3", categoria: "reacoes", tag: "💪" },
-    { name: "É haverdade não minto", file: "ehaverdadenaominto.mp3", categoria: "reacoes", tag: "🤥" },
-    { name: "Bravo", file: "Bravo.mp3", categoria: "reacoes", tag: "👏" },
-    { name: "GG", file: "GG.mp3", categoria: "reacoes", tag: "👍" },
-    { name: "Amado", file: "amado.mp3", categoria: "reacoes", tag: "😍" },
-    { name: "Amo te", file: "amo te.mp3", categoria: "reacoes", tag: "💕" },
-    { name: "Aleluia irmão", file: "aleluia.mp3", categoria: "reacoes", tag: "🙏" },
-    { name: "Bem te vi 2", file: "bemtevi2.mp3", categoria: "reacoes", tag: "🐦" },
-    { name: "Bem te vi 1", file: "bemtevi1.mp3", categoria: "reacoes", tag: "🐦" },
-    { name: "Que demais", file: "quedemais.mp3", categoria: "reacoes", tag: "🤩" },
-    { name: "Foi ótimo", file: "foiotimo.mp3", categoria: "reacoes", tag: "👍" },
-    { name: "Oi meu nome é Betina", file: "oimeunomeehbetina.mp3", categoria: "reacoes", tag: "👧" },
-    { name: "Hagaaay", file: "hagaaay.mp3", categoria: "reacoes", tag: "😆" },
-    { name: "Não seu madruga", file: "naoseumadruga.mp3", categoria: "reacoes", tag: "🧓" },
+            // CATEGORIA: REAÇÕES (cumprimentos/falas cotidianas)
+            { name: "Heart me", file: "heart me.wav", categoria: "reacoes", tag: "💓" },
+            { name: "oi meu chapa", file: "oi meu chapa.mp3", categoria: "reacoes", tag: "👋" },
+            { name: "a tia ta aqui tem peixe", file: "a tia ta aqui tem peixe.mp3", categoria: "reacoes", tag: "🐟" },
+            { name: "whatup bby corpse", file: "whatup bby corpse.mp3", categoria: "reacoes", tag: "👻" },
+            { name: "fart", file: "fart.mp3", categoria: "engracados", tag: "😂" },
+            { name: "fart music", file: "fart music.mp3", categoria: "musica", tag: "🎵" },
+            { name: "O Pintinho Piu music", file: "O Pintinho Piu music.mp3", categoria: "musica", tag: "🎵" },
+            { name: "Gangster paradise Edit Music", file: "Gangster paradise Edit Music.mp3", categoria: "musica", tag: "🎵" },
+            { name: "fazendinha bom dia", file: "fazendinha bom dia.mp3", categoria: "reacoes", tag: "🌄" },
+            { name: "O que? Como?", file: "oquecomo.mp3", categoria: "reacoes", tag: "🤔" },
+            { name: "Aqui tem coragem", file: "aquitemcoragem.mp3", categoria: "reacoes", tag: "💪" },
+            { name: "É haverdade não minto", file: "ehaverdadenaominto.mp3", categoria: "reacoes", tag: "🤥" },
+            { name: "Bravo", file: "Bravo.mp3", categoria: "reacoes", tag: "👏" },
+            { name: "GG", file: "GG.mp3", categoria: "reacoes", tag: "👍" },
+            { name: "Amado", file: "amado.mp3", categoria: "reacoes", tag: "😍" },
+            { name: "Amo te", file: "amo te.mp3", categoria: "reacoes", tag: "💕" },
+            { name: "Aleluia irmão", file: "aleluia.mp3", categoria: "reacoes", tag: "🙏" },
+            { name: "Bem te vi 2", file: "bemtevi2.mp3", categoria: "reacoes", tag: "🐦" },
+            { name: "Bem te vi 1", file: "bemtevi1.mp3", categoria: "reacoes", tag: "🐦" },
+            { name: "Que demais", file: "quedemais.mp3", categoria: "reacoes", tag: "🤩" },
+            { name: "Foi ótimo", file: "foiotimo.mp3", categoria: "reacoes", tag: "👍" },
+            { name: "Oi meu nome é Betina", file: "oimeunomeehbetina.mp3", categoria: "reacoes", tag: "👧" },
+            { name: "Hagaaay", file: "hagaaay.mp3", categoria: "reacoes", tag: "😆" },
+            { name: "Não seu madruga", file: "naoseumadruga.mp3", categoria: "reacoes", tag: "🧓" },
 
-    // CATEGORIA: MÚSICAS (qualquer música ou trilha)
-    { name: "dora aventureira music", file: "dora aventureira music.mp3", categoria: "musicas", tag: "🎶" },
-    { name: "Allstar but it's Frozen music", file: "Allstar but it's Frozen music.mp3", categoria: "musicas", tag: "❄️" },
-    { name: "What Is Star Baby Don't Shoot Me music", file: "What Is Star Baby Don t Shoot Me.mp3", categoria: "musicas", tag: "⭐" },
-    { name: "megalovania funk music", file: "megalovania funk music.mp3", categoria: "musicas", tag: "🎸" },
-    { name: "pretty little bby music", file: "pretty little bby music.mp3", categoria: "musicas", tag: "👶" },
-    { name: "i like to move move it music", file: "i like to move move it music.mp3", categoria: "musicas", tag: "💃" },
-    { name: "moto moto music", file: "moto moto music.mp3", categoria: "musicas", tag: "🦛" },
-    { name: "love song", file: "love song.mp3", categoria: "musicas", tag: "💘" },
-    { name: "CHAD musica", file: "CHAD musica.mp3", categoria: "musicas", tag: "💪" },
-    { name: "chipi chipi chapa music", file: "chipi chipi chapa music.mp3", categoria: "musicas", tag: "🦊" },
-    { name: "chipi chipi chapa phonk", file: "chipi chipi chapa phonk.mp3", categoria: "musicas", tag: "🦊" },
-    { name: "rat-dance-music", file: "rat-dance-music.mp3", categoria: "musicas", tag: "🐀" },
-    { name: "Música da Dolly", file: "musicadolly.mp3", categoria: "musicas", tag: "🧴" },
-    { name: "Sou o Dollynho vamos cantar", file: "souodollynhovamoscantar.mp3", categoria: "musicas", tag: "🧴" },
-    { name: "Pokémon temos que pegar musi", file: "poktemospegar.mp3", categoria: "musicas", tag: "⚡" },
-    { name: "Buttercup musi", file: "buttercup.mp3", categoria: "musicas", tag: "🧈" },
-    { name: "Dorime remix musi", file: "dorimeremix.mp3", categoria: "musicas", tag: "🙏" },
-    { name: "Música da garrafa", file: "musicagarrafa.mp3", categoria: "musicas", tag: "🍾" },
-    { name: "Bombadiro crocodilo musi", file: "Bombadiro crocodilo.mp3", categoria: "musicas", tag: "🐊" },
-    { name: "PHONK UHU musi", file: "PHONK UHU.mp3", categoria: "musicas", tag: "👻" },
-    { name: "GANGASTA cat musi", file: "gangstar cat.mp3", categoria: "musicas", tag: "🐱" },
-    { name: "Funk winks musi", file: "funkwinks.mp3", categoria: "musicas", tag: "😉" },
-    { name: "heaven asmr.mp3", file: "heaven asmr.mp3", categoria: "musicas", tag: "😉" },
-    { name: "raining tacos musica.mp3", file: "raining tacos musica.mp3", categoria: "musicas", tag: "😉" },
-    { name: "Final Arnold (funk) musi", file: "finalarnoldfunk.mp3", categoria: "musicas", tag: "💪" },
-    { name: "Caneta azul", file: "canetaazul.mp3", categoria: "musicas", tag: "🖊️" },
-    { name: "Smoke weed everyday musica", file: "smokeweedeveryday.mp3", categoria: "musicas", tag: "🍁" },
-    { name: "Música triste Chaves music", file: "musicatristechaves1.mp3", categoria: "musicas", tag: "🎻" },
-    { name: "Sweet dreams (funk) musi", file: "sweetdreamsfunk.mp3", categoria: "musicas", tag: "💤" },
-    { name: "Final Arnold music", file: "finalarnold.mp3", categoria: "musicas", tag: "💪" },
-    { name: "I believe I can fly", file: "ibelieveicanfly.mp3", categoria: "musicas", tag: "✈️" },
-    { name: "Tô comendo um tico le music", file: "tocomendoumticole.mp3", categoria: "musicas", tag: "🍽️" },
-    { name: "Run music", file: "run.mp3", categoria: "musicas", tag: "🏃" },
+            // CATEGORIA: MÚSICAS (qualquer música ou trilha)
+            { name: "dora aventureira music", file: "dora aventureira music.mp3", categoria: "musicas", tag: "🎶" },
+            { name: "Allstar but it's Frozen music", file: "Allstar but it's Frozen music.mp3", categoria: "musicas", tag: "❄️" },
+            { name: "What Is Star Baby Don't Shoot Me music", file: "What Is Star Baby Don t Shoot Me.mp3", categoria: "musicas", tag: "⭐" },
+            { name: "megalovania funk music", file: "megalovania funk music.mp3", categoria: "musicas", tag: "🎸" },
+            { name: "pretty little bby music", file: "pretty little bby music.mp3", categoria: "musicas", tag: "👶" },
+            { name: "i like to move move it music", file: "i like to move move it music.mp3", categoria: "musicas", tag: "💃" },
+            { name: "moto moto music", file: "moto moto music.mp3", categoria: "musicas", tag: "🦛" },
+            { name: "love song", file: "love song.mp3", categoria: "musicas", tag: "💘" },
+            { name: "CHAD musica", file: "CHAD musica.mp3", categoria: "musicas", tag: "💪" },
+            { name: "chipi chipi chapa music", file: "chipi chipi chapa music.mp3", categoria: "musicas", tag: "🦊" },
+            { name: "chipi chipi chapa phonk", file: "chipi chipi chapa phonk.mp3", categoria: "musicas", tag: "🦊" },
+            { name: "rat-dance-music", file: "rat-dance-music.mp3", categoria: "musicas", tag: "🐀" },
+            { name: "Música da Dolly", file: "musicadolly.mp3", categoria: "musicas", tag: "🧴" },
+            { name: "Sou o Dollynho vamos cantar", file: "souodollynhovamoscantar.mp3", categoria: "musicas", tag: "🧴" },
+            { name: "Pokémon temos que pegar musi", file: "poktemospegar.mp3", categoria: "musicas", tag: "⚡" },
+            { name: "Buttercup musi", file: "buttercup.mp3", categoria: "musicas", tag: "🧈" },
+            { name: "Dorime remix musi", file: "dorimeremix.mp3", categoria: "musicas", tag: "🙏" },
+            { name: "Música da garrafa", file: "musicagarrafa.mp3", categoria: "musicas", tag: "🍾" },
+            { name: "Bombadiro crocodilo musi", file: "Bombadiro crocodilo.mp3", categoria: "musicas", tag: "🐊" },
+            { name: "PHONK UHU musi", file: "PHONK UHU.mp3", categoria: "musicas", tag: "👻" },
+            { name: "GANGASTA cat musi", file: "gangstar cat.mp3", categoria: "musicas", tag: "🐱" },
+            { name: "Funk winks musi", file: "funkwinks.mp3", categoria: "musicas", tag: "😉" },
+            { name: "heaven asmr.mp3", file: "heaven asmr.mp3", categoria: "musicas", tag: "😉" },
+            { name: "raining tacos musica.mp3", file: "raining tacos musica.mp3", categoria: "musicas", tag: "😉" },
+            { name: "Final Arnold (funk) musi", file: "finalarnoldfunk.mp3", categoria: "musicas", tag: "💪" },
+            { name: "Caneta azul", file: "canetaazul.mp3", categoria: "musicas", tag: "🖊️" },
+            { name: "Smoke weed everyday musica", file: "smokeweedeveryday.mp3", categoria: "musicas", tag: "🍁" },
+            { name: "Música triste Chaves music", file: "musicatristechaves1.mp3", categoria: "musicas", tag: "🎻" },
+            { name: "Sweet dreams (funk) musi", file: "sweetdreamsfunk.mp3", categoria: "musicas", tag: "💤" },
+            { name: "Final Arnold music", file: "finalarnold.mp3", categoria: "musicas", tag: "💪" },
+            { name: "I believe I can fly", file: "ibelieveicanfly.mp3", categoria: "musicas", tag: "✈️" },
+            { name: "Tô comendo um tico le music", file: "tocomendoumticole.mp3", categoria: "musicas", tag: "🍽️" },
+            { name: "Run music", file: "run.mp3", categoria: "musicas", tag: "🏃" },
 
-    // OUTROS (sons que não se encaixam nas categorias acima)
-    { name: "to meio gripadinha", file: "to meio gripadinha.mp3", categoria: "outros", tag: "🤧" },
-    { name: "Valores uhulll!", file: "valores uhulll.mp3", categoria: "outros", tag: "💰" },
-    { name: "Apresentação da LojinhaDarakyOficial", file: "Apresentação da LojinhaDarakyOficial.mp3", categoria: "reacoes", tag: "📢" },
-    { name: "Vegeta Goku 2", file: "vegeta goku 2.mp3", categoria: "reacoes", tag: "🐉" },
-    { name: "Vegeta Goku 1", file: "vegeta goku 1.mp3", categoria: "outros", tag: "🐉" },
-    { name: "Vegeta 3", file: "vegeta 3.mp3", categoria: "reacoes", tag: "🐉" },
-    { name: "e é memo porque é memo sid", file: "e é memo porque é memo sid.mp3", categoria: "engracados", tag: "🦥" },
-    { name: "welcome-to-the-mato-estourado", file: "welcome-to-the-mato-estourado.mp3", categoria: "musicas", tag: "🌳" },
-    { name: "sid era do gelo", file: "sid era do gelo.mp3", categoria: "engracados", tag: "🦥" },
-    { name: "vacuo motivacional", file: "vacuo motivacional.mp3", categoria: "reacoes", tag: "💨" },
-    { name: "reflexao do dia", file: "reflexao do dia.mp3", categoria: "reacoes", tag: "🧠" },
-    { name: "ta chovendo ai", file: "ta chovendo ai.mp3", categoria: "engracados", tag: "🌧️" },
-    { name: "hoije-e-teu-aniverseiriooo", file: "hoije-e-teu-aniverseiriooo.mp3", categoria: "musicas", tag: "🎂" },
-    { name: "aipai-para-hihi", file: "aipai-para-hihi.mp3", categoria: "engracados", tag: "👨" },
-    { name: "ze da manga", file: "ze da manga.mp3", categoria: "engracados", tag: "🥭" },
-    { name: "bem-amigos-terminou", file: "bem-amigos-terminou.mp3", categoria: "musicas", tag: "👋" },
-    { name: "Caneta Azul 3", file: "caneta azul 3.mp3", categoria: "reacoes", tag: "🖊️" },
-    { name: "sente a pressão nenem music", file: "sente a pressão nenem music.mp3", categoria: "musicas", tag: "👶" },
-    { name: "indian version music", file: "indian version music.mp3", categoria: "musicas", tag: "🇮🇳" },
-    { name: "historia da dubladora da Raky", file: "historia da dubladora da Raky.mp3", categoria: "reacoes", tag: "🎙️" },
-    { name: "Caneta azul engasgado", file: "caneta azul engasgado.mp3", categoria: "engracados", tag: "🖊️" },
-    { name: "caneta azul sigam a raky bugado", file: "caneta azul sigam a raky bugado.mp3", categoria: "engracados", tag: "🖊️" },
-    { name: "Porfavor aguarde William Bonner", file: "porfavor aguarde william bonner.mp3", categoria: "reacoes", tag: "📺" },
-    { name: "Essa vai ser a minha melhor vigarice", file: "essavaiseraminhamelhorvigarice.mp3", categoria: "engracados", tag: "🎩" },
-    { name: "Naruto LojinhaDarakyOficial confiável", file: "naruto LojinhaDarakyOficial confiavel.mp3", categoria: "reacoes", tag: "🍥" },
-    { name: "Naruto dúvida de compra", file: "Naruto dúvida de compra.mp3", categoria: "reacoes", tag: "🍥" },
-    { name: "Como entrar pelo join locutor", file: "como entrar pelo join locutor.mp3", categoria: "reacoes", tag: "🎙️" },
-    { name: "Informações flutuando", file: "informações flutuando na tela.mp3", categoria: "reacoes", tag: "ℹ️" },
-    { name: "Its corn", file: "its corn.mp3", categoria: "presentes", tag: "🌽" },
-    { name: "Hello darkness my old friend", file: "hellodarknessmyownfriend.mp3", categoria: "musicas", tag: "🌑" },
-    { name: "Mostrar inventário", file: "ja irei mostrar o inventário.mp3", categoria: "reacoes", tag: "📦" },
-    { name: "Freeza completo", file: "freezacompleto.mp3", categoria: "engracados", tag: "👾" },
-    { name: "Eu estou nervoso", file: "euestounervoso.mp3", categoria: "engracados", tag: "😤" },
-    { name: "Pq vc faz isso comigo", file: "pqvoce.mp3", categoria: "engracados", tag: "😢" },
-    { name: "Ou será que não?", file: "ouseraquenao.mp3", categoria: "engracados", tag: "🤔" },
-    { name: "Acho que eu tava brincando", file: "achoqueeutavabrincando.mp3", categoria: "engracados", tag: "🤪" },
-    { name: "É mesmo é?", file: "emesmoe.mp3", categoria: "engracados", tag: "🤨" },
-    { name: "William Bonner's Voice", file: "William_Bonner's_Voice.mp3", categoria: "reacoes", tag: "📺" },
-    { name: "PANetoneee", file: "PANetoneee.mp3", categoria: "presentes", tag: "🎄" },
-    { name: "Futebol", file: "Text_to_Speech-1.wav", categoria: "outros", tag: "⚽" },
-    { name: "ASMR", file: "asmr.mp3", categoria: "presentes", tag: "🎧" },
-    { name: "Bolacha", file: "bolacha.mp3", categoria: "presentes", tag: "🍪" },
-    { name: "Boné", file: "boné.mp3", categoria: "presentes", tag: "🧢" },
-    { name: "Café", file: "café.mp3", categoria: "presentes", tag: "☕" },
-    { name: "Capivara", file: "capivara.mp3", categoria: "presentes", tag: "🦫" },
-    { name: "Chapéu de bigode", file: "chapeu de bigode.mp3", categoria: "presentes", tag: "🧔" },
-    { name: "Chimarrão", file: "chimarrão.mp3", categoria: "presentes", tag: "🧉" },
-    { name: "Chocolate", file: "chocolate.mp3", categoria: "presentes", tag: "🍫" },
-    { name: "Colar da amizade", file: "colar da amizade.mp3", categoria: "presentes", tag: "📿" },
-    { name: "Coração", file: "coração.mp3", categoria: "presentes", tag: "💖" },
-    { name: "Coroa", file: "coroa.mp3", categoria: "presentes", tag: "👑" },
-    { name: "Creeps russos", file: "creeps russos.mp3", categoria: "presentes", tag: "👻" },
-    { name: "Dino", file: "dino.mp3", categoria: "presentes", tag: "🦖" },
-    { name: "Entrar pelo join", file: "entrar pelo join como.mp3", categoria: "presentes", tag: "🎙️" },
-    { name: "Estucadores", file: "estucadores.mp3", categoria: "presentes", tag: "👷" },
-    { name: "Exatamente esse valor", file: "exatamente esse valor.mp3", categoria: "presentes", tag: "💰" },
-    { name: "Fabuloso", file: "fabuloso.mp3", categoria: "presentes", tag: "✨" },
-    { name: "Fantástico", file: "fantástico.mp3", categoria: "presentes", tag: "🌟" },
-    { name: "Fathers day", file: "fathers day.mp3", categoria: "presentes", tag: "👨" },
-    { name: "Fogo", file: "fogo.mp3", categoria: "presentes", tag: "🔥" },
-    { name: "Galáxia", file: "galaxia.mp3", categoria: "presentes", tag: "🌌" },
-    { name: "Feliz parabéns", file: "feliz ani lalaia.mp3", categoria: "musicas", tag: "🎂" },
-    { name: "Feliz kids", file: "feliz ani kids.mp3", categoria: "reacoes", tag: "👶" },
-    { name: "Feliz mensagem", file: "feliz ani mensagem.mp3", categoria: "reacoes", tag: "✉️" },
-    { name: "Geladinho em cone", file: "geladinho em cone.mp3", categoria: "presentes", tag: "🍦" },
-    { name: "Guacamole", file: "guacamole.mp3", categoria: "musicas", tag: "🥑" },
-    { name: "Música", file: "música.mp3", categoria: "presentes", tag: "🎵" },
-    { name: "Nachos", file: "nachos.mp3", categoria: "presentes", tag: "🌮" },
-    { name: "Não tenho esse pet", file: "não tenho esse pet.mp3", categoria: "reacoes", tag: "🐾" },
-    { name: "Origami", file: "origami.mp3", categoria: "presentes", tag: "📜" },
-    { name: "Perfume", file: "perfume.mp3", categoria: "presentes", tag: "💨" },
-    { name: "Pião", file: "pião.mp3", categoria: "presentes", tag: "🪀" },
-    { name: "Poção medicinal", file: "poção medicinal.mp3", categoria: "presentes", tag: "🧪" },
-    { name: "Px e pix flutuando", file: "px e pix flutuando.mp3", categoria: "reacoes", tag: "💸" },
-    { name: "Que tanto de presente", file: "que tanto de presente.mp3", categoria: "presentes", tag: "🎁" },
-    { name: "Raky morrendo", file: "raky morrendo.mp3", categoria: "reacoes", tag: "💀" },
-    { name: "Rosquinha", file: "rosquinha.mp3", categoria: "presentes", tag: "🍩" },
-    { name: "T gif", file: "t gif.wav", categoria: "presentes", tag: "🔄" },
-    { name: "T giiff", file: "t giiff.wav", categoria: "presentes", tag: "🔄" },
-    { name: "Tacos", file: "tacos.mp3", categoria: "presentes", tag: "🌮" },
-    { name: "TikTok", file: "tiktok.mp3", categoria: "presentes", tag: "📱" },
-    { name: "Valores e combos", file: "valores e combos.mp3", categoria: "reacoes", tag: "💰" },
-    { name: "Vota", file: "vota.mp3", categoria: "presentes", tag: "🗳️" },
-    { name: "Welcome to the mato", file: "welcome-to-the-mato-estourado.mp3", categoria: "musicas", tag: "🌳" },
-    { name: "Belligol demais", file: "belligol.mp3", categoria: "engracados", tag: "⚽" },
-    { name: "Banido desbanido", file: "banidodesbanido.mp3", categoria: "engracados", tag: "🚫" },
-    { name: "Milos (grito)", file: "milos.mp3", categoria: "engracados", tag: "😱" },
-    { name: "Machista opressor music", file: "machistaopressor.mp3", categoria: "musicas", tag: "👊" },
-    { name: "Entendi a referência", file: "entendiareferencia.mp3", categoria: "engracados", tag: "🔍" },
-    { name: "Hehe boy", file: "heheboy.mp3", categoria: "engracados", tag: "😏" },
-    { name: "Você é um amigo", file: "vcehumamigo.mp3", categoria: "engracados", tag: "🤝" },
-    { name: "Gringo é mais caro", file: "gringoehmaiscaro.mp3", categoria: "engracados", tag: "💵" },
-    { name: "Caixão curto musi", file: "caixaocurto.mp3", categoria: "musicas", tag: "⚰️" },
-    { name: "Caixão longo musi", file: "caixaolongo.mp3", categoria: "musicas", tag: "⚰️" },
-    { name: "Corona vírus", file: "corona.mp3", categoria: "engracados", tag: "🦠" },
-    { name: "Piada do tijolinho", file: "piadatijolinho.mp3", categoria: "engracados", tag: "🧱" },
-    { name: "Quero café", file: "querocafe.mp3", categoria: "engracados", tag: "☕" },
-    { name: "Você que fuma maconha vai morrer antes do natal", file: "vocequefumamaconhavaimorrerantesdonatal.mp3", categoria: "engracados", tag: "🚬" },
-    { name: "Sou um merda mermo", file: "souummerdamerdao.mp3", categoria: "engracados", tag: "💩" },
-    { name: "To be continued", file: "tobecontinued.mp3", categoria: "musicas", tag: "⏭️" },
-    { name: "É verdade as vezes não", file: "ehverdadeasvezesnao.mp3", categoria: "engracados", tag: "🤷" },
-    { name: "Harlem shake", file: "harlemshake.mp3", categoria: "musicas", tag: "🕺" },
-    { name: "O que passa na cabeça dela", file: "oquepassanacabecadela.mp3", categoria: "engracados", tag: "🧠" },
-    { name: "Open the door", file: "openthedoor.mp3", categoria: "engracados", tag: "🚪" },
-    { name: "Essa gente inventa cada coisa", file: "essagenteinventacadacoisa.mp3", categoria: "engracados", tag: "🤯" },
-    { name: "Tá me ouvindo?", file: "tameouvindo.mp3", categoria: "engracados", tag: "👂" },
-    { name: "Som directed by Robert music", file: "somdirectedbyrobert.mp3", categoria: "musicas", tag: "🎬" },
-    { name: "Socorro Deus music", file: "socorrodeus.mp3", categoria: "musicas", tag: "🙏" },
-    { name: "Som do grilo", file: "somgrilo.mp3", categoria: "engracados", tag: "🦗" },
-    { name: "Você não é tão bom assim e hum fracassado", file: "vocenaoehtaobomassimehumfracassado.mp3", categoria: "engracados", tag: "👎" },
-    { name: "Você é retardado por acaso?", file: "voceehretardadoporacaso.mp3", categoria: "engracados", tag: "🤪" },
-    { name: "Eu não quero", file: "eunaoquero.mp3", categoria: "engracados", tag: "🙅" },
-    { name: "Talvez não funcione com burros", file: "talveznaofuncionecomburros.mp3", categoria: "engracados", tag: "🤦" },
-    { name: "Que cara mais engraçado", file: "quecaramaisengracado.mp3", categoria: "engracados", tag: "🤣" },
-    { name: "Evil Morty tema music", file: "evilmortytema.mp3", categoria: "musicas", tag: "👁️" },
-    { name: "Mama mia Marcelo", file: "mamamiamarcelo.mp3", categoria: "engracados", tag: "👨" },
-    { name: "Olá amor podendo falar ou sua mulher tá perto?", file: "oiamortapodendofalarousuamulhertaperto.mp3", categoria: "engracados", tag: "💑" },
-    { name: "Não vou aguentar mais", file: "naovouaguentarmais.mp3", categoria: "engracados", tag: "😫" },
-    { name: "I got a gun", file: "igotagun.mp3", categoria: "engracados", tag: "🔫" },
-    { name: "Jubileu está esquisito hoje", file: "jubileuestaesquisitohoje.mp3", categoria: "engracados", tag: "👴" },
-    { name: "Já avisei que vai dar merda", file: "jaaviseiquevaidarmerda.mp3", categoria: "engracados", tag: "💩" },
-    { name: "Do you know the way?", file: "doyouknowtheway.mp3", categoria: "engracados", tag: "🗺️" },
-    { name: "Vinicius Jr vamos pular", file: "viniciusjrvamospular.mp3", categoria: "musicas", tag: "⚽" },
-    { name: "É mais de 8 mil", file: "edemaisde8mil.mp3", categoria: "engracados", tag: "💰" },
-    { name: "eu fingo que nao percebo motivacional", file: "eu fingo que nao percebo motivacional.mp3", categoria: "reacoes", tag: "💪" }
-];
+            // OUTROS (sons que não se encaixam nas categorias acima)
+            { name: "to meio gripadinha", file: "to meio gripadinha.mp3", categoria: "outros", tag: "🤧" },
+            { name: "Valores uhulll!", file: "valores uhulll.mp3", categoria: "outros", tag: "💰" },
+            { name: "Apresentação da LojinhaDarakyOficial", file: "Apresentação da LojinhaDarakyOficial.mp3", categoria: "reacoes", tag: "📢" },
+            { name: "Vegeta Goku 2", file: "vegeta goku 2.mp3", categoria: "reacoes", tag: "🐉" },
+            { name: "Vegeta Goku 1", file: "vegeta goku 1.mp3", categoria: "outros", tag: "🐉" },
+            { name: "Vegeta 3", file: "vegeta 3.mp3", categoria: "reacoes", tag: "🐉" },
+            { name: "e é memo porque é memo sid", file: "e é memo porque é memo sid.mp3", categoria: "engracados", tag: "🦥" },
+            { name: "welcome-to-the-mato-estourado", file: "welcome-to-the-mato-estourado.mp3", categoria: "musicas", tag: "🌳" },
+            { name: "sid era do gelo", file: "sid era do gelo.mp3", categoria: "engracados", tag: "🦥" },
+            { name: "vacuo motivacional", file: "vacuo motivacional.mp3", categoria: "reacoes", tag: "💨" },
+            { name: "reflexao do dia", file: "reflexao do dia.mp3", categoria: "reacoes", tag: "🧠" },
+            { name: "ta chovendo ai", file: "ta chovendo ai.mp3", categoria: "engracados", tag: "🌧️" },
+            { name: "hoije-e-teu-aniverseiriooo", file: "hoije-e-teu-aniverseiriooo.mp3", categoria: "musicas", tag: "🎂" },
+            { name: "aipai-para-hihi", file: "aipai-para-hihi.mp3", categoria: "engracados", tag: "👨" },
+            { name: "ze da manga", file: "ze da manga.mp3", categoria: "engracados", tag: "🥭" },
+            { name: "bem-amigos-terminou", file: "bem-amigos-terminou.mp3", categoria: "musicas", tag: "👋" },
+            { name: "Caneta Azul 3", file: "caneta azul 3.mp3", categoria: "reacoes", tag: "🖊️" },
+            { name: "sente a pressão nenem music", file: "sente a pressão nenem music.mp3", categoria: "musicas", tag: "👶" },
+            { name: "indian version music", file: "indian version music.mp3", categoria: "musicas", tag: "🇮🇳" },
+            { name: "historia da dubladora da Raky", file: "historia da dubladora da Raky.mp3", categoria: "reacoes", tag: "🎙️" },
+            { name: "Caneta azul engasgado", file: "caneta azul engasgado.mp3", categoria: "engracados", tag: "🖊️" },
+            { name: "caneta azul sigam a raky bugado", file: "caneta azul sigam a raky bugado.mp3", categoria: "engracados", tag: "🖊️" },
+            { name: "Porfavor aguarde William Bonner", file: "porfavor aguarde william bonner.mp3", categoria: "reacoes", tag: "📺" },
+            { name: "Essa vai ser a minha melhor vigarice", file: "essavaiseraminhamelhorvigarice.mp3", categoria: "engracados", tag: "🎩" },
+            { name: "Naruto LojinhaDarakyOficial confiável", file: "naruto LojinhaDarakyOficial confiavel.mp3", categoria: "reacoes", tag: "🍥" },
+            { name: "Naruto dúvida de compra", file: "Naruto dúvida de compra.mp3", categoria: "reacoes", tag: "🍥" },
+            { name: "Como entrar pelo join locutor", file: "como entrar pelo join locutor.mp3", categoria: "reacoes", tag: "🎙️" },
+            { name: "Informações flutuando", file: "informações flutuando na tela.mp3", categoria: "reacoes", tag: "ℹ️" },
+            { name: "Its corn", file: "its corn.mp3", categoria: "presentes", tag: "🌽" },
+            { name: "Hello darkness my old friend", file: "hellodarknessmyownfriend.mp3", categoria: "musicas", tag: "🌑" },
+            { name: "Mostrar inventário", file: "ja irei mostrar o inventário.mp3", categoria: "reacoes", tag: "📦" },
+            { name: "Freeza completo", file: "freezacompleto.mp3", categoria: "engracados", tag: "👾" },
+            { name: "Eu estou nervoso", file: "euestounervoso.mp3", categoria: "engracados", tag: "😤" },
+            { name: "Pq vc faz isso comigo", file: "pqvoce.mp3", categoria: "engracados", tag: "😢" },
+            { name: "Ou será que não?", file: "ouseraquenao.mp3", categoria: "engracados", tag: "🤔" },
+            { name: "Acho que eu tava brincando", file: "achoqueeutavabrincando.mp3", categoria: "engracados", tag: "🤪" },
+            { name: "É mesmo é?", file: "emesmoe.mp3", categoria: "engracados", tag: "🤨" },
+            { name: "William Bonner's Voice", file: "William_Bonner's_Voice.mp3", categoria: "reacoes", tag: "📺" },
+            { name: "PANetoneee", file: "PANetoneee.mp3", categoria: "presentes", tag: "🎄" },
+            { name: "Futebol", file: "Text_to_Speech-1.wav", categoria: "outros", tag: "⚽" },
+            { name: "ASMR", file: "asmr.mp3", categoria: "presentes", tag: "🎧" },
+            { name: "Bolacha", file: "bolacha.mp3", categoria: "presentes", tag: "🍪" },
+            { name: "Boné", file: "boné.mp3", categoria: "presentes", tag: "🧢" },
+            { name: "Café", file: "café.mp3", categoria: "presentes", tag: "☕" },
+            { name: "Capivara", file: "capivara.mp3", categoria: "presentes", tag: "🦫" },
+            { name: "Chapéu de bigode", file: "chapeu de bigode.mp3", categoria: "presentes", tag: "🧔" },
+            { name: "Chimarrão", file: "chimarrão.mp3", categoria: "presentes", tag: "🧉" },
+            { name: "Chocolate", file: "chocolate.mp3", categoria: "presentes", tag: "🍫" },
+            { name: "Colar da amizade", file: "colar da amizade.mp3", categoria: "presentes", tag: "📿" },
+            { name: "Coração", file: "coração.mp3", categoria: "presentes", tag: "💖" },
+            { name: "Coroa", file: "coroa.mp3", categoria: "presentes", tag: "👑" },
+            { name: "Creeps russos", file: "creeps russos.mp3", categoria: "presentes", tag: "👻" },
+            { name: "Dino", file: "dino.mp3", categoria: "presentes", tag: "🦖" },
+            { name: "Entrar pelo join", file: "entrar pelo join como.mp3", categoria: "presentes", tag: "🎙️" },
+            { name: "Estucadores", file: "estucadores.mp3", categoria: "presentes", tag: "👷" },
+            { name: "Exatamente esse valor", file: "exatamente esse valor.mp3", categoria: "presentes", tag: "💰" },
+            { name: "Fabuloso", file: "fabuloso.mp3", categoria: "presentes", tag: "✨" },
+            { name: "Fantástico", file: "fantástico.mp3", categoria: "presentes", tag: "🌟" },
+            { name: "Fathers day", file: "fathers day.mp3", categoria: "presentes", tag: "👨" },
+            { name: "Fogo", file: "fogo.mp3", categoria: "presentes", tag: "🔥" },
+            { name: "Galáxia", file: "galaxia.mp3", categoria: "presentes", tag: "🌌" },
+            { name: "Feliz parabéns", file: "feliz ani lalaia.mp3", categoria: "musicas", tag: "🎂" },
+            { name: "Feliz kids", file: "feliz ani kids.mp3", categoria: "reacoes", tag: "👶" },
+            { name: "Feliz mensagem", file: "feliz ani mensagem.mp3", categoria: "reacoes", tag: "✉️" },
+            { name: "Geladinho em cone", file: "geladinho em cone.mp3", categoria: "presentes", tag: "🍦" },
+            { name: "Guacamole", file: "guacamole.mp3", categoria: "musicas", tag: "🥑" },
+            { name: "Música", file: "música.mp3", categoria: "presentes", tag: "🎵" },
+            { name: "Nachos", file: "nachos.mp3", categoria: "presentes", tag: "🌮" },
+            { name: "Não tenho esse pet", file: "não tenho esse pet.mp3", categoria: "reacoes", tag: "🐾" },
+            { name: "Origami", file: "origami.mp3", categoria: "presentes", tag: "📜" },
+            { name: "Perfume", file: "perfume.mp3", categoria: "presentes", tag: "💨" },
+            { name: "Pião", file: "pião.mp3", categoria: "presentes", tag: "🪀" },
+            { name: "Poção medicinal", file: "poção medicinal.mp3", categoria: "presentes", tag: "🧪" },
+            { name: "Px e pix flutuando", file: "px e pix flutuando.mp3", categoria: "reacoes", tag: "💸" },
+            { name: "Que tanto de presente", file: "que tanto de presente.mp3", categoria: "presentes", tag: "🎁" },
+            { name: "Raky morrendo", file: "raky morrendo.mp3", categoria: "reacoes", tag: "💀" },
+            { name: "Rosquinha", file: "rosquinha.mp3", categoria: "presentes", tag: "🍩" },
+            { name: "T gif", file: "t gif.wav", categoria: "presentes", tag: "🔄" },
+            { name: "T giiff", file: "t giiff.wav", categoria: "presentes", tag: "🔄" },
+            { name: "Tacos", file: "tacos.mp3", categoria: "presentes", tag: "🌮" },
+            { name: "TikTok", file: "tiktok.mp3", categoria: "presentes", tag: "📱" },
+            { name: "Valores e combos", file: "valores e combos.mp3", categoria: "reacoes", tag: "💰" },
+            { name: "Vota", file: "vota.mp3", categoria: "presentes", tag: "🗳️" },
+            { name: "Welcome to the mato", file: "welcome-to-the-mato-estourado.mp3", categoria: "musicas", tag: "🌳" },
+            { name: "Belligol demais", file: "belligol.mp3", categoria: "engracados", tag: "⚽" },
+            { name: "Banido desbanido", file: "banidodesbanido.mp3", categoria: "engracados", tag: "🚫" },
+            { name: "Milos (grito)", file: "milos.mp3", categoria: "engracados", tag: "😱" },
+            { name: "Machista opressor music", file: "machistaopressor.mp3", categoria: "musicas", tag: "👊" },
+            { name: "Entendi a referência", file: "entendiareferencia.mp3", categoria: "engracados", tag: "🔍" },
+            { name: "Hehe boy", file: "heheboy.mp3", categoria: "engracados", tag: "😏" },
+            { name: "Você é um amigo", file: "vcehumamigo.mp3", categoria: "engracados", tag: "🤝" },
+            { name: "Gringo é mais caro", file: "gringoehmaiscaro.mp3", categoria: "engracados", tag: "💵" },
+            { name: "Caixão curto musi", file: "caixaocurto.mp3", categoria: "musicas", tag: "⚰️" },
+            { name: "Caixão longo musi", file: "caixaolongo.mp3", categoria: "musicas", tag: "⚰️" },
+            { name: "Corona vírus", file: "corona.mp3", categoria: "engracados", tag: "🦠" },
+            { name: "Piada do tijolinho", file: "piadatijolinho.mp3", categoria: "engracados", tag: "🧱" },
+            { name: "Quero café", file: "querocafe.mp3", categoria: "engracados", tag: "☕" },
+            { name: "Você que fuma maconha vai morrer antes do natal", file: "vocequefumamaconhavaimorrerantesdonatal.mp3", categoria: "engracados", tag: "🚬" },
+            { name: "Sou um merda mermo", file: "souummerdamerdao.mp3", categoria: "engracados", tag: "💩" },
+            { name: "To be continued", file: "tobecontinued.mp3", categoria: "musicas", tag: "⏭️" },
+            { name: "É verdade as vezes não", file: "ehverdadeasvezesnao.mp3", categoria: "engracados", tag: "🤷" },
+            { name: "Harlem shake", file: "harlemshake.mp3", categoria: "musicas", tag: "🕺" },
+            { name: "O que passa na cabeça dela", file: "oquepassanacabecadela.mp3", categoria: "engracados", tag: "🧠" },
+            { name: "Open the door", file: "openthedoor.mp3", categoria: "engracados", tag: "🚪" },
+            { name: "Essa gente inventa cada coisa", file: "essagenteinventacadacoisa.mp3", categoria: "engracados", tag: "🤯" },
+            { name: "Tá me ouvindo?", file: "tameouvindo.mp3", categoria: "engracados", tag: "👂" },
+            { name: "Som directed by Robert music", file: "somdirectedbyrobert.mp3", categoria: "musicas", tag: "🎬" },
+            { name: "Socorro Deus music", file: "socorrodeus.mp3", categoria: "musicas", tag: "🙏" },
+            { name: "Som do grilo", file: "somgrilo.mp3", categoria: "engracados", tag: "🦗" },
+            { name: "Você não é tão bom assim e hum fracassado", file: "vocenaoehtaobomassimehumfracassado.mp3", categoria: "engracados", tag: "👎" },
+            { name: "Você é retardado por acaso?", file: "voceehretardadoporacaso.mp3", categoria: "engracados", tag: "🤪" },
+            { name: "Eu não quero", file: "eunaoquero.mp3", categoria: "engracados", tag: "🙅" },
+            { name: "Talvez não funcione com burros", file: "talveznaofuncionecomburros.mp3", categoria: "engracados", tag: "🤦" },
+            { name: "Que cara mais engraçado", file: "quecaramaisengracado.mp3", categoria: "engracados", tag: "🤣" },
+            { name: "Evil Morty tema music", file: "evilmortytema.mp3", categoria: "musicas", tag: "👁️" },
+            { name: "Mama mia Marcelo", file: "mamamiamarcelo.mp3", categoria: "engracados", tag: "👨" },
+            { name: "Olá amor podendo falar ou sua mulher tá perto?", file: "oiamortapodendofalarousuamulhertaperto.mp3", categoria: "engracados", tag: "💑" },
+            { name: "Não vou aguentar mais", file: "naovouaguentarmais.mp3", categoria: "engracados", tag: "😫" },
+            { name: "I got a gun", file: "igotagun.mp3", categoria: "engracados", tag: "🔫" },
+            { name: "Jubileu está esquisito hoje", file: "jubileuestaesquisitohoje.mp3", categoria: "engracados", tag: "👴" },
+            { name: "Já avisei que vai dar merda", file: "jaaviseiquevaidarmerda.mp3", categoria: "engracados", tag: "💩" },
+            { name: "Do you know the way?", file: "doyouknowtheway.mp3", categoria: "engracados", tag: "🗺️" },
+            { name: "Vinicius Jr vamos pular", file: "viniciusjrvamospular.mp3", categoria: "musicas", tag: "⚽" },
+            { name: "É mais de 8 mil", file: "edemaisde8mil.mp3", categoria: "engracados", tag: "💰" },
+            { name: "eu fingo que nao percebo motivacional", file: "eu fingo que nao percebo motivacional.mp3", categoria: "reacoes", tag: "💪" }
+        ];
 
         // Sistema de Favoritos e Histórico
         let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
         let historico = JSON.parse(localStorage.getItem('historico')) || [];
-        let modoEmergencia = false;
 
         // Slideshow
         let slideIndex = 0;
@@ -918,7 +861,6 @@
         // Inicialização
         window.onload = function() {
             createSoundButtons();
-            mostrarAtalhos();
             mostrarSlide(slideIndex);
             startSlideShow();
         };
@@ -1068,46 +1010,27 @@
             });
         }
 
-        // Teclas de Atalho
-        document.addEventListener('keydown', (e) => {
-            if (e.altKey) {
-                switch(e.key.toLowerCase()) {
-                    case '1': playSound('obgd por seguir.mp3'); break;
-                    case '2': playSound('nhe.mp3'); break;
-                    case '3': playSound('sommorteroblox.mp3'); break;
-                    case 'h': mostrarAtalhos(); break;
-                    case 'f': filtrarPorCategoria('favoritos'); break;
-                    case 'e': toggleModoEmergencia(); break;
-                    case 'arrowright': proximoSlide(); break;
-                    case 'arrowleft': voltarSlide(); break;
-                    case 'p': togglePause(); break;
-                }
-            }
-        });
-
-        // Mostrar atalhos
-        function mostrarAtalhos() {
-            alert(`📌 Atalhos do Teclado:
-Alt+1 = Agradecimento
-Alt+2 = Som "Nhe"
-Alt+3 = Som morte Roblox
-Alt+F = Mostrar Favoritos
-Alt+E = Modo Emergência
-Alt+→ = Próximo Slide
-Alt+← = Slide Anterior
-Alt+P = Pausar/Continuar Slideshow
-Alt+H = Mostrar esta ajuda`);
+        // Funções da calculadora
+        function toggleCalculator() {
+            const calc = document.getElementById('calculatorContainer');
+            calc.style.display = calc.style.display === 'block' ? 'none' : 'block';
         }
 
-        // Modo Emergência
-        function toggleModoEmergencia() {
-            modoEmergencia = !modoEmergencia;
-            document.body.classList.toggle('modo-emergencia', modoEmergencia);
-            
-            const container = document.getElementById('soundContainer');
-            container.style.gridTemplateColumns = modoEmergencia ? 
-                'repeat(auto-fill, minmax(90px, 1fr))' : 
-                'repeat(auto-fill, minmax(70px, 1fr))';
+        function appendToDisplay(value) {
+            document.getElementById('calcDisplay').value += value;
+        }
+
+        function clearDisplay() {
+            document.getElementById('calcDisplay').value = '';
+        }
+
+        function calculate() {
+            const display = document.getElementById('calcDisplay');
+            try {
+                display.value = eval(display.value);
+            } catch (e) {
+                display.value = 'Erro';
+            }
         }
 
         // Funções para copiar PIX e Join
@@ -1150,34 +1073,6 @@ Alt+H = Mostrar esta ajuda`);
 
         function closeJoinModal() {
             document.getElementById('joinModal').style.display = 'none';
-        }
-
-        // Funções da calculadora de valores
-        function toggleValueCalculator() {
-            const calc = document.getElementById('valueCalculatorContainer');
-            calc.style.display = calc.style.display === 'block' ? 'none' : 'block';
-        }
-
-        function appendToValueDisplay(value) {
-            document.getElementById('valueCalcDisplay').value += value;
-        }
-
-        function clearValueDisplay() {
-            document.getElementById('valueCalcDisplay').value = '';
-        }
-
-        function valueBackspace() {
-            const display = document.getElementById('valueCalcDisplay');
-            display.value = display.value.slice(0, -1);
-        }
-
-        function calculateValue() {
-            const display = document.getElementById('valueCalcDisplay');
-            try {
-                display.value = eval(display.value);
-            } catch (e) {
-                display.value = 'Erro';
-            }
         }
     </script>
 </body>
