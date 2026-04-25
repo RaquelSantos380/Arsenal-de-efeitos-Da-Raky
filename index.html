@@ -2,678 +2,547 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Arsenal | Arsenal da Raky</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Arsenal | Arsenal da Raky — Slideshow Expandido</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        :root {
-            --cor-presentes: #FFB6C1;
-            --cor-engracados: #90EE90;
-            --cor-musicas: #87CEFA;
-            --cor-reacoes: #FFD700;
-            --cor-jogos: #D8BFD8;
-            --cor-favoritos: #FF1493;
-        }
-        
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
         }
-        
+
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f8ff;
-            margin: 0;
-            padding: 10px;
-            text-align: center;
-            touch-action: manipulation;
-            overflow-x: hidden;
-        }
-        
-        header {
-            margin-bottom: 15px;
-        }
-        
-        h1 {
-            color: #ff69b4;
-            font-weight: bold;
-            letter-spacing: 1px;
-            font-size: 1.2rem;
-            text-shadow: 1px 1px 2px white;
-            border: 2px solid white;
-            border-radius: 10px;
-            display: inline-block;
-            padding: 5px 10px;
-            margin: 0;
-        }
-        
-        h2 {
-            color: #ff3f81;
-            margin: 10px 0;
-            font-size: 1.1rem;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background: linear-gradient(145deg, #fef9f0 0%, #fff5e6 100%);
+            padding: 12px 16px 30px 16px;
+            color: #2d2b26;
         }
 
-        /* Slideshow Styles */
-        .slideshow-container {
+        /* ========= SLIDESHOW GIGANTE — COBRE A LARGURA TOTAL ========= */
+        .hero-slideshow {
             position: relative;
-            width: 100%;
-            height: 180px;
-            margin: 10px auto;
+            width: 100vw;           /* largura total da viewport */
+            left: 50%;
+            transform: translateX(-50%);
+            margin: 0 0 20px 0;
+            background: #0a0a0a;
+            border-radius: 0;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.3);
             overflow: hidden;
-            background-color: #f5f5f5;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border: 2px solid #d3d3d3;
+            aspect-ratio: 16 / 9;   /* proporção cinematográfica, fica enorme e equilibrado */
+            max-height: 85vh;        /* em telas muito altas não excede 85% da altura, mantém controle */
         }
 
-        .slides {
-            display: none;
+        /* container dos slides (ocupando 100% do hero) */
+        .slideshow-large {
+            position: relative;
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            margin: auto;
-            padding: 3px;
+            background: #111;
         }
 
-        .seta {
+        .slide-img {
             position: absolute;
-            top: 75%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;     /* garante que a imagem inteira seja visível, sem cortes, fundo preto elegante */
+            background-color: #0f0f0f;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            pointer-events: none;
+        }
+
+        .slide-img.active {
+            opacity: 1;
+            position: relative;
+        }
+
+        /* setas maiores e mais impactantes (PC e mobile) */
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
             transform: translateY(-50%);
-            font-size: 24px;
-            color: #666;
-            cursor: pointer;
-            user-select: none;
-            padding: 8px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-            transition: all 0.2s ease;
-            width: 35px;
-            height: 35px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            color: white;
+            font-size: 2.5rem;
+            width: 54px;
+            height: 54px;
+            border-radius: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 10;
-        }
-
-        .seta-esquerda {
-            left: 5px;
-        }
-
-        .seta-direita {
-            right: 5px;
-        }
-
-        .pause-btn {
-            display: block;
-            margin: 8px auto;
-            padding: 8px 12px;
-            background: linear-gradient(145deg, #FFB6C1, #FF69B4);
-            color: white;
-            border: none;
-            border-radius: 20px;
-            font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            border: 2px solid #FF1493;
-            font-size: 0.8rem;
-            width: 90%;
-            max-width: 200px;
+            z-index: 20;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(255,215,0,0.7);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
 
-        .pause-btn:active {
-            transform: translateY(1px);
+        .nav-arrow:active {
+            transform: translateY(-50%) scale(0.94);
+            background: rgba(0,0,0,0.85);
         }
 
-        /* Sistema de Categorias */
-        .categoria-presentes { background-color: var(--cor-presentes) !important; }
-        .categoria-engracados { background-color: var(--cor-engracados) !important; }
-        .categoria-musicas { background-color: var(--cor-musicas) !important; }
-        .categoria-reacoes { background-color: var(--cor-reacoes) !important; }
-        .categoria-jogos { background-color: var(--cor-jogos) !important; }
-        .categoria-favoritos { 
-            background-color: var(--cor-favoritos) !important;
-            color: white !important;
-            animation: pulse 2s infinite;
+        .arrow-left {
+            left: 18px;
         }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-            100% { transform: scale(1); }
+        .arrow-right {
+            right: 18px;
         }
-        
-        /* Filtros Rápidos */
-        .filtro-rapido {
-            margin: 10px auto;
+
+        /* botão de pausar/play estilizado, discreto mas visível */
+        .pause-control {
+            position: absolute;
+            bottom: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            color: #FFD966;
+            border: 1px solid #ffc107;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            z-index: 20;
+            transition: 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            font-family: inherit;
+        }
+
+        .pause-control i {
+            margin-right: 6px;
+        }
+
+        .pause-control:active {
+            transform: translateX(-50%) scale(0.97);
+        }
+
+        /* Header e perfil com estilo clean */
+        .top-brand {
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            background: linear-gradient(135deg, #FF69B4, #FFB347);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            text-shadow: none;
+            display: inline-block;
+            padding: 0 8px;
+        }
+
+        .profile-img {
+            display: block;
+            margin: 6px auto 8px auto;
+            border-radius: 50%;
+            width: 85px;
+            height: 85px;
+            object-fit: cover;
+            box-shadow: 0 0 0 3px #FFD966, 0 6px 14px rgba(0,0,0,0.2);
+            border: 2px solid white;
+            transition: transform 0.2s;
+        }
+
+        .lembrete {
+            background: #ffebee;
+            color: #c62828;
+            font-weight: bold;
+            padding: 8px 12px;
+            border-radius: 32px;
+            width: fit-content;
+            margin: 6px auto 12px auto;
+            font-size: 0.85rem;
+            border-left: 5px solid #ff3b3b;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        /* Botões principais (PIX, JOIN, Calculadora, etc) */
+        .action-bar {
             display: flex;
             flex-wrap: wrap;
+            align-items: center;
             justify-content: center;
-            gap: 5px;
-            width: 100%;
-            padding: 0 5px;
+            gap: 12px;
+            margin: 18px 0 16px 0;
         }
-        
-        .filtro-rapido button {
-            padding: 6px 10px;
+
+        .btn-primary, .btn-secondary, .btn-tool {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 0.85rem;
             border: none;
-            border-radius: 12px;
-            background: #333;
-            color: white;
+            background: white;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            transition: 0.15s linear;
             cursor: pointer;
-            font-size: 0.7rem;
-            transition: all 0.2s;
+            text-decoration: none;
+            color: #2c3e2f;
         }
-        
-        .filtro-rapido button:active {
+
+        .btn-primary {
+            background: linear-gradient(135deg, #BA55D3, #9b4bcf);
+            color: white;
+            border: 1px solid #e0b3ff;
+        }
+        .btn-secondary {
+            background: #FFE4E1;
+            color: #b13e6b;
+            border: 1px solid #ffb7c5;
+        }
+        .btn-tool {
+            background: #f5f0e7;
+            color: #4a4a4a;
+            border: 1px solid #ddcfa0;
+        }
+
+        .btn-primary:active, .btn-secondary:active, .btn-tool:active {
             transform: translateY(1px);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
-        
-        /* Botões de Som Melhorados */
-        .sound-button {
-            position: relative;
-            background-color: #FFD700;
-            color: #333;
-            border: none;
-            border-radius: 50%;
-            width: 70px;
-            height: 70px;
-            margin: 3px;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.6rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: all 0.1s;
-            padding: 5px;
-            overflow: hidden;
-            word-break: break-word;
-            text-align: center;
-        }
-        
-        .sound-button:active {
-            transform: scale(0.95);
-        }
-        
-        .sound-tag {
-            position: absolute;
-            top: -3px;
-            right: -3px;
-            background: #FF1493;
-            color: white;
-            border-radius: 50%;
-            width: 16px;
-            height: 16px;
-            font-size: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .favorito-btn {
-            position: absolute;
-            bottom: 2px;
-            right: 2px;
-            background: rgba(0,0,0,0.2);
-            border-radius: 50%;
-            width: 14px;
-            height: 14px;
-            font-size: 0.6rem;
-            cursor: pointer;
-        }
-        
-        /* Barra de Pesquisa */
-        #search {
-            padding: 8px 12px;
-            width: 90%;
-            max-width: 350px;
-            border-radius: 15px;
-            border: 2px solid #FFD700;
-            font-size: 14px;
-            box-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
-            margin-bottom: 10px;
-        }
-        
-        /* Botões Principais */
-        .buttons-container {
-            margin: 15px 0;
+
+        /* filtros rápidos */
+        .filter-strip {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 8px;
-            padding: 0 5px;
+            margin: 10px 0 15px 0;
         }
-        
-        .pix-button, .join-button, .small-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 8px 12px;
-            border-radius: 20px;
-            font-weight: bold;
-            text-decoration: none;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            transition: all 0.2s;
+        .filter-badge {
+            background: #e9ecef;
+            padding: 5px 14px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #2c3e50;
             cursor: pointer;
-            border: 2px solid transparent;
-            font-size: 0.8rem;
+            transition: all 0.1s;
+            border: 1px solid #cccbc8;
         }
-        
-        .pix-button {
-            background: linear-gradient(145deg, #BA55D3, #9370DB);
-            color: white;
-            border-color: #E6E6FA;
-        }
-        
-        .join-button {
-            background: linear-gradient(145deg, #FFD1DC, #FFB6C1);
-            color: #333;
-            border-color: #FFE4E1;
-        }
-        
-        .small-button {
-            font-size: 0.7rem;
-            padding: 6px 10px;
-        }
-        
-        .calculator-button {
-            background: linear-gradient(145deg, #4CAF50, #2E7D32);
-            color: white;
-            border-color: #81C784;
-        }
-        
-        .scammer-button {
-            background: linear-gradient(145deg, #FF9800, #F57C00);
-            color: white;
-            border-color: #FFB74D;
-        }
-        
-        .inventory-button {
-            background: linear-gradient(145deg, #2196F3, #1976D2);
-            color: white;
-            border-color: #64B5F6;
-        }
-        
-        /* Seção de Histórico */
-        .historico-container {
-            background: rgba(255,255,255,0.8);
-            border-radius: 8px;
-            padding: 8px;
-            margin: 10px auto;
-            width: 95%;
-            display: none;
-        }
-        
-        .historico-title {
-            font-weight: bold;
-            margin-bottom: 5px;
-            color: #FF1493;
-            font-size: 0.9rem;
-        }
-        
-        .historico-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px;
-            justify-content: center;
-        }
-        
-        .historico-btn {
-            background: #333;
-            color: white;
-            border: none;
-            border-radius: 12px;
-            padding: 4px 8px;
-            font-size: 0.6rem;
-            cursor: pointer;
-        }
-        
-        /* Profile image */
-        .profile-img {
-            display: block;
-            margin: 0 auto;
-            border-radius: 50%;
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
-            border: 3px solid #FFD700;
-            transition: all 0.2s ease;
-        }
-        
-        /* Modal styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 100;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.7);
-            touch-action: manipulation;
+        .filter-badge:active {
+            transform: scale(0.96);
+            background: #d4d9e0;
         }
 
-        .modal-content {
-            background-color: #fefefe;
-            margin: 30% auto;
-            padding: 15px;
-            border: 1px solid #888;
-            width: 85%;
-            max-width: 300px;
-            border-radius: 10px;
+        /* barra de busca */
+        .search-wrapper {
             text-align: center;
-            position: relative;
+            margin: 10px 0 14px;
         }
-
-        .close {
-            position: absolute;
-            right: 10px;
-            top: 5px;
-            color: #aaa;
-            font-size: 24px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        /* Lembrete vermelho */
-        .lembrete {
-            color: red;
-            font-weight: bold;
-            margin: 8px 0;
+        #search {
+            width: 86%;
+            max-width: 480px;
+            padding: 12px 20px;
+            border-radius: 60px;
+            border: 1px solid #ffc2d9;
+            background: white;
             font-size: 0.9rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            transition: 0.2s;
         }
 
-        /* Efeitos sonoros lado a lado */
+        /* grade de sons (mesmo estilo robusto) */
         .sound-grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 3px;
-            padding: 0 5px;
+            gap: 12px;
+            margin: 16px 0 20px;
+        }
+        .sound-button {
+            position: relative;
+            width: 85px;
+            height: 85px;
+            background: #FFD966;
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: #2b2b2b;
+            border: none;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: 0.07s linear;
+            text-align: center;
+            padding: 8px 3px;
+            word-break: break-word;
+        }
+        .sound-button:active {
+            transform: scale(0.94);
+        }
+        .categoria-presentes { background: #FFB6C1; }
+        .categoria-engracados { background: #90EE90; }
+        .categoria-musicas { background: #87CEFA; }
+        .categoria-reacoes { background: #FFD700; }
+        .categoria-jogos { background: #D8BFD8; }
+        .categoria-favoritos { background: #FF1493; color: white; animation: pulse 1.4s infinite; }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,20,147,0.4);}
+            70% { transform: scale(1.02); box-shadow: 0 0 0 6px rgba(255,20,147,0);}
+            100% { transform: scale(1); }
+        }
+        .favorito-btn {
+            position: absolute;
+            bottom: 5px;
+            right: 8px;
+            background: rgba(0,0,0,0.25);
+            border-radius: 30px;
+            width: 20px;
+            height: 20px;
+            font-size: 0.7rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: gold;
         }
 
-        /* Footer */
-        footer {
-            margin-top: 15px;
-            font-size: 0.7rem;
-            color: #666;
-            padding: 5px;
-        }
-        
-        /* Calculadora flutuante menor */
-        .calculator-container {
+        /* historico */
+        .historico-panel {
+            background: rgba(255,248,225,0.9);
+            border-radius: 28px;
+            padding: 12px;
+            margin: 12px 0;
             display: none;
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            width: 150px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            z-index: 100;
-            padding: 8px;
-            border: 2px solid #4CAF50;
+            border: 1px solid #ffdfaa;
         }
-        
-        .calculator-display {
-            width: 100%;
-            height: 30px;
+        .historico-title {
+            font-weight: bold;
             margin-bottom: 8px;
-            text-align: right;
-            padding: 5px;
-            font-size: 0.9rem;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            font-size: 0.85rem;
+            color: #b34180;
         }
-        
-        .calculator-buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 4px;
+        .historico-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
         }
-        
-        .calc-btn {
-            padding: 6px;
-            font-size: 0.8rem;
+        .historico-btn {
+            background: #4a4e69;
+            color: white;
             border: none;
-            border-radius: 4px;
-            background: #f0f0f0;
+            border-radius: 30px;
+            padding: 5px 12px;
+            font-size: 0.7rem;
             cursor: pointer;
         }
-        
-        .calc-btn:active {
-            background: #ddd;
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 200;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            align-items: center;
+            justify-content: center;
         }
-        
-        .calc-btn.operator {
-            background: #FFD700;
+        .modal-card {
+            background: white;
+            width: 80%;
+            max-width: 300px;
+            border-radius: 30px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
         }
-        
-        .calc-btn.equals {
+        .close-modal {
+            position: absolute;
+            right: 15px;
+            top: 12px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        button.copy-btn {
             background: #4CAF50;
+            border: none;
             color: white;
+            padding: 8px 15px;
+            border-radius: 40px;
+            margin-top: 12px;
+            font-weight: bold;
         }
-        
-        .calc-btn.clear {
-            background: #FF5722;
-            color: white;
-            font-size: 0.7rem;
-        }
-        
-        /* Botão da calculadora flutuante */
-        .floating-calculator-btn {
+
+        /* calculadora flutuante */
+        .floating-calc {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(145deg, #4CAF50, #2E7D32);
+            z-index: 99;
+        }
+        .calc-toggle {
+            width: 55px;
+            height: 55px;
+            border-radius: 30px;
+            background: #2E7D32;
             color: white;
             border: none;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            font-size: 20px;
+            font-size: 24px;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.3);
             cursor: pointer;
-            z-index: 99;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        }
+        .calc-widget {
+            display: none;
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            background: #1f2a2e;
+            padding: 12px;
+            border-radius: 24px;
+            width: 220px;
+            backdrop-filter: blur(2px);
+            z-index: 100;
+            border: 1px solid gold;
+        }
+        .calc-display {
+            width: 100%;
+            height: 44px;
+            background: #fff;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            text-align: right;
+            padding: 10px;
+            font-size: 1rem;
+        }
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+        }
+        .calc-grid button {
+            padding: 8px;
+            border-radius: 40px;
+            border: none;
+            background: #f0e6c5;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.7rem;
+            margin-top: 20px;
+            color: #6b5e4a;
+        }
+
+        @media (max-width: 700px) {
+            .hero-slideshow {
+                aspect-ratio: 16 / 9;
+                max-height: 50vh;
+            }
+            .nav-arrow {
+                width: 44px;
+                height: 44px;
+                font-size: 1.8rem;
+            }
+            .sound-button {
+                width: 75px;
+                height: 75px;
+                font-size: 0.65rem;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Arsenal de Efeitos Sonoros da Raky</h1>
-    </header>
 
-    <!-- Profile image -->
-    <img src="Raky.jpg" alt="Foto de Perfil" class="profile-img">
-    <h2>Inventário da Raky</h2>
-
-    <!-- Lembrete vermelho -->
-    <div class="lembrete">NÃO ACEITO BANCO INTER</div>
-
-    <!-- Slideshow -->
-<div class="slideshow-container" id="slideshow-container">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/1.jpg" alt="Slide 1">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/2.jpg" alt="Slide 2">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/3.jpg" alt="Slide 3">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/4.jpg" alt="Slide 4">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/5.jpg" alt="Slide 5">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/6.jpg" alt="Slide 6">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/7.jpg" alt="Slide 7">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/8.jpg" alt="Slide 8">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/9.jpg" alt="Slide 9">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/10.jpg" alt="Slide 10">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/11.jpg" alt="Slide 11">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/12.jpg" alt="Slide 12">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/13.jpg" alt="Slide 13">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/14.jpg" alt="Slide 14">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/15.jpg" alt="Slide 15">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/16.jpg" alt="Slide 16">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/17.jpg" alt="Slide 17">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/18.jpg" alt="Slide 18">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/19.jpg" alt="Slide 19">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/20.jpg" alt="Slide 20">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/21.jpg" alt="Slide 21">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/22.jpg" alt="Slide 22">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/23.jpg" alt="Slide 23">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/24.jpg" alt="Slide 24">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/25.jpg" alt="Slide 25">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/26.jpg" alt="Slide 26">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/27.jpg" alt="Slide 27">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/28.jpg" alt="Slide 28">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/29.jpg" alt="Slide 29">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/30.jpg" alt="Slide 30">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/31.jpg" alt="Slide 31">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/32.jpg" alt="Slide 32">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/33.jpg" alt="Slide 33">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/34.jpg" alt="Slide 34">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/35.jpg" alt="Slide 35">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/36.jpg" alt="Slide 36">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/37.jpg" alt="Slide 37">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/38.jpg" alt="Slide 38">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/39.jpg" alt="Slide 39">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/40.jpg" alt="Slide 40">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/41.jpg" alt="Slide 41">
-        <img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/42.jpg" alt="Slide 42">
-<img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/43.jpg" alt="Slide 43">
-<img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/44.jpg" alt="Slide 44">
-<img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/45.jpg" alt="Slide 45">
-<img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/46.jpg" alt="Slide 46">
-<img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/47.jpg" alt="Slide 47">
-<img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/48.jpg" alt="Slide 48">
-<img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/49.jpg" alt="Slide 49">
-<img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/50.jpg" alt="Slide 50">
-<img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/51.jpg" alt="Slide 51">
-<img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/52.jpg" alt="Slide 52">
-<img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/53.jpg" alt="Slide 53">
-<img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/54.jpg" alt="Slide 54">
-<img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/55.jpg" alt="Slide 55">
-<img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/56.jpg" alt="Slide 56">
-<img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/57.jpg" alt="Slide 57">
-<img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/58.jpg" alt="Slide 58">
-<img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/59.jpg" alt="Slide 59">
-<img class="slides" src="https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/60.jpg" alt="Slide 60">
+<div class="top-brand">
+    <h1>🎧 Arsenal da Raky 🎧</h1>
+    <img src="Raky.jpg" alt="Raky Perfil" class="profile-img" onerror="this.src='https://placehold.co/100x100/FFD966/white?text=Raky'">
+    <div class="lembrete">⚠️ NÃO ACEITO BANCO INTER ⚠️</div>
 </div>
 
-        <span class="seta seta-esquerda" onclick="voltarSlide()">&#8249;</span>
-        <span class="seta seta-direita" onclick="proximoSlide()">&#8250;</span>
+<!-- SLIDESHOW EXPANSIVO FULL WIDTH (COBRE A TELA INTEIRA HORIZONTALMENTE) -->
+<div class="hero-slideshow">
+    <div class="slideshow-large" id="megaSlideshow">
+        <!-- as imagens serão injetadas dinamicamente via JS com base na lista original -->
     </div>
+    <div class="nav-arrow arrow-left" id="prevSlideBtn"><i class="fas fa-chevron-left"></i></div>
+    <div class="nav-arrow arrow-right" id="nextSlideBtn"><i class="fas fa-chevron-right"></i></div>
+    <button class="pause-control" id="globalPauseBtn"><i class="fas fa-pause"></i> Pausar</button>
+</div>
 
-    <button class="pause-btn" id="pauseBtn" onclick="togglePause()">
-        <i class="fas fa-pause"></i> Pausar Slideshow
-    </button>
+<!-- Barra de ações -->
+<div class="action-bar">
+    <button class="btn-primary" id="pixModalBtn"><i class="fas fa-money-bill-wave"></i> PIX</button>
+    <a href="https://elvebredd.com/ValueCalculator.html" target="_blank" class="btn-tool"><i class="fas fa-coins"></i> Calculadora de Valores</a>
+    <button class="btn-secondary" id="joinModalBtn"><i class="fas fa-sign-in-alt"></i> Join</button>
+    <button class="btn-tool" id="toggleCalcFloat"><i class="fas fa-calculator"></i> Calc</button>
+    <a href="https://raquelsantos380.github.io/Confiavel-ou-Scammer-/" target="_blank" class="btn-tool"><i class="fas fa-user-shield"></i> Confiável?</a>
+</div>
 
-    <!-- Botões Principais -->
-    <div class="buttons-container">
-        <button class="pix-button" onclick="showPixModal()">
-            <i class="fas fa-money-bill-wave"></i> PIX
-        </button>
+<!-- Filtros rápidos -->
+<div class="filter-strip">
+    <span class="filter-badge" data-filter="todos">🎯 Todos</span>
+    <span class="filter-badge" data-filter="favoritos">⭐ Favoritos</span>
+    <span class="filter-badge" data-filter="reacoes">😄 Reações</span>
+    <span class="filter-badge" data-filter="presentes">🎁 Presentes</span>
+    <span class="filter-badge" data-filter="musicas">🎵 Músicas</span>
+    <span class="filter-badge" data-filter="engracados">😂 Engraçados</span>
+    <span class="filter-badge" data-filter="jogos">🎮 Jogos</span>
+</div>
 
-        <a href="https://elvebredd.com/ValueCalculator.html" target="_blank" class="small-button inventory-button">
-            <i class="fas fa-coins"></i> Calculadora de Valores
-        </a>
-        
-        <button class="join-button" onclick="showJoinModal()">
-            <i class="fas fa-sign-in-alt"></i> Join
-        </button>
+<div class="search-wrapper">
+    <input type="text" id="search" placeholder="🔍 Pesquisar efeito sonoro... (ex: obgd, presente)">
+</div>
 
-        <button class="small-button calculator-button" onclick="toggleCalculator()">
-            <i class="fas fa-calculator"></i> Calculadora
-        </button>
-        
-        <a href="https://raquelsantos380.github.io/Confiavel-ou-Scammer-/" target="_blank" class="small-button scammer-button">
-            <i class="fas fa-user-shield"></i> Confiável?
-        </a>
-    </div>
+<!-- Histórico -->
+<div id="historicoPanel" class="historico-panel">
+    <div class="historico-title">📻 Usados recentemente:</div>
+    <div id="historicoButtons" class="historico-buttons"></div>
+</div>
 
-    <!-- Filtros Rápidos -->
-    <div class="filtro-rapido">
-        <button onclick="filtrarPorCategoria('todos')"><i class="fas fa-list"></i> Todos</button>
-        <button onclick="filtrarPorCategoria('favoritos')"><i class="fas fa-star"></i> Favoritos</button>
-        <button onclick="filtrarPorCategoria('reacoes')"><i class="fas fa-smile"></i> Reações</button>
-        <button onclick="filtrarPorCategoria('presentes')"><i class="fas fa-gift"></i> Presentes</button>
-        <button onclick="filtrarPorCategoria('musicas')"><i class="fas fa-music"></i> Músicas</button>
-        <button onclick="filtrarPorCategoria('engracados')"><i class="fas fa-laugh-squint"></i> Engraçados</button>
-        <button onclick="filtrarPorCategoria('jogos')"><i class="fas fa-gamepad"></i> Jogos</button>
-    </div>
+<!-- Grid de sons -->
+<div id="soundContainer" class="sound-grid"></div>
 
-    <!-- Barra de Pesquisa -->
-    <div class="search-container">
-        <input type="text" id="search" placeholder="🔍 Pesquisar efeitos sonoros..." onkeyup="filterSounds()">
-    </div>
+<!-- Modais -->
+<div id="pixModal" class="modal"><div class="modal-card"><span class="close-modal" id="closePixModal">&times;</span><h3>💸 Chave PIX</h3><p style="font-weight:bold;">raquelgata780@gmail.com</p><button class="copy-btn" id="copyPixBtn">Copiar Chave</button></div></div>
+<div id="joinModal" class="modal"><div class="modal-card"><span class="close-modal" id="closeJoinModal">&times;</span><h3>🎮 Nick para Join</h3><p style="font-weight:bold;">RaqueSantos380_2</p><button class="copy-btn" id="copyJoinBtn">Copiar Nick</button></div></div>
 
-    <!-- Histórico Recente -->
-    <div class="historico-container" id="historicoContainer">
-        <div class="historico-title">Usados Recentemente:</div>
-        <div class="historico-buttons" id="historicoButtons"></div>
-    </div>
-
-    <!-- Grid de Sons -->
-    <div class="sound-grid" id="soundContainer"></div>
-    
-    <!-- Modal PIX -->
-    <div id="pixModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closePixModal()">&times;</span>
-            <h3>Chave PIX</h3>
-            <p>raquelgata780@gmail.com</p>
-            <button onclick="copyPixKey()" style="padding: 8px 15px; margin-top: 10px; border: none; border-radius: 5px; background: #4CAF50; color: white; cursor: pointer;">Copiar Chave</button>
+<!-- Calculadora flutuante -->
+<div class="floating-calc">
+    <button class="calc-toggle" id="toggleCalcWidget"><i class="fas fa-calculator"></i></button>
+    <div id="calcWidget" class="calc-widget">
+        <input type="text" id="calcDisplay" class="calc-display" readonly>
+        <div class="calc-grid">
+            <button onclick="appendCalc('7')">7</button><button onclick="appendCalc('8')">8</button><button onclick="appendCalc('9')">9</button><button onclick="appendCalc('/')">/</button>
+            <button onclick="appendCalc('4')">4</button><button onclick="appendCalc('5')">5</button><button onclick="appendCalc('6')">6</button><button onclick="appendCalc('*')">×</button>
+            <button onclick="appendCalc('1')">1</button><button onclick="appendCalc('2')">2</button><button onclick="appendCalc('3')">3</button><button onclick="appendCalc('-')">-</button>
+            <button onclick="appendCalc('0')">0</button><button onclick="appendCalc('.')">.</button><button onclick="calcResult()">=</button><button onclick="appendCalc('+')">+</button>
+            <button onclick="clearCalc()" style="background:#ff8a5c;">C</button>
         </div>
     </div>
+</div>
 
-    <!-- Modal Join -->
-    <div id="joinModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeJoinModal()">&times;</span>
-            <h3>Entrar pelo Join</h3>
-            <p>Nick: RaqueSantos380_2</p>
-            <button onclick="copyJoinInfo()" style="padding: 8px 15px; margin-top: 10px; border: none; border-radius: 5px; background: #4CAF50; color: white; cursor: pointer;">Copiar Nick</button>
-        </div>
-    </div>
-    
-    <!-- Botão flutuante da calculadora -->
-    <button class="floating-calculator-btn" onclick="toggleCalculator()">
-        <i class="fas fa-calculator"></i>
-    </button>
-    
-    <!-- Calculadora flutuante menor -->
-    <div class="calculator-container" id="calculatorContainer">
-        <input type="text" class="calculator-display" id="calcDisplay" readonly>
-        <div class="calculator-buttons">
-            <button class="calc-btn clear" onclick="clearDisplay()">C</button>
-            <button class="calc-btn" onclick="appendToDisplay('/')">/</button>
-            <button class="calc-btn" onclick="appendToDisplay('*')">×</button>
-            <button class="calc-btn" onclick="appendToDisplay('7')">7</button>
-            <button class="calc-btn" onclick="appendToDisplay('8')">8</button>
-            <button class="calc-btn" onclick="appendToDisplay('9')">9</button>
-            <button class="calc-btn" onclick="appendToDisplay('-')">-</button>
-            <button class="calc-btn" onclick="appendToDisplay('4')">4</button>
-            <button class="calc-btn" onclick="appendToDisplay('5')">5</button>
-            <button class="calc-btn" onclick="appendToDisplay('6')">6</button>
-            <button class="calc-btn" onclick="appendToDisplay('+')">+</button>
-            <button class="calc-btn" onclick="appendToDisplay('1')">1</button>
-            <button class="calc-btn" onclick="appendToDisplay('2')">2</button>
-            <button class="calc-btn" onclick="appendToDisplay('3')">3</button>
-            <button class="calc-btn equals" onclick="calculate()">=</button>
-            <button class="calc-btn" onclick="appendToDisplay('0')" style="grid-column: span 2;">0</button>
-            <button class="calc-btn" onclick="appendToDisplay('.')">.</button>
-        </div>
-    </div>
-    
-    <footer>
-        <p>Arsenal de Efeitos da Raky &copy; 2023</p>
-    </footer>
-    
-    <script>
-        const soundEffects = [
-            // CATEGORIA: PRESENTES (obgd ou presentes do TikTok)
-            { name: "Obgd por seguir", file: "obgd por seguir.mp3", categoria: "presentes", tag: "🎁" },
+<footer>Arsenal de Efeitos da Raky © 2025 — Todos os sons registrados na mente rakyana</footer>
+
+<script>
+    // --------------------------------------------------------------
+    // 1. DEFINIR OS SONS (MESMA BASE + ADICIONEI ALGUNS PARA DEMONSTRAÇÃO
+    // --------------------------------------------------------------
+    const soundEffects = [
+        { name: "Obgd por seguir", file: "obgd por seguir.mp3", categoria: "presentes", tag: "🎁" },
             { name: "Obgd pela rosa", file: "obgd pela rosa mmmm.mp3", categoria: "presentes", tag: "🌹" },
             { name: "Obg pelo coração molusco", file: "lula molusco 1.mp3", categoria: "presentes", tag: "🐙" },
             { name: "Goku presente", file: "Goku presente.mp3", categoria: "presentes", tag: "🐉" },
@@ -919,234 +788,225 @@
             { name: "Vinicius Jr vamos pular", file: "viniciusjrvamospular.mp3", categoria: "musicas", tag: "⚽" },
             { name: "É mais de 8 mil", file: "edemaisde8mil.mp3", categoria: "engracados", tag: "💰" },
             { name: "eu fingo que nao percebo motivacional", file: "eu fingo que nao percebo motivacional.mp3", categoria: "reacoes", tag: "💪" }
-        ];
+    ];
 
-        // Sistema de Favoritos e Histórico
-        let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
-        let historico = JSON.parse(localStorage.getItem('historico')) || [];
+    // Lista de imagens para o slideshow expandido (42 imagens da sua lista original)
+    const imageUrls = [];
+    for (let i = 1; i <= 60; i++) {
+        imageUrls.push(`https://raw.githubusercontent.com/RaquelSantos380/Seja-Bem-vindo-A-LojinhaDaRaky/main/minhas%20imagens/${i}.jpg`);
+    }
+    // 60 imagens robustas
 
-        // Slideshow
-        let slideIndex = 0;
-        const slides = document.getElementsByClassName("slides");
-        let slideInterval;
-        let isPaused = false;
+    // Estado favoritos e histórico
+    let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+    let historico = JSON.parse(localStorage.getItem('historico')) || [];
 
-        // Inicialização
-        window.onload = function() {
-            createSoundButtons();
-            mostrarSlide(slideIndex);
-            startSlideShow();
-        };
+    // ----- SLIDESHOW GIGANTE -----
+    let currentSlide = 0;
+    let slideshowInterval = null;
+    let isPaused = false;
+    let slidesElements = [];
 
-        // Slideshow functions
-        function mostrarSlide(n) {
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
+    function buildSlideshow() {
+        const container = document.getElementById('megaSlideshow');
+        container.innerHTML = '';
+        imageUrls.forEach((url, idx) => {
+            const img = document.createElement('img');
+            img.src = url;
+            img.classList.add('slide-img');
+            if (idx === 0) img.classList.add('active');
+            img.alt = `slide-${idx+1}`;
+            container.appendChild(img);
+        });
+        slidesElements = document.querySelectorAll('.slide-img');
+    }
+
+    function showSlide(n) {
+        if (!slidesElements.length) return;
+        slidesElements.forEach(img => img.classList.remove('active'));
+        let newIndex = (n + slidesElements.length) % slidesElements.length;
+        slidesElements[newIndex].classList.add('active');
+        currentSlide = newIndex;
+    }
+
+    function nextSlide() { showSlide(currentSlide + 1); }
+    function prevSlide() { showSlide(currentSlide - 1); }
+
+    function startAutoSlide() {
+        if (slideshowInterval) clearInterval(slideshowInterval);
+        slideshowInterval = setInterval(() => {
+            if (!isPaused) nextSlide();
+        }, 3200);
+    }
+
+    function togglePauseSlideshow() {
+        isPaused = !isPaused;
+        const btn = document.getElementById('globalPauseBtn');
+        if (isPaused) {
+            btn.innerHTML = '<i class="fas fa-play"></i> Iniciar';
+        } else {
+            btn.innerHTML = '<i class="fas fa-pause"></i> Pausar';
+        }
+    }
+
+    // Renderizar botões de som (completos)
+    function renderSoundButtons() {
+        const container = document.getElementById('soundContainer');
+        container.innerHTML = '';
+        soundEffects.forEach(sound => {
+            const btn = document.createElement('button');
+            let categoriaClass = `categoria-${sound.categoria}`;
+            if (favoritos.includes(sound.name)) categoriaClass += ' categoria-favoritos';
+            btn.className = `sound-button ${categoriaClass}`;
+            btn.innerHTML = `
+                <strong style="font-size:0.7rem;">${sound.name}</strong>
+                ${sound.tag ? `<span class="sound-tag" style="position:absolute; top:-5px; left:-5px; background:#FF1493; border-radius:20px; padding:0px 5px; font-size:9px;">${sound.tag}</span>` : ''}
+                <span class="favorito-btn" data-name="${sound.name.replace(/['"]/g, '&quot;')}">${favoritos.includes(sound.name) ? '★' : '☆'}</span>
+            `;
+            btn.onclick = (e) => {
+                if (e.target.classList && e.target.classList.contains('favorito-btn')) return;
+                playSound(sound.file, sound.name);
+            };
+            const favSpan = btn.querySelector('.favorito-btn');
+            if (favSpan) {
+                favSpan.onclick = (e) => {
+                    e.stopPropagation();
+                    toggleFavorito(sound.name);
+                };
             }
-            slides[n].style.display = "block";
-        }
+            container.appendChild(btn);
+        });
+        updateHistoricoUI();
+    }
 
-        function proximoSlide() {
-            slideIndex = (slideIndex + 1) % slides.length;
-            mostrarSlide(slideIndex);
-        }
+    function playSound(file, soundName) {
+        const audio = new Audio(`https://raw.githubusercontent.com/RaquelSantos380/Arsenal-de-efeitos-Da-Raky/main/${file}`);
+        audio.play().catch(e => console.warn("som não disponível no servidor, mas fluxo ok:", e));
+        // atualiza histórico
+        historico = historico.filter(n => n !== soundName);
+        historico.unshift(soundName);
+        if (historico.length > 8) historico.pop();
+        localStorage.setItem('historico', JSON.stringify(historico));
+        updateHistoricoUI();
+        document.getElementById('historicoPanel').style.display = 'block';
+    }
 
-        function voltarSlide() {
-            slideIndex = (slideIndex - 1 + slides.length) % slides.length;
-            mostrarSlide(slideIndex);
-        }
-
-        function startSlideShow() {
-            if (!slideInterval) {
-                slideInterval = setInterval(proximoSlide, 3000);
-                document.getElementById("pauseBtn").innerHTML = '<i class="fas fa-pause"></i> Pausar Slideshow';
-                isPaused = false;
+    function updateHistoricoUI() {
+        const histDiv = document.getElementById('historicoButtons');
+        histDiv.innerHTML = '';
+        historico.forEach(soundName => {
+            const found = soundEffects.find(s => s.name === soundName);
+            if (found) {
+                const btn = document.createElement('button');
+                btn.className = 'historico-btn';
+                btn.textContent = soundName;
+                btn.onclick = () => playSound(found.file, found.name);
+                histDiv.appendChild(btn);
             }
-        }
+        });
+        if (historico.length > 0) document.getElementById('historicoPanel').style.display = 'block';
+        else document.getElementById('historicoPanel').style.display = 'none';
+    }
 
-        function stopSlideShow() {
-            clearInterval(slideInterval);
-            slideInterval = null;
-            document.getElementById("pauseBtn").innerHTML = '<i class="fas fa-play"></i> Continuar Slideshow';
-            isPaused = true;
-        }
+    function toggleFavorito(nome) {
+        if (favoritos.includes(nome)) favoritos = favoritos.filter(f => f !== nome);
+        else favoritos.push(nome);
+        localStorage.setItem('favoritos', JSON.stringify(favoritos));
+        renderSoundButtons();
+        applyCurrentFilter(); // reaplica o filtro ativo
+    }
 
-        function togglePause() {
-            if (isPaused) {
-                startSlideShow();
+    let activeFilter = 'todos';
+    function applyCurrentFilter() {
+        const btns = document.querySelectorAll('.sound-button');
+        btns.forEach(btn => {
+            const nome = btn.querySelector('strong')?.innerText || btn.innerText.split('★')[0].trim();
+            const soundObj = soundEffects.find(s => s.name === nome);
+            if (!soundObj) return;
+            if (activeFilter === 'todos') btn.style.display = 'flex';
+            else if (activeFilter === 'favoritos') {
+                btn.style.display = favoritos.includes(nome) ? 'flex' : 'none';
             } else {
-                stopSlideShow();
+                btn.style.display = soundObj.categoria === activeFilter ? 'flex' : 'none';
             }
-        }
+        });
+    }
 
-        // Criar botões de som
-        function createSoundButtons() {
-            const container = document.getElementById('soundContainer');
-            container.innerHTML = '';
-            
-            soundEffects.forEach(sound => {
-                const button = document.createElement('button');
-                button.className = `sound-button categoria-${sound.categoria}`;
-                if (favoritos.includes(sound.name)) {
-                    button.classList.add('categoria-favoritos');
-                }
-                
-                button.innerHTML = `
-                    ${sound.name}
-                    ${sound.tag ? `<span class="sound-tag">${sound.tag}</span>` : ''}
-                    <span class="favorito-btn" onclick="event.stopPropagation(); toggleFavorito('${sound.name}')">
-                        ${favoritos.includes(sound.name) ? '★' : '☆'}
-                    </span>
-                `;
-                
-                button.onclick = () => playSound(sound.file);
-                container.appendChild(button);
+    function filtrarPorCategoria(cat) {
+        activeFilter = cat;
+        applyCurrentFilter();
+    }
+
+    function filterSoundsSearch() {
+        const term = document.getElementById('search').value.toLowerCase();
+        const allBtns = document.querySelectorAll('.sound-button');
+        allBtns.forEach(btn => {
+            const nome = btn.querySelector('strong')?.innerText || btn.innerText.split('★')[0].trim();
+            if (nome.toLowerCase().includes(term)) {
+                btn.style.display = 'flex';
+                // verifica também se há filtro de categoria ativo
+                if (activeFilter !== 'todos' && activeFilter !== 'favoritos') {
+                    const sound = soundEffects.find(s => s.name === nome);
+                    if (sound && sound.categoria !== activeFilter) btn.style.display = 'none';
+                } else if (activeFilter === 'favoritos' && !favoritos.includes(nome)) btn.style.display = 'none';
+            } else btn.style.display = 'none';
+        });
+    }
+
+    // Calculadora pequena
+    function appendCalc(val) { document.getElementById('calcDisplay').value += val; }
+    function clearCalc() { document.getElementById('calcDisplay').value = ''; }
+    function calcResult() {
+        try {
+            let expr = document.getElementById('calcDisplay').value.replace(/×/g, '*');
+            document.getElementById('calcDisplay').value = eval(expr);
+        } catch(e) { document.getElementById('calcDisplay').value = 'Erro'; }
+    }
+
+    // Modais
+    function showModal(modalId) { document.getElementById(modalId).style.display = 'flex'; }
+    function closeModal(modalId) { document.getElementById(modalId).style.display = 'none'; }
+    function copyPix() { navigator.clipboard.writeText('raquelgata780@gmail.com'); alert('Chave PIX copiada!'); closeModal('pixModal'); }
+    function copyJoin() { navigator.clipboard.writeText('RaqueSantos380_2'); alert('Nick do Join copiado!'); closeModal('joinModal'); }
+
+    // Eventos e inicialização
+    window.onload = () => {
+        buildSlideshow();
+        startAutoSlide();
+        renderSoundButtons();
+        // Eventos slideshow
+        document.getElementById('prevSlideBtn').addEventListener('click', () => { prevSlide(); });
+        document.getElementById('nextSlideBtn').addEventListener('click', () => { nextSlide(); });
+        document.getElementById('globalPauseBtn').addEventListener('click', () => { togglePauseSlideshow(); });
+        
+        // Filtros
+        document.querySelectorAll('.filter-badge').forEach(badge => {
+            badge.addEventListener('click', (e) => {
+                const filter = badge.getAttribute('data-filter');
+                filtrarPorCategoria(filter);
             });
-            
-            updateHistoricoUI();
-        }
-
-        // Toggle Favorito
-        function toggleFavorito(nomeSom) {
-            const index = favoritos.indexOf(nomeSom);
-            if (index === -1) {
-                favoritos.push(nomeSom);
-            } else {
-                favoritos.splice(index, 1);
-            }
-            localStorage.setItem('favoritos', JSON.stringify(favoritos));
-            createSoundButtons();
-        }
-
-        // Filtrar por categoria
-        function filtrarPorCategoria(categoria) {
-            const buttons = document.querySelectorAll('.sound-button');
-            buttons.forEach(button => {
-                if (categoria === 'todos') {
-                    button.style.display = 'flex';
-                } else if (categoria === 'favoritos') {
-                    button.style.display = favoritos.includes(button.textContent.trim()) ? 'flex' : 'none';
-                } else {
-                    button.style.display = button.classList.contains(`categoria-${categoria}`) ? 'flex' : 'none';
-                }
-            });
-            
-            document.getElementById('historicoContainer').style.display = categoria === 'todos' ? 'block' : 'none';
-        }
-
-        // Atualizar UI do Histórico
-        function updateHistoricoUI() {
-            const container = document.getElementById('historicoButtons');
-            container.innerHTML = '';
-            
-            historico.forEach(soundName => {
-                const sound = soundEffects.find(s => s.name === soundName);
-                if (sound) {
-                    const btn = document.createElement('button');
-                    btn.className = 'historico-btn';
-                    btn.textContent = soundName;
-                    btn.onclick = () => playSound(sound.file);
-                    container.appendChild(btn);
-                }
-            });
-        }
-
-        // Reproduzir som
-        function playSound(file) {
-            const audio = new Audio(`https://raw.githubusercontent.com/RaquelSantos380/Arsenal-de-efeitos-Da-Raky/main/${file}`);
-            audio.play().catch(e => console.log("Erro ao reproduzir som:", e));
-            
-            // Adicionar ao histórico
-            const soundName = soundEffects.find(s => s.file === file).name;
-            historico = historico.filter(name => name !== soundName);
-            historico.unshift(soundName);
-            if (historico.length > 5) historico.pop();
-            localStorage.setItem('historico', JSON.stringify(historico));
-            
-            updateHistoricoUI();
-        }
-
-        // Filtro de pesquisa
-        function filterSounds() {
-            const searchTerm = document.getElementById('search').value.toLowerCase();
-            const buttons = document.querySelectorAll('.sound-button');
-            
-            buttons.forEach(button => {
-                const soundName = button.textContent.toLowerCase();
-                if (soundName.includes(searchTerm)) {
-                    button.style.display = 'flex';
-                    button.style.animation = 'pulse 0.5s';
-                    setTimeout(() => button.style.animation = '', 500);
-                } else {
-                    button.style.display = 'none';
-                }
-            });
-        }
-
-        // Funções da calculadora
-        function toggleCalculator() {
-            const calc = document.getElementById('calculatorContainer');
-            calc.style.display = calc.style.display === 'block' ? 'none' : 'block';
-        }
-
-        function appendToDisplay(value) {
-            document.getElementById('calcDisplay').value += value;
-        }
-
-        function clearDisplay() {
-            document.getElementById('calcDisplay').value = '';
-        }
-
-        function calculate() {
-            const display = document.getElementById('calcDisplay');
-            try {
-                display.value = eval(display.value);
-            } catch (e) {
-                display.value = 'Erro';
-            }
-        }
-
-        // Funções para copiar PIX e Join
-        function copyPixKey() {
-            const pixKey = 'raquelgata780@gmail.com';
-            navigator.clipboard.writeText(pixKey)
-                .then(() => {
-                    alert('Chave PIX copiada: ' + pixKey);
-                    closePixModal();
-                })
-                .catch(err => {
-                    console.error('Erro ao copiar: ', err);
-                });
-        }
-
-        function copyJoinInfo() {
-            const joinInfo = 'RaqueSantos380_2';
-            navigator.clipboard.writeText(joinInfo)
-                .then(() => {
-                    alert('Nick para o Join copiado: ' + joinInfo);
-                    closeJoinModal();
-                })
-                .catch(err => {
-                    console.error('Erro ao copiar: ', err);
-                });
-        }
-
-        // Modal functions
-        function showPixModal() {
-            document.getElementById('pixModal').style.display = 'block';
-        }
-
-        function closePixModal() {
-            document.getElementById('pixModal').style.display = 'none';
-        }
-
-        function showJoinModal() {
-            document.getElementById('joinModal').style.display = 'block';
-        }
-
-        function closeJoinModal() {
-            document.getElementById('joinModal').style.display = 'none';
-        }
-    </script>
+        });
+        document.getElementById('search').addEventListener('keyup', filterSoundsSearch);
+        
+        // Modais
+        document.getElementById('pixModalBtn').onclick = () => showModal('pixModal');
+        document.getElementById('joinModalBtn').onclick = () => showModal('joinModal');
+        document.getElementById('closePixModal').onclick = () => closeModal('pixModal');
+        document.getElementById('closeJoinModal').onclick = () => closeModal('joinModal');
+        document.getElementById('copyPixBtn').onclick = copyPix;
+        document.getElementById('copyJoinBtn').onclick = copyJoin;
+        window.onclick = (e) => { if(e.target.classList.contains('modal')) e.target.style.display = 'none'; };
+        
+        // calculadora flutuante
+        const calcWidget = document.getElementById('calcWidget');
+        document.getElementById('toggleCalcWidget').addEventListener('click', () => {
+            calcWidget.style.display = calcWidget.style.display === 'block' ? 'none' : 'block';
+        });
+        window.appendCalc = appendCalc; window.clearCalc = clearCalc; window.calcResult = calcResult;
+        
+        // exibir histórico se existir
+        if(historico.length) document.getElementById('historicoPanel').style.display = 'block';
+    };
+</script>
 </body>
 </html>
